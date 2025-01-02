@@ -1,0 +1,10 @@
+[package]
+name = "goblin_pdf_converter"
+version = "0.1.0"
+authors = ["Ihr Name <ihre.email@example.com>"]
+edition = "2021"
+
+[dependencies]
+gtk = "0.9.2"
+glib = "0.10.3"
+shell-escape = "0.1.5"
