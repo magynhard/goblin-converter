@@ -24,18 +24,21 @@ class GoblinApp
     source_button = Gtk::Button.new(label: "Select Source File (PDF)")
     output_button = Gtk::Button.new(label: "Select Output File (ODF)")
 
-    @source_label = Gtk::Label.new("No file selected")
-    @output_label = Gtk::Label.new("No file selected")
+    @source_entry = Gtk::Entry.new
+    @source_entry.text = "No file selected"
+
+    @output_entry = Gtk::Entry.new
+    @output_entry.text = "No file selected"
 
     source_button.signal_connect("clicked") do
       open_file_dialog(window, "Select PDF Source File", Gtk::FileChooserAction::OPEN) do |file|
-        @source_label.text = file if file
+        @source_entry.text = file if file
       end
     end
 
     output_button.signal_connect("clicked") do
       open_file_dialog(window, "Select Output ODF File", Gtk::FileChooserAction::SAVE) do |file|
-        @output_label.text = file if file
+        @output_entry.text = file if file
       end
     end
 
@@ -45,31 +48,40 @@ class GoblinApp
     vbox.append(Gtk::Label.new("Conversion Mode:"))
     vbox.append(dropdown)
 
-    density_scale = Gtk::Scale.new(:horizontal, 50, 500, 25)
+    adjustment = Gtk::Adjustment.new(300, 50, 500, 25, 25, 0)
+    density_scale = Gtk::Scale.new(:horizontal, adjustment)
     density_scale.value = 300
     density_scale.draw_value = true
     density_scale.value_pos = :top
+
+    density_scale.signal_connect("value-changed") do
+      value = density_scale.value
+      step = adjustment.step_increment
+      snapped_value = ((value / step).round) * step
+      adjustment.value = snapped_value unless value == snapped_value
+    end
+
     vbox.append(Gtk::Label.new("Density (default 300):"))
     vbox.append(density_scale)
 
     vbox.append(Gtk::Label.new("Source File:"))
-    vbox.append(@source_label)
+    vbox.append(@source_entry)
     vbox.append(source_button)
 
     vbox.append(Gtk::Label.new("Output File:"))
-    vbox.append(@output_label)
+    vbox.append(@output_entry)
     vbox.append(output_button)
 
     convert_button = Gtk::Button.new(label: "Convert")
     vbox.append(convert_button)
 
     convert_button.signal_connect("clicked") do
-      source_file = @source_label.text
-      output_file = @output_label.text
+      source_file = @source_entry.text
+      output_file = @output_entry.text
       mode = dropdown.active_text.downcase
       density = density_scale.value.to_i
 
-      if source_file != "No file selected" && output_file != "No file selected"
+      if !["No file selected", ""].include?(source_file)  && !["No file selected", ""].include?(oupuf_file)
         mode = if mode == "monochrome"
                  "monochrome"
                else
