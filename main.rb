@@ -73,12 +73,11 @@ class GoblinApp
                else
                  "monochrome"
                end
-        command = "magick -density #{density} #{Shellwords.escape(source_file)} -threshold 66% -#{mode} -strip -compress Fax #{Shellwords.escape(output_file)}
-"
+        command = "magick -density #{density} #{Shellwords.escape(source_file)} -threshold 66% -#{mode} -strip -compress Fax #{Shellwords.escape(output_file)}"
         system(command)
-        Gtk::MessageDialog.new(parent: window, message_type: :info, buttons: :ok, text: "Conversion Complete!").run
+        show_message_dialog(window, :info, "Conversion Complete!")
       else
-        Gtk::MessageDialog.new(parent: window, message_type: :error, buttons: :ok, text: "Please select both source and output files.").run
+        show_message_dialog(window, :error, "Please select both source and output files.")
       end
     end
 
@@ -100,6 +99,15 @@ class GoblinApp
       d.destroy
     end
 
+    dialog.show
+  end
+
+  def show_message_dialog(parent, message_type, text)
+    dialog = Gtk::MessageDialog.new(parent: parent, message_type: message_type, buttons: :ok, text: text)
+    dialog.set_modal(true)
+    dialog.signal_connect("response") do |d, _|
+      d.destroy
+    end
     dialog.show
   end
 
