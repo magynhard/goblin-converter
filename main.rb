@@ -75,9 +75,9 @@ class GoblinApp
                end
         command = "magick -density #{density} #{Shellwords.escape(source_file)} -threshold 66% -#{mode} -strip -compress Fax #{Shellwords.escape(output_file)}"
         system(command)
-        show_message_dialog(window, :info, "Conversion Complete!")
+        show_custom_dialog(window, "Conversion Complete!", :info)
       else
-        show_message_dialog(window, :error, "Please select both source and output files.")
+        show_custom_dialog(window, "Please select both source and output files.", :error)
       end
     end
 
@@ -102,12 +102,20 @@ class GoblinApp
     dialog.show
   end
 
-  def show_message_dialog(parent, message_type, text)
-    dialog = Gtk::MessageDialog.new(parent: parent, message_type: message_type, buttons: :ok, text: text)
-    dialog.set_modal(true)
-    dialog.signal_connect("response") do |d, _|
-      d.destroy
+  def show_custom_dialog(parent, text, message_type)
+    dialog = Gtk::Dialog.new(parent: parent, title: message_type == :info ? "Information" : "Error", flags: :modal)
+    dialog.set_default_size(300, 100)
+
+    content_area = dialog.content_area
+    label = Gtk::Label.new(text)
+    content_area.append(label)
+
+    ok_button = Gtk::Button.new(label: "OK")
+    ok_button.signal_connect("clicked") do
+      dialog.destroy
     end
+    content_area.append(ok_button)
+
     dialog.show
   end
 
