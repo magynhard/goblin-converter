@@ -45,10 +45,12 @@ class GoblinApp
     vbox.append(Gtk::Label.new("Conversion Mode:"))
     vbox.append(dropdown)
 
-    density_entry = Gtk::Entry.new
-    density_entry.text = "300"
+    density_scale = Gtk::Scale.new(:horizontal, 50, 500, 25)
+    density_scale.value = 300
+    density_scale.draw_value = true
+    density_scale.value_pos = :top
     vbox.append(Gtk::Label.new("Density (default 300):"))
-    vbox.append(density_entry)
+    vbox.append(density_scale)
 
     vbox.append(Gtk::Label.new("Source File:"))
     vbox.append(@source_label)
@@ -65,7 +67,7 @@ class GoblinApp
       source_file = @source_label.text
       output_file = @output_label.text
       mode = dropdown.active_text.downcase
-      density = density_entry.text.to_i
+      density = density_scale.value.to_i
 
       if source_file != "No file selected" && output_file != "No file selected"
         mode = if mode == "monochrome"
