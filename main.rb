@@ -81,7 +81,7 @@ class GoblinApp
       mode = dropdown.active_text.downcase
       density = density_scale.value.to_i
 
-      if !["No file selected", ""].include?(source_file)  && !["No file selected", ""].include?(oupuf_file)
+      if !["No file selected", ""].include?(source_file)  && !["No file selected", ""].include?(output_file)
         mode = if mode == "monochrome"
                  "monochrome"
                else
