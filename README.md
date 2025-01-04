@@ -16,7 +16,7 @@ Initial use case was to convert 300ppi (PDF) documents (grayscale or colored) to
 E.g. a PDF document with 300ppi and about 3-4MB in grayscale can be reduced to about 40-75KB(!) in monochrome.
 
 ## Requirements
-* Ruby >= 2.7
+* Ruby >= 2.4
 * GTK4
 * ImageMagick
 
