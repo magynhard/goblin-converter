@@ -4,4 +4,12 @@
 [![GTK](https://img.shields.io/badge/_-magick-Sub?style=plastic&color=gray&logo=gnome-terminal&logoColor=)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=plastic&logo=mit)](LICENSE)
 
-> A simple PDF converter for GTK using magick
+> A simple PDF converter GUI for GTK using magick
+
+## Requirements
+* Ruby >= 2.7
+* GTK4
+* ImageMagick
+
+## Setup
+
