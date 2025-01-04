@@ -3,7 +3,7 @@ require 'shellwords'
 
 class GoblinApp
   def initialize
-    @app = Gtk::Application.new("com.example.Goblin", :flags_none)
+    @app = Gtk::Application.new("de.magynhard.goblin", :flags_none)
 
     @app.signal_connect("activate") do |application|
       create_window(application)
@@ -12,7 +12,7 @@ class GoblinApp
 
   def create_window(application)
     window = Gtk::ApplicationWindow.new(application)
-    window.set_title("Goblin")
+    window.set_title("Goblin PDF converter")
     window.set_default_size(400, 300)
 
     vbox = Gtk::Box.new(:vertical, 10)
@@ -32,7 +32,10 @@ class GoblinApp
 
     source_button.signal_connect("clicked") do
       open_file_dialog(window, "Select PDF Source File", Gtk::FileChooserAction::OPEN) do |file|
-        @source_entry.text = file if file
+        if file
+          @source_entry.text = file
+          @output_entry.text = file.gsub(/\.pdf$/, "_sw.pdf") if @output_entry.text == "No file selected"
+        end
       end
     end
 
@@ -61,8 +64,24 @@ class GoblinApp
       adjustment.value = snapped_value unless value == snapped_value
     end
 
+    adjustment2 = Gtk::Adjustment.new(66, 0, 100, 1, 1, 0)
+    threshold_scale = Gtk::Scale.new(:horizontal, adjustment2)
+    threshold_scale.value = 66
+    threshold_scale.draw_value = true
+    threshold_scale.value_pos = :top
+
+    threshold_scale.signal_connect("value-changed") do
+      value = threshold_scale.value
+      step = adjustment2.step_increment
+      snapped_value = ((value / step).round) * step
+      adjustment2.value = snapped_value unless value == snapped_value
+    end
+
     vbox.append(Gtk::Label.new("Density (default 300):"))
     vbox.append(density_scale)
+
+    vbox.append(Gtk::Label.new("Threshold (default 66%):"))
+    vbox.append(threshold_scale)
 
     vbox.append(Gtk::Label.new("Source File:"))
     vbox.append(@source_entry)
@@ -80,14 +99,15 @@ class GoblinApp
       output_file = @output_entry.text
       mode = dropdown.active_text.downcase
       density = density_scale.value.to_i
+      threshold = threshold_scale.value.to_i
 
-      if !["No file selected", ""].include?(source_file)  && !["No file selected", ""].include?(output_file)
+      if !["No file selected", ""].include?(source_file)  && !["No file selected", "", nil].include?(output_file)
         mode = if mode == "monochrome"
                  "monochrome"
                else
                  "monochrome"
                end
-        command = "magick -density #{density} #{Shellwords.escape(source_file)} -threshold 66% -#{mode} -strip -compress Fax #{Shellwords.escape(output_file)}"
+        command = "magick -density #{density} #{Shellwords.escape(source_file)} -threshold #{threshold}% -#{mode} -strip -compress Fax #{Shellwords.escape(output_file)}"
         system(command)
         show_custom_dialog(window, "Conversion Complete!", :info)
       else
