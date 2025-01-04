@@ -10,7 +10,7 @@ GEM
     cairo-gobject (4.2.5)
       cairo (>= 1.16.2)
       glib2 (= 4.2.5)
-    fiddle (1.1.6)
+    fiddle (1.0.9)
     gdk4 (4.2.5)
       cairo-gobject (= 4.2.5)
       gdk_pixbuf2 (= 4.2.5)
@@ -28,8 +28,8 @@ GEM
     gtk4 (4.2.5)
       atk (= 4.2.5)
       gdk4 (= 4.2.5)
-    json (2.9.1)
-    matrix (0.4.2)
+    json (2.7.6)
+    matrix (0.1.0)
     native-package-installer (1.1.9)
     pango (4.2.5)
       cairo-gobject (= 4.2.5)
@@ -41,6 +41,7 @@ GEM
     shellwords (0.2.2)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
