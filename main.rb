@@ -15,7 +15,8 @@ class GoblinApp
   end
 
   def create_window(application)
-    window = Adwaita::ApplicationWindow.new(application)
+    window = Gtk::Window.new()
+    window.set_application(application)
     window.set_title("Goblin PDF converter")
     window.set_default_size(400, 300)
 
@@ -119,7 +120,7 @@ class GoblinApp
       end
     end
 
-    window.set_content(vbox)
+    window.child = vbox
     window.present
   end
 
