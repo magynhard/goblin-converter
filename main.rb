@@ -2,10 +2,12 @@
 
 require 'gtk4'
 require 'shellwords'
+require 'adwaita'
 
 class GoblinApp
   def initialize
-    @app = Gtk::Application.new("de.magynhard.goblin", :flags_none)
+    Adwaita.init
+    @app = Adwaita::Application.new("de.magynhard.goblin", :flags_none)
 
     @app.signal_connect("activate") do |application|
       create_window(application)
@@ -13,7 +15,7 @@ class GoblinApp
   end
 
   def create_window(application)
-    window = Gtk::ApplicationWindow.new(application)
+    window = Adwaita::ApplicationWindow.new(application)
     window.set_title("Goblin PDF converter")
     window.set_default_size(400, 300)
 
@@ -117,7 +119,7 @@ class GoblinApp
       end
     end
 
-    window.child = vbox
+    window.set_content(vbox)
     window.present
   end
 
