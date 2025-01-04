@@ -21,8 +21,8 @@ class GoblinApp
     vbox.margin_start = 20
     vbox.margin_end = 20
 
-    source_button = Gtk::Button.new(label: "Select Source File (PDF)")
-    output_button = Gtk::Button.new(label: "Select Output File (ODF)")
+    source_button = Gtk::Button.new(label: "Select Source File (PDF, PNG, JPG, ...)")
+    output_button = Gtk::Button.new(label: "Select Output File (PDF)")
 
     @source_entry = Gtk::Entry.new
     @source_entry.text = "No file selected"
@@ -40,7 +40,7 @@ class GoblinApp
     end
 
     output_button.signal_connect("clicked") do
-      open_file_dialog(window, "Select Output ODF File", Gtk::FileChooserAction::SAVE) do |file|
+      open_file_dialog(window, "Select Output PDF File", Gtk::FileChooserAction::SAVE) do |file|
         @output_entry.text = file if file
       end
     end
