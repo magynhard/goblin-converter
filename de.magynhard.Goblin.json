@@ -5,8 +5,9 @@
   "sdk": "org.gnome.Sdk",
   "command": "run.sh",
   "finish-args": [
-    "--socket=x11",
-    "--share=network"
+    "--socket=wayland",
+    "--share=network",
+    "--device=dri"
   ],
   "modules": [
     {
@@ -40,12 +41,17 @@
       "name": "run-script",
       "buildsystem": "simple",
       "build-commands": [
-        "install -D run.sh ${FLATPAK_DEST}/bin/run.sh"
+        "install -D run.sh ${FLATPAK_DEST}/bin/run.sh",
+        "install -D main.rb ${FLATPAK_DEST}/bin/main.rb"
       ],
       "sources": [
         {
           "type": "file",
           "path": "run.sh"
+        },
+        {
+          "type": "file",
+          "path": "main.rb"
         }
       ]
     },
