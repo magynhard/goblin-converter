@@ -17,7 +17,7 @@ class GoblinApp
   def create_window(application)
     window = Gtk::Window.new()
     window.set_application(application)
-    window.set_title("Goblin PDF converter")
+    window.set_title("Goblin Document Converter")
     window.set_default_size(400, 300)
 
     vbox = Gtk::Box.new(:vertical, 10)
@@ -36,7 +36,7 @@ class GoblinApp
     @output_entry.text = "No file selected"
 
     source_button.signal_connect("clicked") do
-      open_file_dialog(window, "Select PDF Source File", Gtk::FileChooserAction::OPEN) do |file|
+      open_file_dialog(window, "Select Source File", Gtk::FileChooserAction::OPEN) do |file|
         if file
           @source_entry.text = file
           @output_entry.text = file.gsub(/\.pdf$/, "_sw.pdf") if @output_entry.text == "No file selected"
@@ -45,7 +45,7 @@ class GoblinApp
     end
 
     output_button.signal_connect("clicked") do
-      open_file_dialog(window, "Select Output PDF File", Gtk::FileChooserAction::SAVE) do |file|
+      open_file_dialog(window, "Select Output File", Gtk::FileChooserAction::SAVE) do |file|
         @output_entry.text = file if file
       end
     end
