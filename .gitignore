@@ -2,3 +2,4 @@
 /target
 /.ruby-version
 /tmp
+/.flatpak-builder
