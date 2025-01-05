@@ -1,7 +1,7 @@
 {
   "app-id": "de.magynhard.goblin",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "3.22",
+  "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
   "command": "main.rb",
   "finish-args": [
