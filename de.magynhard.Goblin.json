@@ -1,5 +1,5 @@
 {
-  "app-id": "de.magynhard.goblin",
+  "app-id": "de.magynhard.Goblin",
   "runtime": "org.gnome.Platform",
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
@@ -33,6 +33,19 @@
           "type": "file",
           "url": "https://rubygems.org/downloads/bundler-2.6.2.gem",
           "sha256": "4b89756e1b05390ff678491119a10f0973a2045cc9fcb227b02a9396b28f7d74"
+        }
+      ]
+    },
+    {
+      "name": "run-script",
+      "buildsystem": "simple",
+      "build-commands": [
+        "install -D run.sh ${FLATPAK_DEST}/bin/run.sh"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "path": "run.sh"
         }
       ]
     },
