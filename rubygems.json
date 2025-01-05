@@ -2,7 +2,8 @@
   "name": "rubygems",
   "buildsystem": "simple",
   "build-commands": [
-    "bundle install --local"
+    "bundle install --local",
+    "cp run.sh $FLATPAK_DESTDIR/bin/run.sh"
   ],
   "sources": [
     "source.json",
