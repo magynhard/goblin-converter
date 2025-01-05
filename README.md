@@ -1,4 +1,4 @@
-# Goblin document converter
+# Goblin Document Converter
 [![Ruby](https://img.shields.io/badge/_-Ruby-Sub?style=plastic&color=gray&logo=ruby&logoColor=red)](#)
 [![GTK](https://img.shields.io/badge/_-GTK-Sub?style=plastic&color=gray&logo=gtk&logoColor=green)](#)
 [![GTK](https://img.shields.io/badge/_-magick-Sub?style=plastic&color=gray&logo=gnome-terminal&logoColor=)](#)
@@ -13,10 +13,28 @@ Initial use case was to convert 300ppi (PDF) documents (grayscale or colored) to
 
 E.g. a PDF document with 300ppi and about 3-4MB in grayscale can be reduced to about 40-75KB(!) in monochrome.
 
-## Requirements
-* Ruby >= 2.4
+# Setup
+This app is distributed as a Flatpak package.
+
+# Development
+## Requirements (development)
+* Ruby 3.2
 * GTK4
-* ImageMagick
+* ImageMagick 7
+* Ghostscript 10
+* Flatpak & Flatpak Builder
 
-## Setup
+## Install local for development
+```
+./install.sh
+```
 
+## Build package
+```
+flatpak-builder --force-clean build de.magynhard.Goblin.json
+```
+
+## Run local package
+```
+flatpak-builder --run build de.magynhard.Goblin.json run.sh
+```
