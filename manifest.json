@@ -1,0 +1,41 @@
+{
+  "app-id": "de.magynhard.goblin",
+  "runtime": "org.gnome.Platform",
+  "runtime-version": "3.22",
+  "sdk": "org.gnome.Sdk",
+  "command": "main.rb",
+  "finish-args": [
+    "--socket=x11",
+    "--share=network"
+  ],
+  "modules": [
+    {
+      "name": "ruby",
+      "config-opts": [
+        "--disable-install-doc"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.10.tar.gz",
+          "sha256": "93d06711795bfb76dbe7e765e82cdff3ddf9d82eff2a1f24dead9bb506eaf2d0"
+        }
+      ]
+    },
+    {
+      "name": "bundler",
+      "buildsystem": "simple",
+      "build-commands": [
+        "gem install --local bundler-2.2.25.gem"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "url": "https://rubygems.org/downloads/bundler-2.2.25.gem",
+          "sha256": "422237ffbbf2ceb05e696df7abb1bd1a82b5b1823eb2aeb6193312a60c319d8d"
+        }
+      ]
+    },
+    "rubygems.json"
+  ]
+}
