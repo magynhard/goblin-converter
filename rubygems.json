@@ -8,26 +8,8 @@
     "source.json",
     {
       "type": "file",
-      "url": "https://rubygems.org/gems/fiddle-1.0.9.gem",
-      "sha256": "2d0fc3f47d3db7e75d2dbd786faa1d172d9fc50e5fcd12aee184d66e20165eb4",
-      "dest": "vendor/cache"
-    },
-    {
-      "type": "file",
-      "url": "https://rubygems.org/gems/pkg-config-1.5.8.gem",
-      "sha256": "66f3f90094e5bfb7a66e371ee2dcd55616a21001ebff9bea4419f9457b4a9ef7",
-      "dest": "vendor/cache"
-    },
-    {
-      "type": "file",
-      "url": "https://rubygems.org/gems/cairo-gobject-4.2.5.gem",
-      "sha256": "b77c25144e7252e00b98c243d77ce21e65850ab5877128a895ba34df17659b22",
-      "dest": "vendor/cache"
-    },
-    {
-      "type": "file",
-      "url": "https://rubygems.org/gems/glib2-4.2.5.gem",
-      "sha256": "e92e1cb8bde382a977811a43ad8c09c96f818420f1fd9c4bd298d177a5d0de6b",
+      "url": "https://rubygems.org/gems/adwaita-4.2.5.gem",
+      "sha256": "71cf1b98d9af5080db3273ada235fba7fb1cc12926ba4d1530ad813ecf6d2468",
       "dest": "vendor/cache"
     },
     {
@@ -38,20 +20,20 @@
     },
     {
       "type": "file",
-      "url": "https://rubygems.org/gems/red-colors-0.4.0.gem",
-      "sha256": "2356eba0782ca6c44caa47645fbf942a2b16d85905c35c6e3f80d5ff0c04929a",
-      "dest": "vendor/cache"
-    },
-    {
-      "type": "file",
-      "url": "https://rubygems.org/gems/gobject-introspection-4.2.5.gem",
-      "sha256": "02518f347cbcf58b5f25b0bb6c784d8177e981d1b1ee45f053f812939d5db31d",
-      "dest": "vendor/cache"
-    },
-    {
-      "type": "file",
       "url": "https://rubygems.org/gems/cairo-1.17.14.gem",
       "sha256": "1761a9b8ed268fe3224a38e40e01ac69efdf27681d4ae7f886c7e4ad8b8dc838",
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/cairo-gobject-4.2.5.gem",
+      "sha256": "b77c25144e7252e00b98c243d77ce21e65850ab5877128a895ba34df17659b22",
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/fiddle-1.1.6.gem",
+      "sha256": "79e8d909e602d979434cf9fccfa6e729cb16432bb00e39c7596abe6bee1249ab",
       "dest": "vendor/cache"
     },
     {
@@ -62,26 +44,8 @@
     },
     {
       "type": "file",
-      "url": "https://rubygems.org/gems/native-package-installer-1.1.9.gem",
-      "sha256": "fbb41b6b22750791a4304f0a0aeea3dd837668892117f49c4caf2e8e0f4e792f",
-      "dest": "vendor/cache"
-    },
-    {
-      "type": "file",
-      "url": "https://rubygems.org/gems/gtk4-4.2.5.gem",
-      "sha256": "d7e65c5336c35a3defe659d6148d289fc2dcc96fabb483872a9e8bc76f23585f",
-      "dest": "vendor/cache"
-    },
-    {
-      "type": "file",
-      "url": "https://rubygems.org/gems/json-2.7.6.gem",
-      "sha256": "2d9aba03af3167401e8cf8de50daed5b5aec5b5a622f15c4b7ce2fd8d49a070f",
-      "dest": "vendor/cache"
-    },
-    {
-      "type": "file",
-      "url": "https://rubygems.org/gems/matrix-0.1.0.gem",
-      "sha256": "42d4c00e6bd700f07ebda2fb743d5ce7bb728de3cdedc29341e68d8a8d50a94d",
+      "url": "https://rubygems.org/gems/gdk_pixbuf2-4.2.5.gem",
+      "sha256": "77813f47873160a1e76cb8cbf936e96ed3e06d7953779ecf595c2a234a6ac712",
       "dest": "vendor/cache"
     },
     {
@@ -92,20 +56,62 @@
     },
     {
       "type": "file",
+      "url": "https://rubygems.org/gems/glib2-4.2.5.gem",
+      "sha256": "e92e1cb8bde382a977811a43ad8c09c96f818420f1fd9c4bd298d177a5d0de6b",
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/gobject-introspection-4.2.5.gem",
+      "sha256": "02518f347cbcf58b5f25b0bb6c784d8177e981d1b1ee45f053f812939d5db31d",
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/gtk4-4.2.5.gem",
+      "sha256": "d7e65c5336c35a3defe659d6148d289fc2dcc96fabb483872a9e8bc76f23585f",
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/json-2.9.1.gem",
+      "sha256": "d2bdef4644052fad91c1785d48263756fe32fcac08b96a20bb15840e96550d11",
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/matrix-0.4.2.gem",
+      "sha256": "71083ccbd67a14a43bfa78d3e4dc0f4b503b9cc18e5b4b1d686dc0f9ef7c4cc0",
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/native-package-installer-1.1.9.gem",
+      "sha256": "fbb41b6b22750791a4304f0a0aeea3dd837668892117f49c4caf2e8e0f4e792f",
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
       "url": "https://rubygems.org/gems/pango-4.2.5.gem",
       "sha256": "dc7f735ce28e754fa3ca3610f7ebfaa95bf5c852e48d1a3b7c0a19f4ce786d04",
       "dest": "vendor/cache"
     },
     {
       "type": "file",
-      "url": "https://rubygems.org/gems/gdk_pixbuf2-4.2.5.gem",
-      "sha256": "77813f47873160a1e76cb8cbf936e96ed3e06d7953779ecf595c2a234a6ac712",
+      "url": "https://rubygems.org/gems/pkg-config-1.5.8.gem",
+      "sha256": "66f3f90094e5bfb7a66e371ee2dcd55616a21001ebff9bea4419f9457b4a9ef7",
       "dest": "vendor/cache"
     },
     {
       "type": "file",
-      "url": "https://rubygems.org/gems/adwaita-4.2.5.gem",
-      "sha256": "71cf1b98d9af5080db3273ada235fba7fb1cc12926ba4d1530ad813ecf6d2468",
+      "url": "https://rubygems.org/gems/red-colors-0.4.0.gem",
+      "sha256": "2356eba0782ca6c44caa47645fbf942a2b16d85905c35c6e3f80d5ff0c04929a",
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/shellwords-0.2.2.gem",
+      "sha256": "b8695a791de2f71472de5abdc3f4332f6535a4177f55d8f99e7e44266cd32f94",
       "dest": "vendor/cache"
     }
   ]

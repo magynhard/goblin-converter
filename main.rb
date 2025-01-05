@@ -2,6 +2,7 @@
 
 require 'gtk4'
 require 'adwaita'
+require 'shellwords'
 
 class GoblinApp
   def initialize

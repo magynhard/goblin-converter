@@ -40,6 +40,7 @@ GEM
     red-colors (0.4.0)
       json
       matrix
+    shellwords (0.2.2)
 
 PLATFORMS
   x86_64-linux
@@ -47,6 +48,7 @@ PLATFORMS
 DEPENDENCIES
   adwaita
   gtk4
+  shellwords
 
 BUNDLED WITH
    2.2.25
