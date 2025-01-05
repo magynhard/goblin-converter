@@ -1,4 +1,6 @@
 # Goblin Document Converter
+![GitHub Release](https://img.shields.io/github/v/release/magynhard/goblin?style=plastic&color=default&label)
+[![Flatpak](https://img.shields.io/badge/_-Flatpak-Sub?style=plastic&color=gray&logo=flatpak&logoColor=blu)](#)
 [![Ruby](https://img.shields.io/badge/_-Ruby-Sub?style=plastic&color=gray&logo=ruby&logoColor=red)](#)
 [![GTK](https://img.shields.io/badge/_-GTK-Sub?style=plastic&color=gray&logo=gtk&logoColor=green)](#)
 [![GTK](https://img.shields.io/badge/_-magick-Sub?style=plastic&color=gray&logo=gnome-terminal&logoColor=)](#)

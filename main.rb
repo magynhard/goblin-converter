@@ -17,7 +17,7 @@ class GoblinApp
   def create_window(application)
     window = Gtk::Window.new()
     window.set_application(application)
-    window.set_title("Goblin Document Converter")
+    window.set_title("Goblin")
     window.set_default_size(400, 300)
 
     vbox = Gtk::Box.new(:vertical, 10)
