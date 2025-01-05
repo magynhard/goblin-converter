@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'gtk4'
-require 'shellwords'
 require 'adwaita'
 
 class GoblinApp
