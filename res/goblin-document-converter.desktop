@@ -2,7 +2,7 @@
 Name=Goblin (dev)
 Comment=A simple document converter
 Exec=/bin/bash --login -c "ruby '{{path_to_goblin_document_converter_root}}/main.rb'"
-Icon={{path_to_goblin_document_converter_root}}/res/logo.png
+Icon={{path_to_goblin_document_converter_root}}/res/logo.svg
 Terminal=false
 Type=Application
 Categories=Utility;Application;
