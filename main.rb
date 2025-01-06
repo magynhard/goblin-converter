@@ -30,16 +30,16 @@ class GoblinApp
     output_button = Gtk::Button.new(label: "Select Output File (PDF)")
 
     @source_entry = Gtk::Entry.new
-    @source_entry.text = "No file selected"
+    @source_entry.text = ""
 
     @output_entry = Gtk::Entry.new
-    @output_entry.text = "No file selected"
+    @output_entry.text = ""
 
     source_button.signal_connect("clicked") do
       open_file_dialog(window, "Select Source File", Gtk::FileChooserAction::OPEN) do |file|
         if file
           @source_entry.text = file
-          @output_entry.text = file.gsub(/\.pdf$/, "_sw.pdf") if @output_entry.text == "No file selected"
+          @output_entry.text = file.gsub(/\.pdf$/, "_sw.pdf")
         end
       end
     end
@@ -106,7 +106,7 @@ class GoblinApp
       density = density_scale.value.to_i
       threshold = threshold_scale.value.to_i
 
-      if !["No file selected", ""].include?(source_file)  && !["No file selected", "", nil].include?(output_file)
+      if !["", nil].include?(source_file)  && !["", nil].include?(output_file)
         mode = if mode == "monochrome"
                  "monochrome"
                else
