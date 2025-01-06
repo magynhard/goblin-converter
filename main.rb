@@ -12,10 +12,13 @@ class GoblinApp
     @app.signal_connect("activate") do |application|
       create_window(application)
     end
+
+    add_actions
   end
 
   def create_window(application)
-    window = Gtk::Window.new()
+    # window = Gtk::Window.new()
+    window = Gtk::ApplicationWindow.new(application)
     window.set_application(application)
     window.set_title("Goblin")
     window.set_default_size(400, 300)
@@ -25,6 +28,8 @@ class GoblinApp
     vbox.margin_bottom = 20
     vbox.margin_start = 20
     vbox.margin_end = 20
+
+    create_menu(window)
 
     source_button = Gtk::Button.new(label: "Select Source File (PDF, PNG, JPG, ...)")
     output_button = Gtk::Button.new(label: "Select Output File (PDF)")
@@ -122,6 +127,81 @@ class GoblinApp
 
     window.child = vbox
     window.present
+  end
+
+  def create_menu(window)# Create a box to hold the menu button
+    # Create a header bar (top bar)
+    header_bar = Gtk::HeaderBar.new
+
+    # Create a box to hold the header and sub-header
+    header_box = Gtk::Box.new(:vertical, 0)
+
+    # Create the main header label (big title)
+    main_title = Gtk::Label.new
+    main_title.set_markup('<span font_weight="bold" font_size="11000" foreground="white">Goblin</span>')
+    main_title.halign = :center # Align to the start (left)
+
+    # Create the sub-header label
+    sub_title = Gtk::Label.new
+    sub_title.set_markup('<span font_size="8000" foreground="gray">~Path or other info</span>')
+    sub_title.halign = :center # Align to the start (left)
+
+    # Add labels to the header box
+    header_box.append(main_title)
+    header_box.append(sub_title)
+
+    # Add the header box to the header bar
+    header_bar.title_widget = header_box
+
+    # Create a Menu Button styled as a hamburger menu
+    burger_menu = Gtk::MenuButton.new
+    burger_menu.icon_name = 'open-menu-symbolic' # Standard hamburger icon in GTK
+
+    # Create a PopoverMenu for the hamburger menu
+    popover = Gtk::PopoverMenu.new
+    burger_menu.popover = popover
+
+    # Create a Gio::Menu for the popover
+    menu_model = Gio::Menu.new
+    menu_model.append('Settings', 'app.settings')
+    menu_model.append('Help', 'app.help')
+    menu_model.append('Exit', 'app.quit')
+
+    # Set the menu model to the popover
+    popover.menu_model = menu_model
+
+    # Add actions for the menu items
+    @app.add_action(Gio::SimpleAction.new('settings').tap { |action|
+      action.signal_connect('activate') { puts 'Settings clicked!' }
+    })
+    @app.add_action(Gio::SimpleAction.new('help').tap { |action|
+      action.signal_connect('activate') { puts 'Help clicked!' }
+    })
+    @app.add_action(Gio::SimpleAction.new('quit').tap { |action|
+      action.signal_connect('activate') { window.close }
+    })
+
+    # Add the burger menu to the header bar
+    header_bar.pack_end(burger_menu)
+
+    # Set the header bar as the title bar of the window
+    window.set_titlebar(header_bar)
+  end
+
+  def add_actions
+    about_action = Gio::SimpleAction.new("about")
+    about_action.signal_connect("activate") do
+      show_about_dialog
+    end
+    @app.add_action(about_action)
+  end
+
+  def show_about_dialog
+    dialog = Gtk::AboutDialog.new
+    dialog.program_name = "Goblin"
+    dialog.version = "1.0"
+    dialog.comments = "This is a sample application."
+    dialog.present
   end
 
   def open_file_dialog(parent, title, action)
