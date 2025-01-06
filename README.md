@@ -6,7 +6,7 @@
 [![GTK](https://img.shields.io/badge/_-magick-Sub?style=plastic&color=gray&logo=gnome-terminal&logoColor=)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=plastic&logo=mit)](LICENSE)
 
-<img src="res/logo.png" style="height: 128px;">
+<img src="res/logo.svg" style="height: 96px;">
 
 >
 > A simple document converter GUI for GTK using magick
