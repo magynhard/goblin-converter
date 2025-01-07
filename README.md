@@ -1,4 +1,4 @@
-# Goblin Document Converter
+# Goblin Doc
 ![GitHub Release](https://img.shields.io/github/v/release/magynhard/goblin?style=plastic&color=default&label=GitHub&logo=github)
 [![Flatpak](https://img.shields.io/badge/_-Flatpak-Sub?style=plastic&color=gray&logo=flatpak&logoColor=blu)](#)
 [![Ruby](https://img.shields.io/badge/_-Ruby-Sub?style=plastic&color=gray&logo=ruby&logoColor=red)](#)
@@ -33,10 +33,10 @@ This app is distributed as a Flatpak package.
 
 ## Build package
 ```
-flatpak-builder --force-clean build de.magynhard.Goblin.json
+flatpak-builder --force-clean build de.magynhard.Goblin.yaml
 ```
 
 ## Run local package
 ```
-flatpak-builder --run build de.magynhard.Goblin.json run.sh
+flatpak-builder --run build de.magynhard.Goblin.yaml goblin-doc
 ```

@@ -20,7 +20,7 @@ class GoblinApp
     # window = Gtk::Window.new()
     window = Gtk::ApplicationWindow.new(application)
     window.set_application(application)
-    window.set_title("Goblin")
+    window.set_title("Goblin Doc")
     window.set_default_size(400, 300)
 
     vbox = Gtk::Box.new(:vertical, 10)
@@ -143,8 +143,10 @@ class GoblinApp
 
     # Create the sub-header label
     sub_title = Gtk::Label.new
-    sub_title.set_markup('<span font_size="8000" foreground="gray">~Path or other info</span>')
+    sub_title.set_markup('<span font_size="8000" foreground="gray">~Path or other info and some more text and more info about anything</span>')
     sub_title.halign = :center # Align to the start (left)
+    sub_title.set_ellipsize(Pango::EllipsizeMode::MIDDLE) # Truncate with ellipsis at the end
+    sub_title.set_max_width_chars(50)
 
     # Add labels to the header box
     header_box.append(main_title)
@@ -165,7 +167,7 @@ class GoblinApp
     menu_model = Gio::Menu.new
     menu_model.append('Settings', 'app.settings')
     menu_model.append('Help', 'app.help')
-    menu_model.append('Exit', 'app.quit')
+    menu_model.append('About', 'app.about')
 
     # Set the menu model to the popover
     popover.menu_model = menu_model
@@ -177,8 +179,8 @@ class GoblinApp
     @app.add_action(Gio::SimpleAction.new('help').tap { |action|
       action.signal_connect('activate') { puts 'Help clicked!' }
     })
-    @app.add_action(Gio::SimpleAction.new('quit').tap { |action|
-      action.signal_connect('activate') { window.close }
+    @app.add_action(Gio::SimpleAction.new('about').tap { |action|
+      action.signal_connect('activate') { show_about_dialog(window) }
     })
 
     # Add the burger menu to the header bar
@@ -191,17 +193,137 @@ class GoblinApp
   def add_actions
     about_action = Gio::SimpleAction.new("about")
     about_action.signal_connect("activate") do
-      show_about_dialog
+      show_about_dialog(window)
     end
     @app.add_action(about_action)
   end
 
-  def show_about_dialog
-    dialog = Gtk::AboutDialog.new
-    dialog.program_name = "Goblin"
-    dialog.version = "1.0"
-    dialog.comments = "This is a sample application."
-    dialog.present
+  def show_about_dialog(parent)
+    dialog = Adwaita::AboutDialog.new('/de/magynhard/GoblinDoc/metainfo.xml')
+    #dialog.program_name = "Goblin"
+    #dialog.version = "1.0"
+    #dialog.comments = "This is a sample application."
+    #dialog.developers = ["John Doe", "Jane Smith"]
+    #dialog.artists = ["Alice Brown", "Bob Green"]
+    #dialog.designers = ["Eve White", "Frank Black"]
+    #dialoag.translator_credits = "Goblin is available in many languages."
+    dialog.show
+    dialog.present(parent)
+  end
+
+  def show_about_dialog2(parent)
+    # Create an About dialog
+    about_dialog = Gtk::AboutDialog.new
+    about_dialog.transient_for = parent
+    about_dialog.modal = true
+
+    # Set application details
+    about_dialog.program_name = "My Application"
+    about_dialog.version = "1.0"
+    about_dialog.logo_icon_name = "text-editor" # Use an icon from your icon theme
+    about_dialog.authors = ["John Doe", "Jane Smith"]
+    about_dialog.documenters = ["Documentation Team"]
+    about_dialog.website = "https://example.com"
+    about_dialog.website_label = "Visit Our Website"
+    about_dialog.license = "GPL-3.0 or later"
+    about_dialog.comments = "A simple application written in GTK4 using Ruby."
+    about_dialog.copyright = "© 2025 My Company"
+
+    # Show the About dialog
+    about_dialog.show
+  end
+
+  def show_about_window(parent)
+    # Create an About dialog window
+    about_window = Gtk::Window.new()
+    about_window.title = "About MyApp"
+    about_window.transient_for = parent
+    about_window.modal = true
+    about_window.set_default_size(400, 500)
+
+    # Remove the default title bar and use a custom header bar
+    about_window.decorated = false
+
+    # Create a header bar for the top
+    header_bar = Gtk::HeaderBar.new
+    header_bar.show_title_buttons = true
+    header_bar.title_widget = nil # No title
+    about_window.set_titlebar(header_bar)
+
+    # Create a vertical box for the layout
+    vbox = Gtk::Box.new(:vertical, 20)
+    vbox.margin_top = 20
+    vbox.margin_bottom = 20
+    vbox.margin_start = 20
+    vbox.margin_end = 20
+    about_window.set_child(vbox)
+
+    # App logo
+    logo = Gtk::Image.new(icon_name: "applications-system-symbolic", pixel_size: 96)
+    vbox.append(logo)
+
+    # App title and subtitle
+    title_label = Gtk::Label.new
+    title_label.set_markup("<span size='large' weight='bold'>My Application</span>")
+    title_label.halign = :center
+    vbox.append(title_label)
+
+    subtitle_label = Gtk::Label.new("A GNOME Project")
+    subtitle_label.halign = :center
+    subtitle_label.margin_bottom = 10
+    vbox.append(subtitle_label)
+
+    # App version as a badge
+    version_label = Gtk::Label.new
+    version_label.set_markup("<span background='#E5E5E5' foreground='#000' size='small' weight='bold' style='italic'> 1.0 </span>")
+    version_label.halign = :center
+    version_label.margin_bottom = 20
+    vbox.append(version_label)
+
+    # Create a list of actions as buttons
+    action_list = Gtk::Box.new(:vertical, 10)
+
+    # Website button
+    website_button = create_action_button("Website", "web-browser-symbolic") do
+      Gtk.show_uri(parent, "https://example.com")
+    end
+    action_list.append(website_button)
+
+    # Report Issue button
+    report_button = create_action_button("Report an Issue", "help-symbolic") do
+      Gtk.show_uri(parent, "https://example.com/issues")
+    end
+    action_list.append(report_button)
+
+    # Contributors button
+    contributors_button = create_action_button("Contributors", "emblem-people-symbolic") do
+      # Show a contributors dialog or page
+      puts "Contributors clicked"
+    end
+    action_list.append(contributors_button)
+
+    # Add the action list to the vbox
+    vbox.append(action_list)
+
+    about_window.present
+  end
+
+
+  def create_action_button(label, icon_name, &action)
+    button = Gtk::Button.new
+    button.halign = :fill
+    button.valign = :center
+
+    hbox = Gtk::Box.new(:horizontal, 10)
+    icon = Gtk::Image.new(icon_name: icon_name, pixel_size: 16)
+    hbox.append(icon)
+
+    label_widget = Gtk::Label.new(label)
+    hbox.append(label_widget)
+
+    button.set_child(hbox)
+    button.signal_connect("clicked", &action)
+    button
   end
 
   def open_file_dialog(parent, title, action)

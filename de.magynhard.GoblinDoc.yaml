@@ -3,10 +3,11 @@
   "runtime": "org.gnome.Platform",
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
-  "command": "run.sh",
+  "command": "goblin-doc",
   "finish-args": [
     "--device=dri",
     "--share=ipc",
+    "--socket=session-bus",
     "--socket=fallback-x11",
     "--socket=wayland",
     "--share=network",
@@ -72,13 +73,13 @@
       "name": "run-script",
       "buildsystem": "simple",
       "build-commands": [
-        "install -D run.sh ${FLATPAK_DEST}/bin/run.sh",
+        "install -D goblin-doc ${FLATPAK_DEST}/bin/goblin-doc",
         "install -D main.rb ${FLATPAK_DEST}/bin/main.rb"
       ],
       "sources": [
         {
           "type": "file",
-          "path": "run.sh"
+          "path": "goblin-doc"
         },
         {
           "type": "file",
@@ -86,6 +87,20 @@
         }
       ]
     },
-    "rubygems.json"
+    {
+      "name": "goblin",
+      "buildsystem": "simple",
+      "build-commands": [
+        "bundle install --local"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/magynhard/goblin.git",
+          "tag": "0.1.1"
+        }
+      ]
+    },
+    "rubygems.yaml"
   ]
 }

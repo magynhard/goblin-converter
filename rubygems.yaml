@@ -2,10 +2,8 @@
   "name": "rubygems",
   "buildsystem": "simple",
   "build-commands": [
-    "bundle install --local"
   ],
   "sources": [
-    "source.json",
     {
       "type": "file",
       "url": "https://rubygems.org/gems/adwaita-4.2.5.gem",

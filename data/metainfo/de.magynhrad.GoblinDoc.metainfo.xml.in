@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2014 Florian Müllner <fmuellner@gnome.org>
+
+SPDX-License-Identifier: CC0-1.0
+-->
+
+<component type="desktop">
+  <id>de.magynhard.GoblinDoc.desktop</id>
+
+  <name>Goblin Doc</name>
+  <summary>Simple document converter</summary>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+
+  <url type="homepage">https://github.com/magynhard/GoblinDoc</url>
+  <url type="bugtracker">https://github.com/magynhard/GoblinDoc/issues/</url>
+  <url type="vcs-browser">https://github.com/magynhard/GoblinDoc/</url>
+
+  <developer_name translatable="no">Matthäus J. N. Beyrle</developer_name>
+  <developer id="de.magynhard">
+    <name translatable="no">Matthäus J. N. Beyrle</name>
+  </developer>
+  <update_contact>GoblinDoc.github.com@mail.magynhard.de</update_contact>
+
+  <translation type="gettext">goblin-doc</translation>
+  <launchable type="desktop-id">de.magynhard.GoblinDoc.desktop</launchable>
+
+  <kudos>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>HighContrast</kudo>
+    <kudo>ModernToolkit</kudo>
+    <kudo>Notifications</kudo>
+    <kudo>UserDocs</kudo>
+  </kudos>
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
+
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-chat">intense</content_attribute>
+    <content_attribute id="social-contacts">intense</content_attribute>
+  </content_rating>
+
+  <description>
+    <p>
+      A simple document converter written in GTK4 and Ruby.
+    </p>
+  </description>
+
+  <releases>
+    <release version="0.1" date="2025-01-07">
+      <description>
+        <p>Initial beta release with basic features.</p>
+      </description>
+    </release>
+  </releases>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/magynhard/goblin-doc/refs/heads/master/data/metainfo/goblin-doc-main.png</image>
+    </screenshot>
+  </screenshots>
+</component>

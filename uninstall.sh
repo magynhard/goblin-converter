@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Target path for the .desktop file
-DESKTOP_FILE="$HOME/.local/share/applications/goblin-document-converter.desktop"
+DESKTOP_FILE="$HOME/.local/share/applications/goblin-doc.desktop"
 
 # Remove the .desktop file
 if [ -f "$DESKTOP_FILE" ]; then

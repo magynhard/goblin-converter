@@ -25,9 +25,9 @@ CURRENT_PATH=$(pwd)
 bash -c "bundle install"
 
 # Target path for the .desktop file
-DESKTOP_FILE="$HOME/.local/share/applications/goblin-document-converter.desktop"
+DESKTOP_FILE="$HOME/.local/share/applications/goblin-doc.desktop"
 
 # Copy the .desktop file and replace placeholders
-sed "s|{{path_to_goblin_document_converter_root}}|$CURRENT_PATH|g" res/goblin-document-converter.desktop > "$DESKTOP_FILE"
+sed "s|{{path_to_goblin_document_converter_root}}|$CURRENT_PATH|g" res/goblin-doc.desktop > "$DESKTOP_FILE"
 
 echo "Installation complete. You can now run Goblin Document Converter from the applications menu."
