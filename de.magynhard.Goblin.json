@@ -5,13 +5,12 @@
   "sdk": "org.gnome.Sdk",
   "command": "run.sh",
   "finish-args": [
+    "--device=dri",
     "--share=ipc",
-    "--socket=x11",
     "--socket=fallback-x11",
     "--socket=wayland",
-    "--socket=session-bus",
-    "--device=dri",
     "--share=network",
+    "--filesystem=host",
     "--filesystem=xdg-run/gvfsd"
   ],
   "modules": [
