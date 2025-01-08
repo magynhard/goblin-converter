@@ -10,11 +10,11 @@ class GoblinApp
     @app = Adwaita::Application.new("de.magynhard.goblin", :flags_none)
 
     begin
-      resource_data = Gio::Resource.load(File.dirname(__FILE__) + '/gresource.gresource')
+      resource_data = Gio::Resource.load(File.expand_path(File.dirname(__FILE__) + '/../data/goblin-doc.gresource'))
       Gio::Resources.register(resource_data)
 
       # Überprüfen, ob eine bestimmte Ressource zugänglich ist
-      Gio::Resources.lookup_data('/de/magynhard/GoblinDoc/logo.svg', :none)
+      Gio::Resources.lookup_data('/de/magynhard/GoblinDoc/app-icon.svg', :none)
       puts "Ressource ist zugänglich."
 
       # Auflisten aller Ressourcen im angegebenen Pfad
@@ -27,7 +27,7 @@ class GoblinApp
     end
 
     # Setzen des Standard-App-Icons
-    Gtk::Window.set_default_icon_name('resource:///de/magynhard/GoblinDoc/logo.svg')
+    Gtk::Window.set_default_icon_name('resource:///de/magynhard/GoblinDoc/app-icon.svg')
 
     @app.signal_connect("activate") do |application|
       create_window(application)
@@ -214,10 +214,10 @@ class GoblinApp
 
   def show_about_dialog(parent)
     #dialog = Adwaita::AboutDialog.new('/de/magynhard/GoblinDoc/metainfo.xml')
-    dialog = Adwaita::AboutDialog.new #('resource:///de/magynhard/GoblinDoc/de.magynhrad.GoblinDoc.metainfo.xml.in')
+    dialog = Adwaita::AboutDialog.new #('resource:///de/magynhard/GoblinDoc/de.magynhard.GoblinDoc.metainfo.xml.in')
     dialog.application_name = "Goblin Doc"
     dialog.developer_name = "A simple document converter"
-    #dialog.application_icon = 'resource:///de/magynhard/GoblinDoc/logo.svg'
+    #dialog.application_icon = 'resource:///de/magynhard/GoblinDoc/app-icon.svg'
     dialog.website = "https://github.com/magynhard/goblin-doc"
     dialog.issue_url = "https://github.com/magynhard/goblin-doc/issues"
     dialog.version = "0.1.1"
@@ -256,7 +256,7 @@ class GoblinApp
     content_area.margin_end = 20
 
     # Icon hinzufügen
-    icon = Gtk::Image.new(resource: '/de/magynhard/GoblinDoc/logo.svg')
+    icon = Gtk::Image.new(resource: '/de/magynhard/GoblinDoc/app-icon.svg')
     icon.set_pixel_size(128)
     content_area.append(icon)
 

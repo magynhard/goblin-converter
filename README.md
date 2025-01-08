@@ -6,7 +6,7 @@
 [![GTK](https://img.shields.io/badge/_-magick-Sub?style=plastic&color=gray&logo=gnome-terminal&logoColor=)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=plastic&logo=mit)](LICENSE)
 
-<img src="res/logo.svg" style="height: 96px;">
+<img src="data/icons/app-icon.svg" style="height: 96px;">
 
 >
 > A simple document converter GUI for GTK using magick
@@ -43,5 +43,5 @@ flatpak-builder --run build de.magynhard.Goblin.yaml goblin-doc
 
 ## Create resources
 ```
-glib-compile-resources gresource.xml
+glib-compile-resources data/goblin-doc.gresource.xml
 ```

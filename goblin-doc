@@ -1,2 +1,18 @@
 #!/usr/bin/env bash
-ruby main.rb
+
+# Check if ruby command is available
+if ! command -v ruby &> /dev/null; then
+  echo "Error: Ruby is not installed. Please install Ruby >= 2.4 to continue."
+  exit 1
+fi
+
+# Check if bundle command is available
+if ! command -v bundle &> /dev/null; then
+  echo "Error: Bundler is not installed. Installing bundler ..."
+  bash -c "gem install bundler"
+fi
+
+# Run bundle install to install dependencies
+bash -c "bundle install > /dev/null 2>&1"
+
+bash -c "ruby /usr/share/goblin-doc/src/main.rb"

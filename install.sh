@@ -8,15 +8,18 @@ fi
 
 # Check if bundle command is available
 if ! command -v bundle &> /dev/null; then
-  echo "Error: Bundler is not installed. Please install Bundler by running 'gem install bundler'."
-  exit 1
+  echo "Error: Bundler is not installed. Installing bundler ..."
+  bash -c "gem install bundler"
 fi
 
-# Get the current Ruby version
-RUBY_VERSION=$(ruby -v | awk '{print $2}')
+# Überprüfen, ob die .ruby-version Datei existiert
+if [ ! -f .ruby-version ]; then
+  # Aktuelle Ruby-Version abrufen
+  RUBY_VERSION=$(ruby -v | awk '{print $2}')
 
-# Create .ruby-version file with the current Ruby version
-echo "$RUBY_VERSION" > .ruby-version
+  # .ruby-version Datei mit der aktuellen Ruby-Version erstellen
+  echo "$RUBY_VERSION" > .ruby-version
+fi
 
 # Get the current path
 CURRENT_PATH=$(pwd)

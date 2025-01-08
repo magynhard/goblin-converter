@@ -74,7 +74,10 @@
       "buildsystem": "simple",
       "build-commands": [
         "install -D goblin-doc ${FLATPAK_DEST}/bin/goblin-doc",
-        "install -D main.rb ${FLATPAK_DEST}/bin/main.rb"
+        "install -D src/main.rb ${FLATPAK_DEST}/bin/src/main.rb"
+        "install -D data/de.magynhard.GoblinDoc.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinDoc.metainfo.xml"
+        "install -D data/screenshots/01-goblin-doc-main.png ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.png"
+        "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinDoc.svg"
       ],
       "sources": [
         {
@@ -83,8 +86,20 @@
         },
         {
           "type": "file",
-          "path": "main.rb"
-        }
+          "path": "src/main.rb"
+        },
+        {
+          "type": "file",
+          "path": "data/de.magynhard.GoblinDoc.metainfo.xml"
+        },
+        {
+          "type": "file",
+          "path": "data/screenshots/01-goblin-doc-main.png"
+        },
+#        {
+#          "type": "dir",
+#          "path": "."
+#        }
       ]
     },
     {

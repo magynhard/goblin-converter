@@ -1,0 +1,11 @@
+[Application]
+name=de.magynhard.GoblinDoc
+runtime=org.gnome.Platform
+sdk=org.gnome.Sdk
+command=goblin-doc
+
+[Context]
+device=dri
+share=ipc;network
+socket=session-bus;fallback-x11;wayland
+filesystem=host;xdg-run/gvfsd

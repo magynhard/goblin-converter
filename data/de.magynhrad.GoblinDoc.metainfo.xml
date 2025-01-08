@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-SPDX-FileCopyrightText: 2014 Florian Müllner <fmuellner@gnome.org>
-
-SPDX-License-Identifier: CC0-1.0
--->
-
 <component type="desktop">
   <id>de.magynhard.GoblinDoc.desktop</id>
 
@@ -27,6 +20,10 @@ SPDX-License-Identifier: CC0-1.0
 
   <translation type="gettext">goblin-doc</translation>
   <launchable type="desktop-id">de.magynhard.GoblinDoc.desktop</launchable>
+
+  <categories>
+    <category>Utility</category>
+  </categories>
 
   <kudos>
     <kudo>HiDpiIcon</kudo>
@@ -67,7 +64,7 @@ SPDX-License-Identifier: CC0-1.0
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/magynhard/goblin-doc/refs/heads/master/data/metainfo/goblin-doc-main.png</image>
+      <image type="source">https://raw.githubusercontent.com/magynhard/goblin-doc/refs/heads/master/data/screenshots/01-goblin-doc-main.png</image>
     </screenshot>
   </screenshots>
 </component>
