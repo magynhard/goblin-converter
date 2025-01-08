@@ -9,11 +9,30 @@ class GoblinApp
     Adwaita.init
     @app = Adwaita::Application.new("de.magynhard.goblin", :flags_none)
 
+    begin
+      resource_data = Gio::Resource.load(File.dirname(__FILE__) + '/gresource.gresource')
+      Gio::Resources.register(resource_data)
+
+      # Überprüfen, ob eine bestimmte Ressource zugänglich ist
+      Gio::Resources.lookup_data('/de/magynhard/GoblinDoc/logo.svg', :none)
+      puts "Ressource ist zugänglich."
+
+      # Auflisten aller Ressourcen im angegebenen Pfad
+      resources = Gio::Resources.enumerate_children('/de/magynhard/GoblinDoc', :none)
+      resources.each do |resource|
+        puts resource
+      end
+    rescue GLib::FileError => e
+      puts "Ressource ist nicht zugänglich: #{e.message}"
+    end
+
+    # Setzen des Standard-App-Icons
+    Gtk::Window.set_default_icon_name('resource:///de/magynhard/GoblinDoc/logo.svg')
+
     @app.signal_connect("activate") do |application|
       create_window(application)
     end
 
-    add_actions
   end
 
   def create_window(application)
@@ -112,6 +131,8 @@ class GoblinApp
       threshold = threshold_scale.value.to_i
 
       if !["", nil].include?(source_file)  && !["", nil].include?(output_file)
+        info = show_custom_dialog(window, "Converting...", :info)
+        sleep 0.5
         mode = if mode == "monochrome"
                  "monochrome"
                else
@@ -119,6 +140,7 @@ class GoblinApp
                end
         command = "magick -density #{density} #{Shellwords.escape(source_file)} -threshold #{threshold}% -#{mode} -strip -compress Fax #{Shellwords.escape(output_file)}"
         system(command)
+        info.destroy
         show_custom_dialog(window, "Conversion Complete!", :info)
       else
         show_custom_dialog(window, "Please select both source and output files.", :error)
@@ -190,140 +212,20 @@ class GoblinApp
     window.set_titlebar(header_bar)
   end
 
-  def add_actions
-    about_action = Gio::SimpleAction.new("about")
-    about_action.signal_connect("activate") do
-      show_about_dialog(window)
-    end
-    @app.add_action(about_action)
-  end
-
   def show_about_dialog(parent)
-    dialog = Adwaita::AboutDialog.new('/de/magynhard/GoblinDoc/metainfo.xml')
-    #dialog.program_name = "Goblin"
-    #dialog.version = "1.0"
-    #dialog.comments = "This is a sample application."
-    #dialog.developers = ["John Doe", "Jane Smith"]
-    #dialog.artists = ["Alice Brown", "Bob Green"]
-    #dialog.designers = ["Eve White", "Frank Black"]
-    #dialoag.translator_credits = "Goblin is available in many languages."
+    #dialog = Adwaita::AboutDialog.new('/de/magynhard/GoblinDoc/metainfo.xml')
+    dialog = Adwaita::AboutDialog.new #('resource:///de/magynhard/GoblinDoc/de.magynhrad.GoblinDoc.metainfo.xml.in')
+    dialog.application_name = "Goblin Doc"
+    dialog.developer_name = "A simple document converter"
+    #dialog.application_icon = 'resource:///de/magynhard/GoblinDoc/logo.svg'
+    dialog.website = "https://github.com/magynhard/goblin-doc"
+    dialog.issue_url = "https://github.com/magynhard/goblin-doc/issues"
+    dialog.version = "0.1.1"
+    dialog.developers = ["Matthäus J. N. Beyrle <goblin-doc.github.com@mail.magynhard.de>"]
+    dialog.license_type = Gtk::License::MIT_X11
+
     dialog.show
     dialog.present(parent)
-  end
-
-  def show_about_dialog2(parent)
-    # Create an About dialog
-    about_dialog = Gtk::AboutDialog.new
-    about_dialog.transient_for = parent
-    about_dialog.modal = true
-
-    # Set application details
-    about_dialog.program_name = "My Application"
-    about_dialog.version = "1.0"
-    about_dialog.logo_icon_name = "text-editor" # Use an icon from your icon theme
-    about_dialog.authors = ["John Doe", "Jane Smith"]
-    about_dialog.documenters = ["Documentation Team"]
-    about_dialog.website = "https://example.com"
-    about_dialog.website_label = "Visit Our Website"
-    about_dialog.license = "GPL-3.0 or later"
-    about_dialog.comments = "A simple application written in GTK4 using Ruby."
-    about_dialog.copyright = "© 2025 My Company"
-
-    # Show the About dialog
-    about_dialog.show
-  end
-
-  def show_about_window(parent)
-    # Create an About dialog window
-    about_window = Gtk::Window.new()
-    about_window.title = "About MyApp"
-    about_window.transient_for = parent
-    about_window.modal = true
-    about_window.set_default_size(400, 500)
-
-    # Remove the default title bar and use a custom header bar
-    about_window.decorated = false
-
-    # Create a header bar for the top
-    header_bar = Gtk::HeaderBar.new
-    header_bar.show_title_buttons = true
-    header_bar.title_widget = nil # No title
-    about_window.set_titlebar(header_bar)
-
-    # Create a vertical box for the layout
-    vbox = Gtk::Box.new(:vertical, 20)
-    vbox.margin_top = 20
-    vbox.margin_bottom = 20
-    vbox.margin_start = 20
-    vbox.margin_end = 20
-    about_window.set_child(vbox)
-
-    # App logo
-    logo = Gtk::Image.new(icon_name: "applications-system-symbolic", pixel_size: 96)
-    vbox.append(logo)
-
-    # App title and subtitle
-    title_label = Gtk::Label.new
-    title_label.set_markup("<span size='large' weight='bold'>My Application</span>")
-    title_label.halign = :center
-    vbox.append(title_label)
-
-    subtitle_label = Gtk::Label.new("A GNOME Project")
-    subtitle_label.halign = :center
-    subtitle_label.margin_bottom = 10
-    vbox.append(subtitle_label)
-
-    # App version as a badge
-    version_label = Gtk::Label.new
-    version_label.set_markup("<span background='#E5E5E5' foreground='#000' size='small' weight='bold' style='italic'> 1.0 </span>")
-    version_label.halign = :center
-    version_label.margin_bottom = 20
-    vbox.append(version_label)
-
-    # Create a list of actions as buttons
-    action_list = Gtk::Box.new(:vertical, 10)
-
-    # Website button
-    website_button = create_action_button("Website", "web-browser-symbolic") do
-      Gtk.show_uri(parent, "https://example.com")
-    end
-    action_list.append(website_button)
-
-    # Report Issue button
-    report_button = create_action_button("Report an Issue", "help-symbolic") do
-      Gtk.show_uri(parent, "https://example.com/issues")
-    end
-    action_list.append(report_button)
-
-    # Contributors button
-    contributors_button = create_action_button("Contributors", "emblem-people-symbolic") do
-      # Show a contributors dialog or page
-      puts "Contributors clicked"
-    end
-    action_list.append(contributors_button)
-
-    # Add the action list to the vbox
-    vbox.append(action_list)
-
-    about_window.present
-  end
-
-
-  def create_action_button(label, icon_name, &action)
-    button = Gtk::Button.new
-    button.halign = :fill
-    button.valign = :center
-
-    hbox = Gtk::Box.new(:horizontal, 10)
-    icon = Gtk::Image.new(icon_name: icon_name, pixel_size: 16)
-    hbox.append(icon)
-
-    label_widget = Gtk::Label.new(label)
-    hbox.append(label_widget)
-
-    button.set_child(hbox)
-    button.signal_connect("clicked", &action)
-    button
   end
 
   def open_file_dialog(parent, title, action)
@@ -345,12 +247,26 @@ class GoblinApp
 
   def show_custom_dialog(parent, text, message_type)
     dialog = Gtk::Dialog.new(parent: parent, title: message_type == :info ? "Information" : "Error", flags: :modal)
-    dialog.set_default_size(300, 100)
+    dialog.set_default_size(300, 150)
 
     content_area = dialog.content_area
+    content_area.margin_top = 20
+    content_area.margin_bottom = 20
+    content_area.margin_start = 20
+    content_area.margin_end = 20
+
+    # Icon hinzufügen
+    icon = Gtk::Image.new(resource: '/de/magynhard/GoblinDoc/logo.svg')
+    icon.set_pixel_size(128)
+    content_area.append(icon)
+
+    # Text hinzufügen
     label = Gtk::Label.new(text)
+    label.margin_top = 10
+    label.margin_bottom = 10
     content_area.append(label)
 
+    # OK-Button hinzufügen
     ok_button = Gtk::Button.new(label: "OK")
     ok_button.signal_connect("clicked") do
       dialog.destroy
@@ -358,6 +274,7 @@ class GoblinApp
     content_area.append(ok_button)
 
     dialog.show
+    dialog
   end
 
   def run

@@ -1,0 +1,7 @@
+<gresources>
+  <gresource prefix="/de/magynhard/GoblinDoc">
+    <file>data/metainfo/de.magynhrad.GoblinDoc.metainfo.xml.in</file>
+    <file compressed="true" alias="logo.svg">res/logo.svg</file>
+    <file>res/logo.png</file>
+  </gresource>
+</gresources>

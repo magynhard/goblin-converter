@@ -23,7 +23,7 @@ SPDX-License-Identifier: CC0-1.0
   <developer id="de.magynhard">
     <name translatable="no">Matthäus J. N. Beyrle</name>
   </developer>
-  <update_contact>GoblinDoc.github.com@mail.magynhard.de</update_contact>
+  <update_contact>goblin-doc.github.com@mail.magynhard.de</update_contact>
 
   <translation type="gettext">goblin-doc</translation>
   <launchable type="desktop-id">de.magynhard.GoblinDoc.desktop</launchable>

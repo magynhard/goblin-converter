@@ -40,3 +40,8 @@ flatpak-builder --force-clean build de.magynhard.Goblin.yaml
 ```
 flatpak-builder --run build de.magynhard.Goblin.yaml goblin-doc
 ```
+
+## Create resources
+```
+glib-compile-resources gresource.xml
+```
