@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 23:28+0100\n"
+"POT-Creation-Date: 2025-01-10 00:07+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -42,53 +42,67 @@ msgid "Grayscale"
 msgstr ""
 
 #: src/main.rb:73
+msgid "Grayscale quality"
+msgstr ""
+
+#: src/main.rb:74
 msgid "Color"
 msgstr ""
 
-#: src/main.rb:79
+#: src/main.rb:80
 msgid "Conversion Mode:"
 msgstr "Konverteringsläge:"
 
-#: src/main.rb:108
-msgid "Density (default 300):"
-msgstr "Täthet (standard 300):"
+#: src/main.rb:122
+msgid "Density:"
+msgstr ""
 
-#: src/main.rb:111
-msgid "Threshold (default 66%):"
-msgstr "Tröskel (standard 66%):"
+#: src/main.rb:125
+msgid "Threshold:"
+msgstr ""
 
-#: src/main.rb:114
+#: src/main.rb:128
+msgid "Quality:"
+msgstr ""
+
+#: src/main.rb:131
 msgid "Source File:"
 msgstr "Källfil:"
 
-#: src/main.rb:118
+#: src/main.rb:135
 msgid "Output File:"
 msgstr "Utdatafil:"
 
-#: src/main.rb:122
+#: src/main.rb:139
 msgid "Convert"
 msgstr "Konvertera"
 
-#: src/main.rb:133
+#: src/main.rb:151
 msgid "Converting..."
 msgstr "Konverterar..."
 
-#: src/main.rb:143
+#: src/main.rb:167
 msgid "Conversion Complete!"
 msgstr "Konvertering slutförd!"
 
-#: src/main.rb:145
+#: src/main.rb:169
 msgid "Please select both source and output files."
 msgstr "Vänligen välj både käll- och utdatafiler."
 
-#: src/main.rb:168 src/main.rb:215
+#: src/main.rb:192 src/main.rb:239
 msgid "A simple document converter"
 msgstr "En enkel dokumentkonverterare"
 
-#: src/main.rb:190
+#: src/main.rb:214
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/main.rb:191
+#: src/main.rb:215
 msgid "About"
 msgstr "Om"
+
+#~ msgid "Density (default 300):"
+#~ msgstr "Täthet (standard 300):"
+
+#~ msgid "Threshold (default 66%):"
+#~ msgstr "Tröskel (standard 66%):"

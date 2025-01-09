@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 23:28+0100\n"
+"POT-Creation-Date: 2025-01-10 00:07+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -42,53 +42,67 @@ msgid "Grayscale"
 msgstr ""
 
 #: src/main.rb:73
+msgid "Grayscale quality"
+msgstr ""
+
+#: src/main.rb:74
 msgid "Color"
 msgstr ""
 
-#: src/main.rb:79
+#: src/main.rb:80
 msgid "Conversion Mode:"
 msgstr "변환 모드:"
 
-#: src/main.rb:108
-msgid "Density (default 300):"
-msgstr "밀도 (기본값 300):"
+#: src/main.rb:122
+msgid "Density:"
+msgstr ""
 
-#: src/main.rb:111
-msgid "Threshold (default 66%):"
-msgstr "임계값 (기본값 66%):"
+#: src/main.rb:125
+msgid "Threshold:"
+msgstr ""
 
-#: src/main.rb:114
+#: src/main.rb:128
+msgid "Quality:"
+msgstr ""
+
+#: src/main.rb:131
 msgid "Source File:"
 msgstr "소스 파일:"
 
-#: src/main.rb:118
+#: src/main.rb:135
 msgid "Output File:"
 msgstr "출력 파일:"
 
-#: src/main.rb:122
+#: src/main.rb:139
 msgid "Convert"
 msgstr "변환"
 
-#: src/main.rb:133
+#: src/main.rb:151
 msgid "Converting..."
 msgstr "변환 중..."
 
-#: src/main.rb:143
+#: src/main.rb:167
 msgid "Conversion Complete!"
 msgstr "변환 완료!"
 
-#: src/main.rb:145
+#: src/main.rb:169
 msgid "Please select both source and output files."
 msgstr "소스 파일과 출력 파일을 모두 선택하십시오."
 
-#: src/main.rb:168 src/main.rb:215
+#: src/main.rb:192 src/main.rb:239
 msgid "A simple document converter"
 msgstr "간단한 문서 변환기"
 
-#: src/main.rb:190
+#: src/main.rb:214
 msgid "Settings"
 msgstr "설정"
 
-#: src/main.rb:191
+#: src/main.rb:215
 msgid "About"
 msgstr "정보"
+
+#~ msgid "Density (default 300):"
+#~ msgstr "밀도 (기본값 300):"
+
+#~ msgid "Threshold (default 66%):"
+#~ msgstr "임계값 (기본값 66%):"

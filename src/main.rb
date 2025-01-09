@@ -67,42 +67,66 @@ class GoblinApp
     end
 
     dropdown = Gtk::ComboBoxText.new
-    dropdown.append_text(_("Monochrome"))
+    conversion_modes = {
+      _("Monochrome") => "monochrome",
+      _("Grayscale") => "grayscale",
+      _("Grayscale quality") => "grayscale_quality",
+      _("Color") => "color",
+    }
+    conversion_modes.each_key do |label|
+      dropdown.append_text(label)
+    end
     dropdown.active = 0
     vbox.append(Gtk::Label.new(_("Conversion Mode:")))
     vbox.append(dropdown)
 
-    adjustment = Gtk::Adjustment.new(300, 50, 500, 25, 25, 0)
-    density_scale = Gtk::Scale.new(:horizontal, adjustment)
+    density_adjustment = Gtk::Adjustment.new(300, 50, 500, 25, 25, 0)
+    density_scale = Gtk::Scale.new(:horizontal, density_adjustment)
     density_scale.value = 300
     density_scale.draw_value = true
     density_scale.value_pos = :top
 
     density_scale.signal_connect("value-changed") do
       value = density_scale.value
-      step = adjustment.step_increment
+      step = density_adjustment.step_increment
       snapped_value = ((value / step).round) * step
-      adjustment.value = snapped_value unless value == snapped_value
+      density_adjustment.value = snapped_value unless value == snapped_value
     end
 
-    adjustment2 = Gtk::Adjustment.new(66, 0, 100, 1, 1, 0)
-    threshold_scale = Gtk::Scale.new(:horizontal, adjustment2)
+    threshold_adjustment = Gtk::Adjustment.new(66, 0, 100, 1, 1, 0)
+    threshold_scale = Gtk::Scale.new(:horizontal, threshold_adjustment)
     threshold_scale.value = 66
     threshold_scale.draw_value = true
     threshold_scale.value_pos = :top
 
     threshold_scale.signal_connect("value-changed") do
       value = threshold_scale.value
-      step = adjustment2.step_increment
+      step = threshold_adjustment.step_increment
       snapped_value = ((value / step).round) * step
-      adjustment2.value = snapped_value unless value == snapped_value
+      threshold_adjustment.value = snapped_value unless value == snapped_value
     end
 
-    vbox.append(Gtk::Label.new(_("Density (default 300):")))
+    quality_adjustment = Gtk::Adjustment.new(75, 0, 100, 1, 1, 0)
+    quality_scale = Gtk::Scale.new(:horizontal, quality_adjustment)
+    quality_scale.value = 75
+    quality_scale.draw_value = true
+    quality_scale.value_pos = :top
+
+    quality_scale.signal_connect("value-changed") do
+      value = quality_scale.value
+      step = quality_adjustment.step_increment
+      snapped_value = ((value / step).round) * step
+      quality_adjustment.value = snapped_value unless value == snapped_value
+    end
+
+    vbox.append(Gtk::Label.new(_("Density:")))
     vbox.append(density_scale)
 
-    vbox.append(Gtk::Label.new(_("Threshold (default 66%):")))
+    vbox.append(Gtk::Label.new(_("Threshold:")))
     vbox.append(threshold_scale)
+
+    vbox.append(Gtk::Label.new(_("Quality:")))
+    vbox.append(quality_scale)
 
     vbox.append(Gtk::Label.new(_("Source File:")))
     vbox.append(@source_entry)
@@ -118,19 +142,26 @@ class GoblinApp
     convert_button.signal_connect("clicked") do
       source_file = @source_entry.text
       output_file = @output_entry.text
-      mode = dropdown.active_text.downcase
+      mode = conversion_modes.key(dropdown.active_text)
       density = density_scale.value.to_i
       threshold = threshold_scale.value.to_i
+      quality = quality_scale.value.to_i
 
       if !["", nil].include?(source_file) && !["", nil].include?(output_file)
         info = show_custom_dialog(window, _("Converting..."), :info)
         sleep 0.5
-        mode = if mode == "monochrome"
-                 "monochrome"
-               else
-                 "monochrome"
-               end
-        command = "magick -density #{density} #{Shellwords.escape(source_file)} -threshold #{threshold}% -#{mode} -strip -compress Fax #{Shellwords.escape(output_file)}"
+        mode_parameter = if mode == "monochrome"
+                           "-threshold #{threshold}% -monochrome -compress Fax"
+                         elsif mode == "grayscale"
+                            "-colorspace Gray -compress Zip"
+                         elsif mode == "grayscale_quality"
+                            "-colorspace Gray -compress JPEG -quality #{quality}"
+                         elsif mode == "color"
+                            "-compress JPEG -quality #{quality}"
+                         else
+                           "monochrome"
+                         end
+        command = "magick -density #{density} #{Shellwords.escape(source_file)} -strip #{mode_parameter} #{Shellwords.escape(output_file)}"
         system(command)
         info.destroy
         show_custom_dialog(window, _("Conversion Complete!"), :info)

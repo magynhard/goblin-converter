@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 23:28+0100\n"
+"POT-Creation-Date: 2025-01-10 00:07+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -41,53 +41,68 @@ msgid "Grayscale"
 msgstr "Graddfa Llwyd"
 
 #: src/main.rb:73
+#, fuzzy
+msgid "Grayscale quality"
+msgstr "Graddfa Llwyd"
+
+#: src/main.rb:74
 msgid "Color"
 msgstr "Lliw"
 
-#: src/main.rb:79
+#: src/main.rb:80
 msgid "Conversion Mode:"
 msgstr "Modd Trosi:"
 
-#: src/main.rb:108
-msgid "Density (default 300):"
-msgstr "Dwysedd (rhagosodiad 300):"
+#: src/main.rb:122
+msgid "Density:"
+msgstr ""
 
-#: src/main.rb:111
-msgid "Threshold (default 66%):"
-msgstr "Trothwy (rhagosodiad 66%):"
+#: src/main.rb:125
+msgid "Threshold:"
+msgstr ""
 
-#: src/main.rb:114
+#: src/main.rb:128
+msgid "Quality:"
+msgstr ""
+
+#: src/main.rb:131
 msgid "Source File:"
 msgstr "Ffeil Ffynhonnell:"
 
-#: src/main.rb:118
+#: src/main.rb:135
 msgid "Output File:"
 msgstr "Ffeil Allbwn:"
 
-#: src/main.rb:122
+#: src/main.rb:139
 msgid "Convert"
 msgstr "Trosi"
 
-#: src/main.rb:133
+#: src/main.rb:151
 msgid "Converting..."
 msgstr "Wrthi'n trosi..."
 
-#: src/main.rb:143
+#: src/main.rb:167
 msgid "Conversion Complete!"
 msgstr "Trosi wedi'i gwblhau!"
 
-#: src/main.rb:145
+#: src/main.rb:169
 msgid "Please select both source and output files."
 msgstr "Dewiswch y ddwy ffeil ffynhonnell ac allbwn."
 
-#: src/main.rb:168 src/main.rb:215
+#: src/main.rb:192 src/main.rb:239
 msgid "A simple document converter"
 msgstr "Trosi dogfennau syml"
 
-#: src/main.rb:190
+#: src/main.rb:214
 msgid "Settings"
 msgstr "Gosodiadau"
 
-#: src/main.rb:191
+#: src/main.rb:215
 msgid "About"
 msgstr "Ynghylch"
+
+#~ msgid "Density (default 300):"
+#~ msgstr "Dwysedd (rhagosodiad 300):"
+
+#~ msgid "Threshold (default 66%):"
+#~ msgstr "Trothwy (rhagosodiad 66%):"
