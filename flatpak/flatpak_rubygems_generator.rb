@@ -2,7 +2,7 @@
 # Modified from https://github.com/flatpak/flatpak-builder-tools/tree/master/rubygems
 #
 
-# Usage: ruby flatpak_rubygems_generator.rb -s source.json -o rubygems.json
+# Usage: ruby flatpak_rubygems_generator.rb -s source.json -o rubygems.yaml
 
 
 # frozen_string_literal: true

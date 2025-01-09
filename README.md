@@ -33,12 +33,12 @@ This app is distributed as a Flatpak package.
 
 ## Build package
 ```
-flatpak-builder --force-clean build de.magynhard.Goblin.yaml
+flatpak-builder --force-clean build de.magynhard.GoblinDoc.yaml
 ```
 
 ## Run local package
 ```
-flatpak-builder --run build de.magynhard.Goblin.yaml goblin-doc
+flatpak-builder --run build de.magynhard.GoblinDoc.yaml goblin-doc
 ```
 
 ## Create resources

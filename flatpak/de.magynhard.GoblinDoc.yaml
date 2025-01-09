@@ -1,5 +1,5 @@
 {
-  "app-id": "de.magynhard.Goblin",
+  "app-id": "de.magynhard.GoblinDoc",
   "runtime": "org.gnome.Platform",
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",

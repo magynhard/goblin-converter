@@ -3,13 +3,15 @@ require 'rake'
 desc "Install the application"
 task :install do
   # Check if bundle command is available
-  unless system("command -v bundle > /dev/null")
-    puts "Error: Bundler is not installed. Please install Bundler by running 'gem install bundler'."
-    exit 1
+  unless system("bash -lc 'command -v bundle > /dev/null'")
+    puts "Error: Bundler is not installed. Running 'gem install bundler' to install it ..."
+    sh "bash -lc 'gem install bundler'"
   end
 
   # Check current Ruby version
-  ruby_version = `ruby -v`.split[1]
+  ruby_version = `bash -lc "ruby -v"`.split[1]
+  match = ruby_version.match(/([0-9]+.[0-9]+.[0-9]+)/)
+  ruby_version = match[1] if match
 
   # Create .ruby-version file with current Ruby version
   File.write('.ruby-version', ruby_version)
@@ -18,7 +20,7 @@ task :install do
   current_path = Dir.pwd
 
   # Run bundle install to install dependencies
-  sh "bundle install"
+  sh "bash -lc 'bundle install'"
 
   sh "sudo cp '#{File.dirname(__FILE__)}/data/icons/app-icon.svg' '/usr/share/icons/de.magynhard.GoblinDoc.svg'"
 
@@ -35,6 +37,7 @@ task :install do
       sh "sudo cp '#{file}' /usr/share/goblin-doc/"
     end
   end
+  sh "sudo cp '#{File.dirname(__FILE__)}/.ruby-version' /usr/share/goblin-doc/.ruby-version"
   sh "sudo cp -r '#{File.dirname(__FILE__)}/data' /usr/share/goblin-doc/data"
   sh "sudo cp -r '#{File.dirname(__FILE__)}/src' /usr/share/goblin-doc/src"
 

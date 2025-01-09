@@ -7,7 +7,7 @@ require 'shellwords'
 class GoblinApp
   def initialize
     Adwaita.init
-    @app = Adwaita::Application.new("de.magynhard.goblin", :flags_none)
+    @app = Adwaita::Application.new("de.magynhard.GoblinDoc", :flags_none)
 
     begin
       resource_data = Gio::Resource.load(File.expand_path(File.dirname(__FILE__) + '/../data/goblin-doc.gresource'))
@@ -27,7 +27,7 @@ class GoblinApp
     end
 
     # Setzen des Standard-App-Icons
-    Gtk::Window.set_default_icon_name('resource:///de/magynhard/GoblinDoc/app-icon.svg')
+    Gtk::Window.set_default_icon_name('de.magynhard.GoblinDoc')
 
     @app.signal_connect("activate") do |application|
       create_window(application)
@@ -217,8 +217,8 @@ class GoblinApp
     dialog = Adwaita::AboutDialog.new #('resource:///de/magynhard/GoblinDoc/de.magynhard.GoblinDoc.metainfo.xml.in')
     dialog.application_name = "Goblin Doc"
     dialog.developer_name = "A simple document converter"
-    #dialog.application_icon = 'resource:///de/magynhard/GoblinDoc/app-icon.svg'
-    dialog.website = "https://github.com/magynhard/goblin-doc"
+    dialog.application_icon = "de.magynhard.GoblinDoc"
+    dialog.website = "https://github.com/magynhard/goblin-doc?tab=readme-ov-file#readme"
     dialog.issue_url = "https://github.com/magynhard/goblin-doc/issues"
     dialog.version = "0.1.1"
     dialog.developers = ["Matthäus J. N. Beyrle <goblin-doc.github.com@mail.magynhard.de>"]
