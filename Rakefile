@@ -96,7 +96,12 @@ task :generate_locales do
   locales.each do |locale|
     locale_dir = "po/#{locale}/LC_MESSAGES"
     FileUtils.mkdir_p(locale_dir)
-    sh "bash -lc 'msginit --input=po/goblin-doc.pot --locale=#{locale} --output=#{locale_dir}/goblin-doc.po --no-translator'"
+    po_file = "#{locale_dir}/goblin-doc.po"
+    if File.exist?(po_file)
+      sh "bash -lc 'msgmerge --update --backup=none #{po_file} po/goblin-doc.pot'"
+    else
+      sh "bash -lc 'msginit --input=po/goblin-doc.pot --locale=#{locale} --output=#{po_file} --no-translator'"
+    end
   end
 end
 
