@@ -158,7 +158,7 @@ class GoblinApp
 
     # Create the sub-header label
     sub_title = Gtk::Label.new
-    sub_title.set_markup(%Q(<span font_size="8000" foreground="gray">#{'~Path or other info and some more text and more info about anything'}</span>))
+    sub_title.set_markup(%Q(<span font_size="8000" foreground="gray">#{_("A simple document converter")}</span>))
     sub_title.halign = :center # Align to the start (left)
     sub_title.set_ellipsize(Pango::EllipsizeMode::MIDDLE) # Truncate with ellipsis at the end
     sub_title.set_max_width_chars(50)
