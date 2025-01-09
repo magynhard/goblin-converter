@@ -10,9 +10,11 @@ fi
 if ! command -v bundle &> /dev/null; then
   echo "Error: Bundler is not installed. Installing bundler ..."
   bash -c "gem install bundler"
+  # Run bundle install verbose
+  bash -c "bundle install"
+else
+  # Run bundle install silently to install dependencies
+  bash -c "bundle install > /dev/null 2>&1"
 fi
-
-# Run bundle install to install dependencies
-bash -c "bundle install > /dev/null 2>&1"
 
 bash -c "ruby /usr/share/goblin-doc/src/main.rb"

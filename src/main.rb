@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require_relative "dependency_check"
+
 require 'gtk4'
 require 'adwaita'
 require 'shellwords'
@@ -188,7 +190,6 @@ class GoblinApp
     # Create a Gio::Menu for the popover
     menu_model = Gio::Menu.new
     menu_model.append('Settings', 'app.settings')
-    menu_model.append('Help', 'app.help')
     menu_model.append('About', 'app.about')
 
     # Set the menu model to the popover
@@ -197,9 +198,6 @@ class GoblinApp
     # Add actions for the menu items
     @app.add_action(Gio::SimpleAction.new('settings').tap { |action|
       action.signal_connect('activate') { puts 'Settings clicked!' }
-    })
-    @app.add_action(Gio::SimpleAction.new('help').tap { |action|
-      action.signal_connect('activate') { puts 'Help clicked!' }
     })
     @app.add_action(Gio::SimpleAction.new('about').tap { |action|
       action.signal_connect('activate') { show_about_dialog(window) }
@@ -216,7 +214,7 @@ class GoblinApp
     #dialog = Adwaita::AboutDialog.new('/de/magynhard/GoblinDoc/metainfo.xml')
     dialog = Adwaita::AboutDialog.new #('resource:///de/magynhard/GoblinDoc/de.magynhard.GoblinDoc.metainfo.xml.in')
     dialog.application_name = "Goblin Doc"
-    dialog.developer_name = "A simple document converter"
+    dialog.developer_name = "A simple document converter\n\n#{RUBY_ENGINE} #{RUBY_VERSION}@#{RUBY_PLATFORM} "
     dialog.application_icon = "de.magynhard.GoblinDoc"
     dialog.website = "https://github.com/magynhard/goblin-doc?tab=readme-ov-file#readme"
     dialog.issue_url = "https://github.com/magynhard/goblin-doc/issues"

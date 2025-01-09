@@ -16,7 +16,32 @@ Initial use case was to convert 300ppi (PDF) documents (grayscale or colored) to
 E.g. a PDF document with 300ppi and about 3-4MB in grayscale can be reduced to about 40-75KB(!) in monochrome.
 
 # Setup
-This app is distributed as a Flatpak package.
+This app is distributed as a Flatpak package or can be installed locally.
+
+## Flatpak
+```ruby
+# not available yet
+flatpak install flathub de.magynhard.GoblinDoc
+```
+
+## Local
+Ensure, Ruby is installed.
+### Install
+```
+git clone https://github.com/magynhard/goblin-doc.git
+cd goblin-doc
+rake install
+cd ..
+rm -rf goblin-doc
+```
+### Uninstall
+```
+git clone https://github.com/magynhard/goblin-doc.git
+cd goblin-doc
+rake uninstall
+cd ..
+rm -rf goblin-doc
+```
 
 # Development
 ## Requirements (development)
