@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"POT-Creation-Date: 2025-01-09 23:28+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -33,54 +33,62 @@ msgstr "选择源文件"
 msgid "Select Output File"
 msgstr "选择输出文件"
 
-#: src/main.rb:70
+#: src/main.rb:71
 msgid "Monochrome"
 msgstr "单色"
 
 #: src/main.rb:72
+msgid "Grayscale"
+msgstr "灰度"
+
+#: src/main.rb:73
+msgid "Color"
+msgstr "彩色"
+
+#: src/main.rb:79
 msgid "Conversion Mode:"
 msgstr "转换模式："
 
-#: src/main.rb:101
+#: src/main.rb:108
 msgid "Density (default 300):"
 msgstr "密度（默认 300）："
 
-#: src/main.rb:104
+#: src/main.rb:111
 msgid "Threshold (default 66%):"
 msgstr "阈值（默认 66%）："
 
-#: src/main.rb:107
+#: src/main.rb:114
 msgid "Source File:"
 msgstr "源文件："
 
-#: src/main.rb:111
+#: src/main.rb:118
 msgid "Output File:"
 msgstr "输出文件："
 
-#: src/main.rb:115
+#: src/main.rb:122
 msgid "Convert"
 msgstr "转换"
 
-#: src/main.rb:126
+#: src/main.rb:133
 msgid "Converting..."
 msgstr "正在转换..."
 
-#: src/main.rb:136
+#: src/main.rb:143
 msgid "Conversion Complete!"
 msgstr "转换完成！"
 
-#: src/main.rb:138
+#: src/main.rb:145
 msgid "Please select both source and output files."
 msgstr "请选择源文件和输出文件。"
 
-#: src/main.rb:183
+#: src/main.rb:168 src/main.rb:215
+msgid "A simple document converter"
+msgstr "一个简单的文档转换器"
+
+#: src/main.rb:190
 msgid "Settings"
 msgstr "设置"
 
-#: src/main.rb:184
+#: src/main.rb:191
 msgid "About"
 msgstr "关于"
-
-#: src/main.rb:208
-msgid "A simple document converter"
-msgstr "一个简单的文档转换器"

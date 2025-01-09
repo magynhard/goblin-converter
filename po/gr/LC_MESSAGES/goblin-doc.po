@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"POT-Creation-Date: 2025-01-09 23:28+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -33,54 +33,62 @@ msgstr "Επιλέξτε αρχείο προέλευσης"
 msgid "Select Output File"
 msgstr "Επιλέξτε αρχείο εξόδου"
 
-#: src/main.rb:70
+#: src/main.rb:71
 msgid "Monochrome"
 msgstr "Μονόχρωμο"
 
 #: src/main.rb:72
+msgid "Grayscale"
+msgstr ""
+
+#: src/main.rb:73
+msgid "Color"
+msgstr ""
+
+#: src/main.rb:79
 msgid "Conversion Mode:"
 msgstr "Λειτουργία μετατροπής:"
 
-#: src/main.rb:101
+#: src/main.rb:108
 msgid "Density (default 300):"
 msgstr "Πυκνότητα (προεπιλογή 300):"
 
-#: src/main.rb:104
+#: src/main.rb:111
 msgid "Threshold (default 66%):"
 msgstr "Κατώφλι (προεπιλογή 66%):"
 
-#: src/main.rb:107
+#: src/main.rb:114
 msgid "Source File:"
 msgstr "Αρχείο προέλευσης:"
 
-#: src/main.rb:111
+#: src/main.rb:118
 msgid "Output File:"
 msgstr "Αρχείο εξόδου:"
 
-#: src/main.rb:115
+#: src/main.rb:122
 msgid "Convert"
 msgstr "Μετατροπή"
 
-#: src/main.rb:126
+#: src/main.rb:133
 msgid "Converting..."
 msgstr "Μετατροπή..."
 
-#: src/main.rb:136
+#: src/main.rb:143
 msgid "Conversion Complete!"
 msgstr "Η μετατροπή ολοκληρώθηκε!"
 
-#: src/main.rb:138
+#: src/main.rb:145
 msgid "Please select both source and output files."
 msgstr "Παρακαλώ επιλέξτε και τα δύο αρχεία προέλευσης και εξόδου."
 
-#: src/main.rb:183
+#: src/main.rb:168 src/main.rb:215
+msgid "A simple document converter"
+msgstr "Ένας απλός μετατροπέας εγγράφων"
+
+#: src/main.rb:190
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: src/main.rb:184
+#: src/main.rb:191
 msgid "About"
 msgstr "Σχετικά"
-
-#: src/main.rb:208
-msgid "A simple document converter"
-msgstr "Ένας απλός μετατροπέας εγγράφων"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"POT-Creation-Date: 2025-01-09 23:28+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,68 +18,76 @@ msgstr ""
 
 #: src/main.rb:45
 msgid "Select Source File ..."
-msgstr ""
+msgstr "Dewiswch Ffeil Ffynhonnell ..."
 
 #: src/main.rb:46
 msgid "Select Output File ..."
-msgstr ""
+msgstr "Dewiswch Ffeil Allbwn ..."
 
 #: src/main.rb:55
 msgid "Select Source File"
-msgstr ""
+msgstr "Dewiswch Ffeil Ffynhonnell"
 
 #: src/main.rb:64
 msgid "Select Output File"
-msgstr ""
+msgstr "Dewiswch Ffeil Allbwn"
 
-#: src/main.rb:70
+#: src/main.rb:71
 msgid "Monochrome"
-msgstr ""
+msgstr "Monocrom"
 
 #: src/main.rb:72
+msgid "Grayscale"
+msgstr "Graddfa Llwyd"
+
+#: src/main.rb:73
+msgid "Color"
+msgstr "Lliw"
+
+#: src/main.rb:79
 msgid "Conversion Mode:"
-msgstr ""
+msgstr "Modd Trosi:"
 
-#: src/main.rb:101
+#: src/main.rb:108
 msgid "Density (default 300):"
-msgstr ""
-
-#: src/main.rb:104
-msgid "Threshold (default 66%):"
-msgstr ""
-
-#: src/main.rb:107
-msgid "Source File:"
-msgstr ""
+msgstr "Dwysedd (rhagosodiad 300):"
 
 #: src/main.rb:111
+msgid "Threshold (default 66%):"
+msgstr "Trothwy (rhagosodiad 66%):"
+
+#: src/main.rb:114
+msgid "Source File:"
+msgstr "Ffeil Ffynhonnell:"
+
+#: src/main.rb:118
 msgid "Output File:"
-msgstr ""
+msgstr "Ffeil Allbwn:"
 
-#: src/main.rb:115
+#: src/main.rb:122
 msgid "Convert"
-msgstr ""
+msgstr "Trosi"
 
-#: src/main.rb:126
+#: src/main.rb:133
 msgid "Converting..."
-msgstr ""
+msgstr "Wrthi'n trosi..."
 
-#: src/main.rb:136
+#: src/main.rb:143
 msgid "Conversion Complete!"
-msgstr ""
+msgstr "Trosi wedi'i gwblhau!"
 
-#: src/main.rb:138
+#: src/main.rb:145
 msgid "Please select both source and output files."
-msgstr ""
+msgstr "Dewiswch y ddwy ffeil ffynhonnell ac allbwn."
 
-#: src/main.rb:183
-msgid "Settings"
-msgstr ""
-
-#: src/main.rb:184
-msgid "About"
-msgstr ""
-
-#: src/main.rb:208
+#: src/main.rb:168 src/main.rb:215
 msgid "A simple document converter"
-msgstr ""
+msgstr "Trosi dogfennau syml"
+
+#: src/main.rb:190
+msgid "Settings"
+msgstr "Gosodiadau"
+
+#: src/main.rb:191
+msgid "About"
+msgstr "Ynghylch"

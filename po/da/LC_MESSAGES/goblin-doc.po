@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"POT-Creation-Date: 2025-01-09 23:28+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,68 +19,76 @@ msgstr ""
 
 #: src/main.rb:45
 msgid "Select Source File ..."
-msgstr ""
+msgstr "Vælg kildefil ..."
 
 #: src/main.rb:46
 msgid "Select Output File ..."
-msgstr ""
+msgstr "Vælg outputfil ..."
 
 #: src/main.rb:55
 msgid "Select Source File"
-msgstr ""
+msgstr "Vælg kildefil"
 
 #: src/main.rb:64
 msgid "Select Output File"
-msgstr ""
+msgstr "Vælg outputfil"
 
-#: src/main.rb:70
+#: src/main.rb:71
 msgid "Monochrome"
-msgstr ""
+msgstr "Monokrom"
 
 #: src/main.rb:72
+msgid "Grayscale"
+msgstr "Gråtoner"
+
+#: src/main.rb:73
+msgid "Color"
+msgstr "Farve"
+
+#: src/main.rb:79
 msgid "Conversion Mode:"
-msgstr ""
+msgstr "Konverteringstilstand:"
 
-#: src/main.rb:101
+#: src/main.rb:108
 msgid "Density (default 300):"
-msgstr ""
-
-#: src/main.rb:104
-msgid "Threshold (default 66%):"
-msgstr ""
-
-#: src/main.rb:107
-msgid "Source File:"
-msgstr ""
+msgstr "Densitet (standard 300):"
 
 #: src/main.rb:111
+msgid "Threshold (default 66%):"
+msgstr "Tærskel (standard 66%):"
+
+#: src/main.rb:114
+msgid "Source File:"
+msgstr "Kildefil:"
+
+#: src/main.rb:118
 msgid "Output File:"
-msgstr ""
+msgstr "Outputfil:"
 
-#: src/main.rb:115
+#: src/main.rb:122
 msgid "Convert"
-msgstr ""
+msgstr "Konverter"
 
-#: src/main.rb:126
+#: src/main.rb:133
 msgid "Converting..."
-msgstr ""
+msgstr "Konverterer..."
 
-#: src/main.rb:136
+#: src/main.rb:143
 msgid "Conversion Complete!"
-msgstr ""
+msgstr "Konvertering fuldført!"
 
-#: src/main.rb:138
+#: src/main.rb:145
 msgid "Please select both source and output files."
-msgstr ""
+msgstr "Vælg venligst både kilde- og outputfiler."
 
-#: src/main.rb:183
-msgid "Settings"
-msgstr ""
-
-#: src/main.rb:184
-msgid "About"
-msgstr ""
-
-#: src/main.rb:208
+#: src/main.rb:168 src/main.rb:215
 msgid "A simple document converter"
-msgstr ""
+msgstr "En simpel dokumentkonverter"
+
+#: src/main.rb:190
+msgid "Settings"
+msgstr "Indstillinger"
+
+#: src/main.rb:191
+msgid "About"
+msgstr "Om"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"POT-Creation-Date: 2025-01-09 23:28+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -33,54 +33,62 @@ msgstr "Seleccionar archivo de origen"
 msgid "Select Output File"
 msgstr "Seleccionar archivo de salida"
 
-#: src/main.rb:70
+#: src/main.rb:71
 msgid "Monochrome"
 msgstr "Monocromo"
 
 #: src/main.rb:72
+msgid "Grayscale"
+msgstr "Escala de grises"
+
+#: src/main.rb:73
+msgid "Color"
+msgstr "Color"
+
+#: src/main.rb:79
 msgid "Conversion Mode:"
 msgstr "Modo de conversión:"
 
-#: src/main.rb:101
+#: src/main.rb:108
 msgid "Density (default 300):"
 msgstr "Densidad (por defecto 300):"
 
-#: src/main.rb:104
+#: src/main.rb:111
 msgid "Threshold (default 66%):"
 msgstr "Umbral (por defecto 66%):"
 
-#: src/main.rb:107
+#: src/main.rb:114
 msgid "Source File:"
 msgstr "Archivo de origen:"
 
-#: src/main.rb:111
+#: src/main.rb:118
 msgid "Output File:"
 msgstr "Archivo de salida:"
 
-#: src/main.rb:115
+#: src/main.rb:122
 msgid "Convert"
 msgstr "Convertir"
 
-#: src/main.rb:126
+#: src/main.rb:133
 msgid "Converting..."
 msgstr "Convirtiendo..."
 
-#: src/main.rb:136
+#: src/main.rb:143
 msgid "Conversion Complete!"
 msgstr "¡Conversión completa!"
 
-#: src/main.rb:138
+#: src/main.rb:145
 msgid "Please select both source and output files."
 msgstr "Por favor, seleccione tanto el archivo de origen como el de salida."
 
-#: src/main.rb:183
+#: src/main.rb:168 src/main.rb:215
+msgid "A simple document converter"
+msgstr "Un convertidor de documentos simple"
+
+#: src/main.rb:190
 msgid "Settings"
 msgstr "Configuraciones"
 
-#: src/main.rb:184
+#: src/main.rb:191
 msgid "About"
 msgstr "Acerca de"
-
-#: src/main.rb:208
-msgid "A simple document converter"
-msgstr "Un convertidor de documentos simple"
