@@ -240,7 +240,7 @@ class GoblinApp
     dialog.application_icon = "de.magynhard.GoblinDoc"
     dialog.website = "https://github.com/magynhard/goblin-doc?tab=readme-ov-file#readme"
     dialog.issue_url = "https://github.com/magynhard/goblin-doc/issues"
-    dialog.version = "0.1.1"
+    dialog.version = "0.2.1"
     dialog.developers = ["Matthäus J. N. Beyrle <goblin-doc.github.com@mail.magynhard.de>"]
     dialog.license_type = Gtk::License::MIT_X11
 

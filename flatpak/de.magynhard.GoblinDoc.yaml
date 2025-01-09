@@ -112,7 +112,7 @@
         {
           "type": "git",
           "url": "https://github.com/magynhard/goblin.git",
-          "tag": "0.1.1"
+          "tag": "0.2.1"
         }
       ]
     },
