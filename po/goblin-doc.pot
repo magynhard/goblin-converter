@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/main.rb:45
+msgid "Select Source File ..."
+msgstr ""
+
+#: src/main.rb:46
+msgid "Select Output File ..."
+msgstr ""
+
+#: src/main.rb:55
+msgid "Select Source File"
+msgstr ""
+
+#: src/main.rb:64
+msgid "Select Output File"
+msgstr ""
+
+#: src/main.rb:70
+msgid "Monochrome"
+msgstr ""
+
+#: src/main.rb:72
+msgid "Conversion Mode:"
+msgstr ""
+
+#: src/main.rb:101
+msgid "Density (default 300):"
+msgstr ""
+
+#: src/main.rb:104
+msgid "Threshold (default 66%):"
+msgstr ""
+
+#: src/main.rb:107
+msgid "Source File:"
+msgstr ""
+
+#: src/main.rb:111
+msgid "Output File:"
+msgstr ""
+
+#: src/main.rb:115
+msgid "Convert"
+msgstr ""
+
+#: src/main.rb:126
+msgid "Converting..."
+msgstr ""
+
+#: src/main.rb:136
+msgid "Conversion Complete!"
+msgstr ""
+
+#: src/main.rb:138
+msgid "Please select both source and output files."
+msgstr ""
+
+#: src/main.rb:183
+msgid "Settings"
+msgstr ""
+
+#: src/main.rb:184
+msgid "About"
+msgstr ""
+
+#: src/main.rb:208
+msgid "A simple document converter"
+msgstr ""

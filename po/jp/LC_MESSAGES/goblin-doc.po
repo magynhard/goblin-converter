@@ -1,0 +1,86 @@
+# Japanese translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"PO-Revision-Date: 2025-01-09 21:31+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/main.rb:45
+msgid "Select Source File ..."
+msgstr "ソースファイルを選択 ..."
+
+#: src/main.rb:46
+msgid "Select Output File ..."
+msgstr "出力ファイルを選択 ..."
+
+#: src/main.rb:55
+msgid "Select Source File"
+msgstr "ソースファイルを選択"
+
+#: src/main.rb:64
+msgid "Select Output File"
+msgstr "出力ファイルを選択"
+
+#: src/main.rb:70
+msgid "Monochrome"
+msgstr "モノクローム"
+
+#: src/main.rb:72
+msgid "Conversion Mode:"
+msgstr "変換モード:"
+
+#: src/main.rb:101
+msgid "Density (default 300):"
+msgstr "密度 (デフォルト 300):"
+
+#: src/main.rb:104
+msgid "Threshold (default 66%):"
+msgstr "しきい値 (デフォルト 66%):"
+
+#: src/main.rb:107
+msgid "Source File:"
+msgstr "ソースファイル:"
+
+#: src/main.rb:111
+msgid "Output File:"
+msgstr "出力ファイル:"
+
+#: src/main.rb:115
+msgid "Convert"
+msgstr "変換"
+
+#: src/main.rb:126
+msgid "Converting..."
+msgstr "変換中..."
+
+#: src/main.rb:136
+msgid "Conversion Complete!"
+msgstr "変換完了!"
+
+#: src/main.rb:138
+msgid "Please select both source and output files."
+msgstr "ソースファイルと出力ファイルの両方を選択してください。"
+
+#: src/main.rb:183
+msgid "Settings"
+msgstr "設定"
+
+#: src/main.rb:184
+msgid "About"
+msgstr "約"
+
+#: src/main.rb:208
+msgid "A simple document converter"
+msgstr "シンプルなドキュメントコンバーター"

@@ -1,4 +1,7 @@
 require 'rake'
+require 'fileutils'
+
+
 
 desc "Install the application"
 task :install do
@@ -45,6 +48,7 @@ task :install do
 end
 
 
+
 desc "Uninstall the application"
 task :uninstall do
   desktop_file = File.join('/usr/share/applications/goblin-doc.desktop')
@@ -80,6 +84,34 @@ task :uninstall do
     puts "The binary assets do not exist at #{binary_assets}."
   end
 end
+
+
+
+desc "Generate locale files"
+task :generate_locales do
+  pot_files = File.read("#{File.dirname(__FILE__)}/po/POTFILES").split("\n")
+  Dir.mkdir("po") unless Dir.exist?("po")
+  sh "bash -lc 'xgettext -o po/goblin-doc.pot --from-code=UTF-8 --keyword=_ #{pot_files.join(' ')}'"
+  locales = File.read("#{File.dirname(__FILE__)}/po/LINGUAS").split("\n")
+  locales.each do |locale|
+    locale_dir = "po/#{locale}/LC_MESSAGES"
+    FileUtils.mkdir_p(locale_dir)
+    sh "bash -lc 'msginit --input=po/goblin-doc.pot --locale=#{locale} --output=#{locale_dir}/goblin-doc.po --no-translator'"
+  end
+end
+
+
+
+desc "Compile locale files"
+task :compile_locales do
+  locales = File.read("#{File.dirname(__FILE__)}/po/LINGUAS").split("\n")
+  locales.each do |locale|
+    out_dir = "po/#{locale}/LC_MESSAGES"
+    FileUtils.mkdir_p(out_dir)
+    sh "msgfmt po/#{locale}/LC_MESSAGES/goblin-doc.po -o po/#{locale}/LC_MESSAGES/goblin-doc.mo"
+  end
+end
+
 
 
 desc "Run some basic tests"

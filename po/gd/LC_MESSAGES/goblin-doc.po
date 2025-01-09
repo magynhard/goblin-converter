@@ -1,0 +1,86 @@
+# Scottish Gaelic translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"PO-Revision-Date: 2025-01-09 21:31+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: gd\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 ? 0 : n == 2 ? 1 : 2);\n"
+
+#: src/main.rb:45
+msgid "Select Source File ..."
+msgstr "Tagh am faidhle tùsail ..."
+
+#: src/main.rb:46
+msgid "Select Output File ..."
+msgstr "Tagh am faidhle toraidh ..."
+
+#: src/main.rb:55
+msgid "Select Source File"
+msgstr "Tagh am faidhle tùsail"
+
+#: src/main.rb:64
+msgid "Select Output File"
+msgstr "Tagh am faidhle toraidh"
+
+#: src/main.rb:70
+msgid "Monochrome"
+msgstr "Monochrome"
+
+#: src/main.rb:72
+msgid "Conversion Mode:"
+msgstr "Modh-ìomhaigh:"
+
+#: src/main.rb:101
+msgid "Density (default 300):"
+msgstr "Dùmhlachd (ro-ghoireas 300):"
+
+#: src/main.rb:104
+msgid "Threshold (default 66%):"
+msgstr "Ìre (ro-ghoireas 66%):"
+
+#: src/main.rb:107
+msgid "Source File:"
+msgstr "Faidhle tùsail:"
+
+#: src/main.rb:111
+msgid "Output File:"
+msgstr "Faidhle toraidh:"
+
+#: src/main.rb:115
+msgid "Convert"
+msgstr "Iompaich"
+
+#: src/main.rb:126
+msgid "Converting..."
+msgstr "A' iomlaid..."
+
+#: src/main.rb:136
+msgid "Conversion Complete!"
+msgstr "Iomlaid deiseil!"
+
+#: src/main.rb:138
+msgid "Please select both source and output files."
+msgstr "Tagh an dà chuid faidhlichean tùsail is toraidh."
+
+#: src/main.rb:183
+msgid "Settings"
+msgstr "Roghainnean"
+
+#: src/main.rb:184
+msgid "About"
+msgstr "Mu dheidhinn"
+
+#: src/main.rb:208
+msgid "A simple document converter"
+msgstr "Inneal-tionndaidh sgrìobhainnean sìmplidh"

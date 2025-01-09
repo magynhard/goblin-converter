@@ -1,0 +1,86 @@
+# French translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"PO-Revision-Date: 2025-01-09 21:31+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/main.rb:45
+msgid "Select Source File ..."
+msgstr "Sélectionner le fichier source ..."
+
+#: src/main.rb:46
+msgid "Select Output File ..."
+msgstr "Sélectionner le fichier de sortie ..."
+
+#: src/main.rb:55
+msgid "Select Source File"
+msgstr "Sélectionner le fichier source"
+
+#: src/main.rb:64
+msgid "Select Output File"
+msgstr "Sélectionner le fichier de sortie"
+
+#: src/main.rb:70
+msgid "Monochrome"
+msgstr "Monochrome"
+
+#: src/main.rb:72
+msgid "Conversion Mode:"
+msgstr "Mode de conversion :"
+
+#: src/main.rb:101
+msgid "Density (default 300):"
+msgstr "Densité (par défaut 300) :"
+
+#: src/main.rb:104
+msgid "Threshold (default 66%):"
+msgstr "Seuil (par défaut 66%) :"
+
+#: src/main.rb:107
+msgid "Source File:"
+msgstr "Fichier source :"
+
+#: src/main.rb:111
+msgid "Output File:"
+msgstr "Fichier de sortie :"
+
+#: src/main.rb:115
+msgid "Convert"
+msgstr "Convertir"
+
+#: src/main.rb:126
+msgid "Converting..."
+msgstr "Conversion en cours..."
+
+#: src/main.rb:136
+msgid "Conversion Complete!"
+msgstr "Conversion terminée !"
+
+#: src/main.rb:138
+msgid "Please select both source and output files."
+msgstr "Veuillez sélectionner à la fois les fichiers source et de sortie."
+
+#: src/main.rb:183
+msgid "Settings"
+msgstr "Paramètres"
+
+#: src/main.rb:184
+msgid "About"
+msgstr "À propos"
+
+#: src/main.rb:208
+msgid "A simple document converter"
+msgstr "Un convertisseur de documents simple"

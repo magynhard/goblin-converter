@@ -1,0 +1,86 @@
+# Russian translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-09 21:31+0100\n"
+"PO-Revision-Date: 2025-01-09 21:31+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/main.rb:45
+msgid "Select Source File ..."
+msgstr "Выберите исходный файл ..."
+
+#: src/main.rb:46
+msgid "Select Output File ..."
+msgstr "Выберите выходной файл ..."
+
+#: src/main.rb:55
+msgid "Select Source File"
+msgstr "Выберите исходный файл"
+
+#: src/main.rb:64
+msgid "Select Output File"
+msgstr "Выберите выходной файл"
+
+#: src/main.rb:70
+msgid "Monochrome"
+msgstr "Монохромный"
+
+#: src/main.rb:72
+msgid "Conversion Mode:"
+msgstr "Режим конвертации:"
+
+#: src/main.rb:101
+msgid "Density (default 300):"
+msgstr "Плотность (по умолчанию 300):"
+
+#: src/main.rb:104
+msgid "Threshold (default 66%):"
+msgstr "Порог (по умолчанию 66%):"
+
+#: src/main.rb:107
+msgid "Source File:"
+msgstr "Исходный файл:"
+
+#: src/main.rb:111
+msgid "Output File:"
+msgstr "Выходной файл:"
+
+#: src/main.rb:115
+msgid "Convert"
+msgstr "Конвертировать"
+
+#: src/main.rb:126
+msgid "Converting..."
+msgstr "Конвертация..."
+
+#: src/main.rb:136
+msgid "Conversion Complete!"
+msgstr "Конвертация завершена!"
+
+#: src/main.rb:138
+msgid "Please select both source and output files."
+msgstr "Пожалуйста, выберите оба файла: исходный и выходной."
+
+#: src/main.rb:183
+msgid "Settings"
+msgstr "Настройки"
+
+#: src/main.rb:184
+msgid "About"
+msgstr "О программе"
+
+#: src/main.rb:208
+msgid "A simple document converter"
+msgstr "Простой конвертер документов"

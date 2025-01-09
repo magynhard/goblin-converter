@@ -2,6 +2,10 @@
 
 require_relative "dependency_check"
 
+require_relative '../lib/gettext_setup'
+GetTextSetup.initialize
+include GetText
+
 require 'gtk4'
 require 'adwaita'
 require 'shellwords'
@@ -11,22 +15,8 @@ class GoblinApp
     Adwaita.init
     @app = Adwaita::Application.new("de.magynhard.GoblinDoc", :flags_none)
 
-    begin
-      resource_data = Gio::Resource.load(File.expand_path(File.dirname(__FILE__) + '/../data/goblin-doc.gresource'))
-      Gio::Resources.register(resource_data)
-
-      # Überprüfen, ob eine bestimmte Ressource zugänglich ist
-      Gio::Resources.lookup_data('/de/magynhard/GoblinDoc/app-icon.svg', :none)
-      puts "Ressource ist zugänglich."
-
-      # Auflisten aller Ressourcen im angegebenen Pfad
-      resources = Gio::Resources.enumerate_children('/de/magynhard/GoblinDoc', :none)
-      resources.each do |resource|
-        puts resource
-      end
-    rescue GLib::FileError => e
-      puts "Ressource ist nicht zugänglich: #{e.message}"
-    end
+    resource_data = Gio::Resource.load(File.expand_path(File.dirname(__FILE__) + '/../data/goblin-doc.gresource'))
+    Gio::Resources.register(resource_data)
 
     # Setzen des Standard-App-Icons
     Gtk::Window.set_default_icon_name('de.magynhard.GoblinDoc')
@@ -52,8 +42,8 @@ class GoblinApp
 
     create_menu(window)
 
-    source_button = Gtk::Button.new(label: "Select Source File (PDF, PNG, JPG, ...)")
-    output_button = Gtk::Button.new(label: "Select Output File (PDF)")
+    source_button = Gtk::Button.new(label: _("Select Source File ..."))
+    output_button = Gtk::Button.new(label: _("Select Output File ..."))
 
     @source_entry = Gtk::Entry.new
     @source_entry.text = ""
@@ -62,7 +52,7 @@ class GoblinApp
     @output_entry.text = ""
 
     source_button.signal_connect("clicked") do
-      open_file_dialog(window, "Select Source File", Gtk::FileChooserAction::OPEN) do |file|
+      open_file_dialog(window, _("Select Source File"), Gtk::FileChooserAction::OPEN) do |file|
         if file
           @source_entry.text = file
           @output_entry.text = file.gsub(/\.pdf$/, "_sw.pdf")
@@ -71,15 +61,15 @@ class GoblinApp
     end
 
     output_button.signal_connect("clicked") do
-      open_file_dialog(window, "Select Output File", Gtk::FileChooserAction::SAVE) do |file|
+      open_file_dialog(window, _("Select Output File"), Gtk::FileChooserAction::SAVE) do |file|
         @output_entry.text = file if file
       end
     end
 
     dropdown = Gtk::ComboBoxText.new
-    dropdown.append_text("Monochrome")
+    dropdown.append_text(_("Monochrome"))
     dropdown.active = 0
-    vbox.append(Gtk::Label.new("Conversion Mode:"))
+    vbox.append(Gtk::Label.new(_("Conversion Mode:")))
     vbox.append(dropdown)
 
     adjustment = Gtk::Adjustment.new(300, 50, 500, 25, 25, 0)
@@ -108,21 +98,21 @@ class GoblinApp
       adjustment2.value = snapped_value unless value == snapped_value
     end
 
-    vbox.append(Gtk::Label.new("Density (default 300):"))
+    vbox.append(Gtk::Label.new(_("Density (default 300):")))
     vbox.append(density_scale)
 
-    vbox.append(Gtk::Label.new("Threshold (default 66%):"))
+    vbox.append(Gtk::Label.new(_("Threshold (default 66%):")))
     vbox.append(threshold_scale)
 
-    vbox.append(Gtk::Label.new("Source File:"))
+    vbox.append(Gtk::Label.new(_("Source File:")))
     vbox.append(@source_entry)
     vbox.append(source_button)
 
-    vbox.append(Gtk::Label.new("Output File:"))
+    vbox.append(Gtk::Label.new(_("Output File:")))
     vbox.append(@output_entry)
     vbox.append(output_button)
 
-    convert_button = Gtk::Button.new(label: "Convert")
+    convert_button = Gtk::Button.new(label: _("Convert"))
     vbox.append(convert_button)
 
     convert_button.signal_connect("clicked") do
@@ -132,8 +122,8 @@ class GoblinApp
       density = density_scale.value.to_i
       threshold = threshold_scale.value.to_i
 
-      if !["", nil].include?(source_file)  && !["", nil].include?(output_file)
-        info = show_custom_dialog(window, "Converting...", :info)
+      if !["", nil].include?(source_file) && !["", nil].include?(output_file)
+        info = show_custom_dialog(window, _("Converting..."), :info)
         sleep 0.5
         mode = if mode == "monochrome"
                  "monochrome"
@@ -143,9 +133,9 @@ class GoblinApp
         command = "magick -density #{density} #{Shellwords.escape(source_file)} -threshold #{threshold}% -#{mode} -strip -compress Fax #{Shellwords.escape(output_file)}"
         system(command)
         info.destroy
-        show_custom_dialog(window, "Conversion Complete!", :info)
+        show_custom_dialog(window, _("Conversion Complete!"), :info)
       else
-        show_custom_dialog(window, "Please select both source and output files.", :error)
+        show_custom_dialog(window, _("Please select both source and output files."), :error)
       end
     end
 
@@ -153,7 +143,8 @@ class GoblinApp
     window.present
   end
 
-  def create_menu(window)# Create a box to hold the menu button
+  def create_menu(window)
+    # Create a box to hold the menu button
     # Create a header bar (top bar)
     header_bar = Gtk::HeaderBar.new
 
@@ -162,12 +153,12 @@ class GoblinApp
 
     # Create the main header label (big title)
     main_title = Gtk::Label.new
-    main_title.set_markup('<span font_weight="bold" font_size="11000" foreground="white">Goblin</span>')
+    main_title.set_markup(%Q(<span font_weight="bold" font_size="11000" foreground="white">#{'Goblin Doc'}</span>))
     main_title.halign = :center # Align to the start (left)
 
     # Create the sub-header label
     sub_title = Gtk::Label.new
-    sub_title.set_markup('<span font_size="8000" foreground="gray">~Path or other info and some more text and more info about anything</span>')
+    sub_title.set_markup(%Q(<span font_size="8000" foreground="gray">#{'~Path or other info and some more text and more info about anything'}</span>))
     sub_title.halign = :center # Align to the start (left)
     sub_title.set_ellipsize(Pango::EllipsizeMode::MIDDLE) # Truncate with ellipsis at the end
     sub_title.set_max_width_chars(50)
@@ -189,8 +180,8 @@ class GoblinApp
 
     # Create a Gio::Menu for the popover
     menu_model = Gio::Menu.new
-    menu_model.append('Settings', 'app.settings')
-    menu_model.append('About', 'app.about')
+    menu_model.append(_('Settings'), 'app.settings')
+    menu_model.append(_('About'), 'app.about')
 
     # Set the menu model to the popover
     popover.menu_model = menu_model
@@ -211,10 +202,10 @@ class GoblinApp
   end
 
   def show_about_dialog(parent)
-    #dialog = Adwaita::AboutDialog.new('/de/magynhard/GoblinDoc/metainfo.xml')
+    # dialog = Adwaita::AboutDialog.new('/de/magynhard/GoblinDoc/metainfo.xml')
     dialog = Adwaita::AboutDialog.new #('resource:///de/magynhard/GoblinDoc/de.magynhard.GoblinDoc.metainfo.xml.in')
     dialog.application_name = "Goblin Doc"
-    dialog.developer_name = "A simple document converter\n\n#{RUBY_ENGINE} #{RUBY_VERSION}@#{RUBY_PLATFORM} "
+    dialog.developer_name = %Q(#{_("A simple document converter")}\n\n#{RUBY_ENGINE} #{RUBY_VERSION}@#{RUBY_PLATFORM}])
     dialog.application_icon = "de.magynhard.GoblinDoc"
     dialog.website = "https://github.com/magynhard/goblin-doc?tab=readme-ov-file#readme"
     dialog.issue_url = "https://github.com/magynhard/goblin-doc/issues"
