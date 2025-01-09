@@ -38,8 +38,8 @@ task :install do
     end
   end
   sh "sudo cp '#{File.dirname(__FILE__)}/.ruby-version' /usr/share/goblin-doc/.ruby-version"
-  sh "sudo cp -r '#{File.dirname(__FILE__)}/data' /usr/share/goblin-doc/data"
-  sh "sudo cp -r '#{File.dirname(__FILE__)}/src' /usr/share/goblin-doc/src"
+  sh "sudo cp -r '#{File.dirname(__FILE__)}/data' /usr/share/goblin-doc"
+  sh "sudo cp -r '#{File.dirname(__FILE__)}/src' /usr/share/goblin-doc"
 
   puts "Installation complete. You can now run Goblin Document Converter from the applications menu."
 end
