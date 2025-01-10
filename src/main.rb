@@ -149,22 +149,26 @@ class GoblinApp
 
       if !["", nil].include?(source_file) && !["", nil].include?(output_file)
         info = show_custom_dialog(window, _("Converting..."), :info)
-        sleep 0.5
+        sleep 0.25
         mode_parameter = if mode == "monochrome"
                            "-threshold #{threshold}% -monochrome -compress Fax"
                          elsif mode == "grayscale"
-                            "-colorspace Gray -compress Zip"
+                           "-colorspace Gray -compress Zip"
                          elsif mode == "grayscale_quality"
-                            "-colorspace Gray -compress JPEG -quality #{quality}"
+                           "-colorspace Gray -compress JPEG -quality #{quality}"
                          elsif mode == "color"
-                            "-compress JPEG -quality #{quality}"
+                           "-compress JPEG -quality #{quality}"
                          else
                            "monochrome"
                          end
         command = "magick -density #{density} #{Shellwords.escape(source_file)} #{mode_parameter} -strip #{Shellwords.escape(output_file)}"
-        system(command)
+        ret = system(command)
         info.destroy
-        show_custom_dialog(window, _("Conversion Complete!"), :info)
+        if ret
+          show_custom_dialog(window, _("Conversion Complete!"), :info)
+        else
+          show_custom_dialog(window, _("An error occurred while conversion!"), :error)
+        end
       else
         show_custom_dialog(window, _("Please select both source and output files."), :error)
       end
