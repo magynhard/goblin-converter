@@ -142,7 +142,7 @@ class GoblinApp
     convert_button.signal_connect("clicked") do
       source_file = @source_entry.text
       output_file = @output_entry.text
-      mode = conversion_modes.key(dropdown.active_text)
+      mode = conversion_modes[dropdown.active_text]
       density = density_scale.value.to_i
       threshold = threshold_scale.value.to_i
       quality = quality_scale.value.to_i
@@ -161,7 +161,7 @@ class GoblinApp
                          else
                            "monochrome"
                          end
-        command = "magick -density #{density} #{Shellwords.escape(source_file)} -strip #{mode_parameter} #{Shellwords.escape(output_file)}"
+        command = "magick -density #{density} #{Shellwords.escape(source_file)} #{mode_parameter} -strip #{Shellwords.escape(output_file)}"
         system(command)
         info.destroy
         show_custom_dialog(window, _("Conversion Complete!"), :info)
