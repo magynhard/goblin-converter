@@ -30,7 +30,7 @@ Ensure, Ruby is installed.
 Beside, you need to have build tools and other dependencies to be installed.
 ```
 # Ubuntu
-sudo apt install build-essential libcairo2-dev libgirepository1.0-dev libgdk-pixbuf2.0-devsudo libgtk-4-common libgtk-4-dev libadwaita-1-0 libadwaita-1-dev imagemagick
+sudo apt install build-essential libcairo2-dev libgirepository1.0-dev libgdk-pixbuf2.0-dev libgtk-4-common libgtk-4-dev libadwaita-1-0 libadwaita-1-dev imagemagick
 # Manjaro/Arch
 sudo pacman -S base-devel libcairo gobject-introspection libgdk-pixbuf libgtk gtk+ adwaita imagemagick
 ```
