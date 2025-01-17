@@ -10,9 +10,12 @@ require 'gtk4'
 require 'adwaita'
 require 'shellwords'
 
+require_relative 'about_dialog'
+
 class GoblinApp
   def initialize
     Adwaita.init
+    @argument = ARGV.join(" ")
     @app = Adwaita::Application.new("de.magynhard.GoblinDoc", :flags_none)
 
     resource_data = Gio::Resource.load(File.expand_path(File.dirname(__FILE__) + '/../data/goblin-doc.gresource'))
@@ -32,7 +35,7 @@ class GoblinApp
     window = Gtk::ApplicationWindow.new(application)
     window.set_application(application)
     window.set_title("Goblin Doc")
-    window.set_default_size(400, 300)
+    window.set_default_size(800, 600)
 
     vbox = Gtk::Box.new(:vertical, 10)
     vbox.margin_top = 20
@@ -46,16 +49,16 @@ class GoblinApp
     output_button = Gtk::Button.new(label: _("Select Output File ..."))
 
     @source_entry = Gtk::Entry.new
-    @source_entry.text = ""
+    @source_entry.text = @source_entry.text = @argument || ""
 
     @output_entry = Gtk::Entry.new
-    @output_entry.text = ""
+    @output_entry.text = @argument.gsub(/\.([a-zA-Z]{3,4})$/, "_sw.\\1") || ""
 
     source_button.signal_connect("clicked") do
       open_file_dialog(window, _("Select Source File"), Gtk::FileChooserAction::OPEN) do |file|
         if file
           @source_entry.text = file
-          @output_entry.text = file.gsub(/\.pdf$/, "_sw.pdf")
+          @output_entry.text = file.gsub(/\.([a-zA-Z]{3,4})$/, "_sw.\\1")
         end
       end
     end
@@ -93,11 +96,14 @@ class GoblinApp
       density_adjustment.value = snapped_value unless value == snapped_value
     end
 
+    # put the adjustment in a row
+
     threshold_adjustment = Gtk::Adjustment.new(66, 0, 100, 1, 1, 0)
     threshold_scale = Gtk::Scale.new(:horizontal, threshold_adjustment)
     threshold_scale.value = 66
     threshold_scale.draw_value = true
     threshold_scale.value_pos = :top
+    threshold_scale.set_hexpand(true)
 
     threshold_scale.signal_connect("value-changed") do
       value = threshold_scale.value
@@ -105,6 +111,42 @@ class GoblinApp
       snapped_value = ((value / step).round) * step
       threshold_adjustment.value = snapped_value unless value == snapped_value
     end
+
+    threshold_box = Gtk::Box.new(:horizontal, 10)
+    threshold_label = Gtk::Label.new(_("Threshold:"))
+    threshold_label.set_xalign(0) # Align to the left
+    threshold_box.append(threshold_label)
+    threshold_box.append(threshold_scale)
+    vbox.append(threshold_box)
+
+    # Preferences Group
+    preferences_group = Adwaita::PreferencesGroup.new
+    preferences_group.title = "Preferences"
+    vbox.append(preferences_group)
+
+    # Action Row: Mouse Speed
+    mouse_speed_row = Adwaita::ActionRow.new
+    mouse_speed_row.title = "Mouse Speed"
+    mouse_speed_row.subtitle = "Perfecto"
+
+    # Slider for Mouse Speed
+    adjustment = Gtk::Adjustment.new(5, 0, 10, 1, 0, 0)
+    speed_slider = Gtk::Scale.new(:horizontal, adjustment)
+    speed_slider.set_hexpand(true)
+
+    # Add slider to the action row
+    mouse_speed_row.add_suffix(speed_slider)
+    preferences_group.add(mouse_speed_row)
+
+    # Action Row: Natural Scrolling
+    natural_scroll_row = Adwaita::ActionRow.new
+    natural_scroll_row.title = "Natural Scrolling"
+
+    # Switch for Natural Scrolling
+    scroll_switch = Gtk::Switch.new
+    natural_scroll_row.add_suffix(scroll_switch)
+    preferences_group.add natural_scroll_row
+    vbox.append preferences_group
 
     quality_adjustment = Gtk::Adjustment.new(75, 0, 100, 1, 1, 0)
     quality_scale = Gtk::Scale.new(:horizontal, quality_adjustment)
@@ -128,6 +170,11 @@ class GoblinApp
     vbox.append(Gtk::Label.new(_("Quality:")))
     vbox.append(quality_scale)
 
+    # Add option to strip metadata
+    strip_metadata = Gtk::CheckButton.new(_("Strip Metadata"))
+    strip_metadata.active = true
+    vbox.append(strip_metadata)
+
     vbox.append(Gtk::Label.new(_("Source File:")))
     vbox.append(@source_entry)
     vbox.append(source_button)
@@ -142,13 +189,18 @@ class GoblinApp
     convert_button.signal_connect("clicked") do
       source_file = @source_entry.text
       output_file = @output_entry.text
+      if File.exist?(output_file)
+        if show_custom_dialog(window, text: _("The output file already exists. Do you want to overwrite it?"), message_type: :info).run == Gtk::ResponseType::CANCEL
+          return
+        end
+      end
       mode = conversion_modes[dropdown.active_text]
       density = density_scale.value.to_i
       threshold = threshold_scale.value.to_i
       quality = quality_scale.value.to_i
 
       if !["", nil].include?(source_file) && !["", nil].include?(output_file)
-        info = show_custom_dialog(window, _("Converting..."), :info)
+        info = show_custom_dialog(window, text: _("Converting..."), message_type: :info)
         sleep 0.25
         mode_parameter = if mode == "monochrome"
                            "-threshold #{threshold}% -monochrome -compress Fax"
@@ -165,17 +217,20 @@ class GoblinApp
         ret = system(command)
         info.destroy
         if ret
-          show_custom_dialog(window, _("Conversion Complete!"), :info)
+          show_custom_dialog(window, text: _("Conversion Complete!"), message_type: :info)
         else
-          show_custom_dialog(window, _("An error occurred while conversion!"), :error)
+          show_custom_dialog(window, text: _("An error occurred while conversion!"), message_type: :error)
         end
       else
-        show_custom_dialog(window, _("Please select both source and output files."), :error)
+        show_custom_dialog(window, text: _("Please select both source and output files."), message_type: :error)
       end
     end
 
     window.child = vbox
     window.present
+
+    # show_error_dialog(window, title: "Error", text: "This is an error message")
+    # show_custom_dialog(window, title: "Error", text: "This is an error message")
   end
 
   def create_menu(window)
@@ -226,7 +281,7 @@ class GoblinApp
       action.signal_connect('activate') { puts 'Settings clicked!' }
     })
     @app.add_action(Gio::SimpleAction.new('about').tap { |action|
-      action.signal_connect('activate') { show_about_dialog(window) }
+      action.signal_connect('activate') { AboutDialog.show(window) }
     })
 
     # Add the burger menu to the header bar
@@ -234,22 +289,6 @@ class GoblinApp
 
     # Set the header bar as the title bar of the window
     window.set_titlebar(header_bar)
-  end
-
-  def show_about_dialog(parent)
-    # dialog = Adwaita::AboutDialog.new('/de/magynhard/GoblinDoc/metainfo.xml')
-    dialog = Adwaita::AboutDialog.new #('resource:///de/magynhard/GoblinDoc/de.magynhard.GoblinDoc.metainfo.xml.in')
-    dialog.application_name = "Goblin Doc"
-    dialog.developer_name = %Q(#{_("A simple document converter")}\n\n#{RUBY_ENGINE} #{RUBY_VERSION}@#{RUBY_PLATFORM}])
-    dialog.application_icon = "de.magynhard.GoblinDoc"
-    dialog.website = "https://github.com/magynhard/goblin-doc?tab=readme-ov-file#readme"
-    dialog.issue_url = "https://github.com/magynhard/goblin-doc/issues"
-    dialog.version = "0.2.1"
-    dialog.developers = ["Matthäus J. N. Beyrle <goblin-doc.github.com@mail.magynhard.de>"]
-    dialog.license_type = Gtk::License::MIT_X11
-
-    dialog.show
-    dialog.present(parent)
   end
 
   def open_file_dialog(parent, title, action)
@@ -269,7 +308,7 @@ class GoblinApp
     dialog.show
   end
 
-  def show_custom_dialog(parent, text, message_type)
+  def show_custom_dialog(parent, title: "Info", text:, message_type: :default)
     dialog = Gtk::Dialog.new(parent: parent, title: message_type == :info ? "Information" : "Error", flags: :modal)
     dialog.set_default_size(300, 150)
 
@@ -298,6 +337,30 @@ class GoblinApp
     content_area.append(ok_button)
 
     dialog.show
+    dialog
+  end
+
+  # @param [:destructive|:default|:suggested] message_type
+  def show_error_dialog(parent, title:, text:, message_type: :default)
+    # Create the Adw.MessageDialog
+    dialog = Adwaita::MessageDialog.new parent, title, text
+
+    # dialog.heading = title
+    # dialog.body = text
+
+    # Add a close button to dismiss the dialog
+    dialog.add_response("close", "OK")
+    dialog.set_default_response("close")
+    dialog.set_response_appearance("close", message_type) # Red button for errors
+
+    # Connect the response signal to handle user actions
+    dialog.signal_connect("response") do |_dialog, response|
+      puts "Dialog closed with response: #{response}"
+      dialog.destroy # Close the dialog after response
+    end
+
+    # Show the dialog
+    dialog.present
     dialog
   end
 
