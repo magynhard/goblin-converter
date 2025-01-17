@@ -17,4 +17,4 @@ else
   bash -c "bundle install > /dev/null 2>&1"
 fi
 
-bash -c "ruby /usr/share/goblin-doc/src/main.rb $*"
+bash -c "ruby /usr/share/goblin-docs/src/main.rb $*"

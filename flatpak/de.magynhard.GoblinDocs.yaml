@@ -1,9 +1,9 @@
 {
-  "app-id": "de.magynhard.GoblinDoc",
+  "app-id": "de.magynhard.GoblinDocs",
   "runtime": "org.gnome.Platform",
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
-  "command": "goblin-doc",
+  "command": "goblin-docs",
   "finish-args": [
     "--device=dri",
     "--share=ipc",
@@ -73,16 +73,16 @@
       "name": "run-script",
       "buildsystem": "simple",
       "build-commands": [
-        "install -D goblin-doc ${FLATPAK_DEST}/bin/goblin-doc",
+        "install -D goblin-docs ${FLATPAK_DEST}/bin/goblin-docs",
         "install -D src/main.rb ${FLATPAK_DEST}/bin/src/main.rb"
-        "install -D data/de.magynhard.GoblinDoc.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinDoc.metainfo.xml"
-        "install -D data/screenshots/01-goblin-doc-main.png ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.png"
-        "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinDoc.svg"
+        "install -D data/de.magynhard.GoblinDocs.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinDocs.metainfo.xml"
+        "install -D data/screenshots/01-goblin-docs-main.png ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.png"
+        "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinDocs.svg"
       ],
       "sources": [
         {
           "type": "file",
-          "path": "goblin-doc"
+          "path": "goblin-docs"
         },
         {
           "type": "file",
@@ -90,11 +90,11 @@
         },
         {
           "type": "file",
-          "path": "data/de.magynhard.GoblinDoc.metainfo.xml"
+          "path": "data/de.magynhard.GoblinDocs.metainfo.xml"
         },
         {
           "type": "file",
-          "path": "data/screenshots/01-goblin-doc-main.png"
+          "path": "data/screenshots/01-goblin-docs-main.png"
         },
 #        {
 #          "type": "dir",

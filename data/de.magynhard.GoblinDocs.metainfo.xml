@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>de.magynhard.GoblinDoc.desktop</id>
+  <id>de.magynhard.GoblinDocs.desktop</id>
 
-  <name>Goblin Doc</name>
+  <name>Goblin Docs</name>
   <summary>Simple document converter</summary>
 
   <metadata_license>CC0-1.0</metadata_license>
@@ -16,10 +16,10 @@
   <developer id="de.magynhard">
     <name translatable="no">Matthäus J. N. Beyrle</name>
   </developer>
-  <update_contact>goblin-doc.github.com@mail.magynhard.de</update_contact>
+  <update_contact>goblin-docs.github.com@mail.magynhard.de</update_contact>
 
-  <translation type="gettext">goblin-doc</translation>
-  <launchable type="desktop-id">de.magynhard.GoblinDoc.desktop</launchable>
+  <translation type="gettext">goblin-docs</translation>
+  <launchable type="desktop-id">de.magynhard.GoblinDocs.desktop</launchable>
 
   <categories>
     <category>Utility</category>
@@ -64,7 +64,7 @@
 
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/magynhard/goblin-doc/refs/heads/master/data/screenshots/01-goblin-doc-main.png</image>
+      <image type="source">https://raw.githubusercontent.com/magynhard/goblin-docs/refs/heads/master/data/screenshots/01-goblin-docs-main.png</image>
     </screenshot>
   </screenshots>
 </component>

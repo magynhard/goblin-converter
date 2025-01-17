@@ -1,4 +1,4 @@
-# Goblin Doc
+# Goblin Docs
 ![GitHub Release](https://img.shields.io/github/v/release/magynhard/goblin?style=plastic&color=default&label=GitHub&logo=github)
 [![Flatpak](https://img.shields.io/badge/_-Flatpak-Sub?style=plastic&color=gray&logo=flatpak&logoColor=blu)](#)
 [![Ruby](https://img.shields.io/badge/_-Ruby-Sub?style=plastic&color=gray&logo=ruby&logoColor=red)](#)
@@ -21,7 +21,7 @@ This app is distributed as a Flatpak package or can be installed locally.
 ## Flatpak
 ```ruby
 # not available yet
-flatpak install flathub de.magynhard.GoblinDoc
+flatpak install flathub de.magynhard.GoblinDocs
 ```
 
 ## Local
@@ -37,19 +37,19 @@ sudo pacman -S base-devel libcairo gobject-introspection libgdk-pixbuf libgtk gt
 
 ### Install
 ```
-git clone https://github.com/magynhard/goblin-doc.git
-cd goblin-doc
+git clone https://github.com/magynhard/goblin-docs.git
+cd goblin-docs
 rake install
 cd ..
-rm -rf goblin-doc
+rm -rf goblin-docs
 ```
 ### Uninstall
 ```
-git clone https://github.com/magynhard/goblin-doc.git
-cd goblin-doc
+git clone https://github.com/magynhard/goblin-docs.git
+cd goblin-docs
 rake uninstall
 cd ..
-rm -rf goblin-doc
+rm -rf goblin-docs
 ```
 
 # Development
@@ -67,15 +67,15 @@ rm -rf goblin-doc
 
 ## Build package
 ```
-flatpak-builder --force-clean build de.magynhard.GoblinDoc.yaml
+flatpak-builder --force-clean build de.magynhard.GoblinDocs.yaml
 ```
 
 ## Run local package
 ```
-flatpak-builder --run build de.magynhard.GoblinDoc.yaml goblin-doc
+flatpak-builder --run build de.magynhard.GoblinDocs.yaml goblin-docs
 ```
 
 ## Create resources
 ```
-glib-compile-resources data/goblin-doc.gresource.xml
+glib-compile-resources data/goblin-docs.gresource.xml
 ```
