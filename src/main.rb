@@ -20,12 +20,12 @@ class GoblinApp
   def initialize
     Adwaita.init
     @argument = ARGV.join(" ")
-    @app = Adwaita::Application.new("de.magynhard.GoblinDocs", :flags_none)
+    @app = Adwaita::Application.new("de.magynhard.GoblinConverter", :flags_none)
 
-    resource_data = Gio::Resource.load(File.expand_path(File.dirname(__FILE__) + '/../data/goblin-docs.gresource'))
+    resource_data = Gio::Resource.load(File.expand_path(File.dirname(__FILE__) + '/../data/goblin-converter.gresource.gresource'))
     Gio::Resources.register(resource_data)
 
-    Gtk::Window.set_default_icon_name('de.magynhard.GoblinDocs')
+    Gtk::Window.set_default_icon_name('de.magynhard.GoblinConverter')
 
     @app.signal_connect("activate") do |application|
       MainWindow.show(application)
@@ -44,7 +44,7 @@ class GoblinApp
     content_area.margin_end = 20
 
     # Icon hinzufügen
-    icon = Gtk::Image.new(resource: '/de/magynhard/GoblinDoc/app-icon.svg')
+    icon = Gtk::Image.new(resource: '/de/magynhard/GoblinConverter/app-icon.svg')
     icon.set_pixel_size(128)
     content_area.append(icon)
 

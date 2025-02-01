@@ -1,8 +1,8 @@
 [Application]
-name=de.magynhard.GoblinDocs
+name=de.magynhard.GoblinConverter
 runtime=org.gnome.Platform
 sdk=org.gnome.Sdk
-command=goblin-docs
+command=goblin-converter
 
 [Context]
 device=dri

@@ -6,7 +6,7 @@ class MainWindow
     @@argument = ARGV.join(" ")
     window = Gtk::ApplicationWindow.new(application)
     window.set_application(application)
-    window.set_title("Goblin Docs")
+    window.set_title("Goblin Converter")
     window.set_default_size(800, 600)
 
     vbox = Gtk::Box.new(:vertical, 10)
@@ -222,7 +222,7 @@ class MainWindow
 
     # Create the main header label (big title)
     main_title = Gtk::Label.new
-    main_title.set_markup(%Q(<span font_weight="bold" font_size="11000">#{'Goblin Docs'}</span>))
+    main_title.set_markup(%Q(<span font_weight="bold" font_size="11000">#{'Goblin Converter'}</span>))
     main_title.halign = :center # Align to the start (left)
 
     # Create the sub-header label

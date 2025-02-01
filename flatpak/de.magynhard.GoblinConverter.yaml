@@ -1,9 +1,9 @@
 {
-  "app-id": "de.magynhard.GoblinDocs",
+  "app-id": "de.magynhard.GoblinConverter",
   "runtime": "org.gnome.Platform",
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
-  "command": "goblin-docs",
+  "command": "goblin-converter",
   "finish-args": [
     "--device=dri",
     "--share=ipc",
@@ -73,16 +73,16 @@
       "name": "run-script",
       "buildsystem": "simple",
       "build-commands": [
-        "install -D goblin-docs ${FLATPAK_DEST}/bin/goblin-docs",
+        "install -D goblin-converter ${FLATPAK_DEST}/bin/goblin-converter",
         "install -D src/main.rb ${FLATPAK_DEST}/bin/src/main.rb"
-        "install -D data/de.magynhard.GoblinDocs.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinDocs.metainfo.xml"
-        "install -D data/screenshots/01-goblin-docs-main.png ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.png"
-        "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinDocs.svg"
+        "install -D data/de.magynhard.GoblinConverter.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinConverter.metainfo.xml"
+        "install -D data/screenshots/01-goblin-converter-main.png ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.png"
+        "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinConverter.svg"
       ],
       "sources": [
         {
           "type": "file",
-          "path": "goblin-docs"
+          "path": "goblin-converter"
         },
         {
           "type": "file",
@@ -90,11 +90,11 @@
         },
         {
           "type": "file",
-          "path": "data/de.magynhard.GoblinDocs.metainfo.xml"
+          "path": "data/de.magynhard.GoblinConverter.metainfo.xml"
         },
         {
           "type": "file",
-          "path": "data/screenshots/01-goblin-docs-main.png"
+          "path": "data/screenshots/01-goblin-converter-main.png"
         },
 #        {
 #          "type": "dir",

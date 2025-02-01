@@ -1,4 +1,4 @@
-# Goblin Docs
+# Goblin Converter
 ![GitHub Release](https://img.shields.io/github/v/release/magynhard/goblin?style=plastic&color=default&label=GitHub&logo=github)
 [![Flatpak](https://img.shields.io/badge/_-Flatpak-Sub?style=plastic&color=gray&logo=flatpak&logoColor=blu)](#)
 [![Ruby](https://img.shields.io/badge/_-Ruby-Sub?style=plastic&color=gray&logo=ruby&logoColor=red)](#)
@@ -20,7 +20,7 @@ This app is distributed as a Flatpak package or can be installed locally.
 ## Flatpak
 ```ruby
 # not available yet
-flatpak install flathub de.magynhard.GoblinDocs
+flatpak install flathub de.magynhard.GoblinConverter
 ```
 
 ## Local
@@ -36,19 +36,19 @@ sudo pacman -S base-devel libcairo gobject-introspection libgdk-pixbuf libgtk gt
 
 ### Install
 ```
-git clone https://github.com/magynhard/goblin-docs.git
-cd goblin-docs
+git clone https://github.com/magynhard/goblin-converter.git
+cd goblin-converter
 rake install
 cd ..
-rm -rf goblin-docs
+rm -rf goblin-converter
 ```
 ### Uninstall
 ```
-git clone https://github.com/magynhard/goblin-docs.git
-cd goblin-docs
+git clone https://github.com/magynhard/goblin-converter.git
+cd goblin-converter
 rake uninstall
 cd ..
-rm -rf goblin-docs
+rm -rf goblin-converter
 ```
 
 # Development
@@ -66,15 +66,15 @@ rm -rf goblin-docs
 
 ## Build package
 ```
-flatpak-builder --force-clean build de.magynhard.GoblinDocs.yaml
+flatpak-builder --force-clean build de.magynhard.GoblinConverter.yaml
 ```
 
 ## Run local package
 ```
-flatpak-builder --run build de.magynhard.GoblinDocs.yaml goblin-docs
+flatpak-builder --run build de.magynhard.GoblinConverter.yaml goblin-converter
 ```
 
 ## Create resources
 ```
-glib-compile-resources data/goblin-docs.gresource.xml
+glib-compile-resources data/goblin-converter.gresource.xml
 ```
