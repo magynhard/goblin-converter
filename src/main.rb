@@ -22,7 +22,7 @@ class GoblinApp
     @argument = ARGV.join(" ")
     @app = Adwaita::Application.new("de.magynhard.GoblinConverter", :flags_none)
 
-    resource_data = Gio::Resource.load(File.expand_path(File.dirname(__FILE__) + '/../data/goblin-converter.gresource.gresource'))
+    resource_data = Gio::Resource.load(File.expand_path(File.dirname(__FILE__) + '/../data/goblin-converter.gresource'))
     Gio::Resources.register(resource_data)
 
     Gtk::Window.set_default_icon_name('de.magynhard.GoblinConverter')

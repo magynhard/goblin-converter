@@ -125,3 +125,10 @@ task :test do
   puts "Validate desktop file ... "
   system "desktop-file-validate data/de.magynhard.GoblinConverter.desktop"
 end
+
+
+
+desc "Run the application"
+task :run do
+  sh "bash -lc 'ruby src/main.rb'"
+end
