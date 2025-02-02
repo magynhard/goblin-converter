@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Goblin Docs
+Name=Goblin Converter
 Comment=A simple document converter
 Comment[de]=Ein einfacher Dokumentenkonverter
 Comment[fr]=Un convertisseur de documents simple
@@ -20,8 +20,8 @@ Comment[nl]=Een eenvoudige documentconverter
 Comment[gd]=Inneal-tionndaidh sgrìobhainnean sìmplidh
 Comment[cy]=Trawsnewidydd dogfennau syml
 Comment[hi]=एक साधारण दस्तावेज़ कनवर्टर
-Exec=bash -lc "/usr/bin/goblin-doc %U"
-Icon=de.magynhard.GoblinDoc
+Exec=bash -lc "/usr/bin/goblin-converter %U"
+Icon=de.magynhard.GoblinConverter
 Terminal=false
 Type=Application
 MimeType=application/pdf;image/png;image/webp;image/jpeg;

@@ -120,6 +120,13 @@ end
 
 
 
+desc "Build release"
+task :build_release => [:generate_locales, :compile_locales, :build_resources, :build_flatpak] do
+
+end
+
+
+
 desc "Build resource file"
 task :build_resources do
   system "glib-compile-resources data/goblin-converter.gresource.xml"
@@ -130,6 +137,18 @@ end
 desc "Build flatpak package"
 task :build_flatpak do |t|
   system "flatpak-builder --force-clean build flatpak/de.magynhard.GoblinConverter.yaml"
+end
+
+
+
+desc "Setup flatpak builder"
+task :setup_flatpak do |t|
+  system "flatpak install flathub org.flatpak.Builder"
+end
+
+desc "Test flatpak metadata"
+task :test_flatpak_metadata do |t|
+  system "flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream data/de.magynhard.GoblinConverter.metainfo.xml"
 end
 
 

@@ -12,7 +12,6 @@
   <url type="bugtracker">https://github.com/magynhard/goblin-converter/issues/</url>
   <url type="vcs-browser">https://github.com/magynhard/goblin-converter/</url>
 
-  <developer_name translatable="no">Matthäus J. N. Beyrle</developer_name>
   <developer id="de.magynhard">
     <name translatable="no">Matthäus J. N. Beyrle</name>
   </developer>
@@ -24,14 +23,6 @@
   <categories>
     <category>Utility</category>
   </categories>
-
-  <kudos>
-    <kudo>HiDpiIcon</kudo>
-    <kudo>HighContrast</kudo>
-    <kudo>ModernToolkit</kudo>
-    <kudo>Notifications</kudo>
-    <kudo>UserDocs</kudo>
-  </kudos>
 
   <requires>
     <display_length compare="ge">360</display_length>
@@ -51,6 +42,9 @@
   <description>
     <p>
       A simple document converter written in GTK4 and Ruby.
+
+      It is based on ImageMagick and can convert between various document formats.
+      It is designed to be simple and easy to use to convert documents for digital storage or sharing.
     </p>
   </description>
 
@@ -61,6 +55,8 @@
       </description>
     </release>
   </releases>
+
+  <icon type="stock">de.magynhard.GoblinConverter</icon>
 
   <screenshots>
     <screenshot type="default">

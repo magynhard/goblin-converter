@@ -82,3 +82,13 @@ rake run_flatpak
 ```
 rake build_resources
 ```
+
+## Create new version
+### Create tag
+```
+git tag 0.X.X
+git push origin 0.X.X
+```
+### Create release
+```
+rake generate_lo
