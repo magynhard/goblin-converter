@@ -1,1 +1,4 @@
 src/*.rb
+src/dialogs/*.rb
+src/windows/*.rb
+src/windows/main/*.rb

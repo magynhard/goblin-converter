@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 00:07+0100\n"
+"POT-Creation-Date: 2025-02-02 23:59+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,89 +18,122 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/main.rb:45
-msgid "Select Source File ..."
-msgstr "Выберите исходный файл ..."
-
-#: src/main.rb:46
-msgid "Select Output File ..."
-msgstr "Выберите выходной файл ..."
-
-#: src/main.rb:55
-msgid "Select Source File"
-msgstr "Выберите исходный файл"
-
-#: src/main.rb:64
-msgid "Select Output File"
-msgstr "Выберите выходной файл"
-
-#: src/main.rb:71
-msgid "Monochrome"
-msgstr "Монохромный"
-
-#: src/main.rb:72
-msgid "Grayscale"
-msgstr ""
-
-#: src/main.rb:73
-msgid "Grayscale quality"
-msgstr ""
-
-#: src/main.rb:74
-msgid "Color"
-msgstr ""
-
-#: src/main.rb:80
-msgid "Conversion Mode:"
-msgstr "Режим конвертации:"
-
-#: src/main.rb:122
-msgid "Density:"
-msgstr ""
-
-#: src/main.rb:125
-msgid "Threshold:"
-msgstr ""
-
-#: src/main.rb:128
-msgid "Quality:"
-msgstr ""
-
-#: src/main.rb:131
-msgid "Source File:"
-msgstr "Исходный файл:"
-
-#: src/main.rb:135
-msgid "Output File:"
-msgstr "Выходной файл:"
-
-#: src/main.rb:139
-msgid "Convert"
-msgstr "Конвертировать"
-
-#: src/main.rb:151
-msgid "Converting..."
-msgstr "Конвертация..."
-
-#: src/main.rb:167
-msgid "Conversion Complete!"
-msgstr "Конвертация завершена!"
-
-#: src/main.rb:169
-msgid "Please select both source and output files."
-msgstr "Пожалуйста, выберите оба файла: исходный и выходной."
-
-#: src/main.rb:192 src/main.rb:239
+#: src/dialogs/about_dialog.rb:5 src/windows/main_window.rb:67
 msgid "A simple document converter"
 msgstr "Простой конвертер документов"
 
-#: src/main.rb:214
+#: src/windows/main_window.rb:89
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/main.rb:215
+#: src/windows/main_window.rb:90
 msgid "About"
 msgstr "О программе"
+
+#: src/windows/main/conversion_mode_group.rb:5
+msgid "Monochrome"
+msgstr "Монохромный"
+
+#: src/windows/main/conversion_mode_group.rb:6
+msgid "Grayscale"
+msgstr ""
+
+#: src/windows/main/conversion_mode_group.rb:7
+msgid "Grayscale quality"
+msgstr ""
+
+#: src/windows/main/conversion_mode_group.rb:8
+msgid "Color"
+msgstr ""
+
+#: src/windows/main/conversion_mode_group.rb:14
+#, fuzzy
+msgid "Conversion"
+msgstr "Режим конвертации:"
+
+#: src/windows/main/conversion_mode_group.rb:26
+msgid "Mode"
+msgstr ""
+
+#: src/windows/main/conversion_mode_group.rb:46
+msgid "Resolution"
+msgstr ""
+
+#: src/windows/main/conversion_mode_group.rb:57
+msgid "Density of the resolution in dpi for your output"
+msgstr ""
+
+#: src/windows/main/conversion_mode_group.rb:96
+msgid "Quality"
+msgstr ""
+
+#: src/windows/main/conversion_mode_group.rb:107
+msgid "Lossy compression quality"
+msgstr ""
+
+#: src/windows/main/conversion_mode_group.rb:150
+msgid "Threshold"
+msgstr ""
+
+#: src/windows/main/conversion_mode_group.rb:161
+msgid ""
+"Decrease for more black.\n"
+"66 is a good fit for colored docs.\n"
+"For grayscaled documents 50-60 is\n"
+"often a good choice."
+msgstr ""
+
+#: src/windows/main/convert_button_group.rb:13
+msgid "Convert"
+msgstr "Конвертировать"
+
+#: src/windows/main/convert_button_group.rb:41
+msgid "Converting..."
+msgstr "Конвертация..."
+
+#: src/windows/main/convert_button_group.rb:59
+msgid "Conversion Complete!"
+msgstr "Конвертация завершена!"
+
+#: src/windows/main/convert_button_group.rb:61
+msgid "An error occurred while conversion!"
+msgstr ""
+
+#: src/windows/main/convert_button_group.rb:64
+msgid "Please select both source and output files."
+msgstr "Пожалуйста, выберите оба файла: исходный и выходной."
+
+#: src/windows/main/source_file_group.rb:6
+#, fuzzy
+msgid "Source"
+msgstr "Исходный файл:"
+
+#: src/windows/main/source_file_group.rb:22
+#: src/windows/main/source_file_group.rb:35
+msgid "Select Source File"
+msgstr "Выберите исходный файл"
+
+#: src/windows/main/target_file_group.rb:6
+msgid "Target"
+msgstr ""
+
+#: src/windows/main/target_file_group.rb:22
+#: src/windows/main/target_file_group.rb:35
+#, fuzzy
+msgid "Select target file"
+msgstr "Выберите исходный файл"
+
+#~ msgid "Select Source File ..."
+#~ msgstr "Выберите исходный файл ..."
+
+#~ msgid "Select Output File ..."
+#~ msgstr "Выберите выходной файл ..."
+
+#~ msgid "Select Output File"
+#~ msgstr "Выберите выходной файл"
+
+#~ msgid "Output File:"
+#~ msgstr "Выходной файл:"
 
 #~ msgid "Density (default 300):"
 #~ msgstr "Плотность (по умолчанию 300):"

@@ -120,6 +120,26 @@ end
 
 
 
+desc "Build resource file"
+task :build_resources do
+  system "glib-compile-resources data/goblin-converter.gresource.xml"
+end
+
+
+
+desc "Build flatpak package"
+task :build_flatpak do |t|
+  system "flatpak-builder --force-clean build flatpak/de.magynhard.GoblinConverter.yaml"
+end
+
+
+desc "Run flatpak package"
+task :run_flatpak do |t|
+  system "flatpak-builder --run build flatpak/de.magynhard.GoblinConverter.yaml goblin-converter"
+end
+
+
+
 desc "Run some basic tests"
 task :test do
   puts "Validate desktop file ... "

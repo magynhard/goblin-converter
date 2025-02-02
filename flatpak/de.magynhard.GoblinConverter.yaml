@@ -65,7 +65,7 @@
         {
           "type": "archive",
           "url": "https://download.imagemagick.org/archive/releases/ImageMagick-7.1.1-43.tar.gz",
-          "sha256": "81c03fe273d8dd33c36dc5b967ae279f87e3be5bb5070e6fbeb893ddd40b0340"
+          "sha256": "81c03fe273d8dd33c36dc5b967ae279f87e3be5bb5070e6fbeb893ddd40b0340",
         }
       ]
     },
@@ -73,28 +73,28 @@
       "name": "run-script",
       "buildsystem": "simple",
       "build-commands": [
-        "install -D goblin-converter ${FLATPAK_DEST}/bin/goblin-converter",
-        "install -D src/main.rb ${FLATPAK_DEST}/bin/src/main.rb"
-        "install -D data/de.magynhard.GoblinConverter.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinConverter.metainfo.xml"
-        "install -D data/screenshots/01-goblin-converter-main.png ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.png"
-        "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinConverter.svg"
+        "install -D ../goblin-converter ${FLATPAK_DEST}/bin/goblin-converter",
+        "install -D ../src/main.rb ${FLATPAK_DEST}/bin/src/main.rb",
+        "install -D ../data/de.magynhard.GoblinConverter.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinConverter.metainfo.xml",
+        "install -D ../data/screenshots/01-goblin-converter-main.png ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.png",
+        "install -D ../data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinConverter.svg",
       ],
       "sources": [
         {
           "type": "file",
-          "path": "goblin-converter"
+          "path": "../goblin-converter"
         },
         {
           "type": "file",
-          "path": "src/main.rb"
+          "path": "../src/main.rb"
         },
         {
           "type": "file",
-          "path": "data/de.magynhard.GoblinConverter.metainfo.xml"
+          "path": "../data/de.magynhard.GoblinConverter.metainfo.xml"
         },
         {
           "type": "file",
-          "path": "data/screenshots/01-goblin-converter-main.png"
+          "path": "../data/screenshots/01-goblin-converter-main.png"
         },
 #        {
 #          "type": "dir",
@@ -111,8 +111,8 @@
       "sources": [
         {
           "type": "git",
-          "url": "https://github.com/magynhard/goblin.git",
-          "tag": "0.2.1"
+          "url": "https://github.com/magynhard/goblin-converter.git",
+          "tag": "0.3.0"
         }
       ]
     },

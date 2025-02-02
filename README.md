@@ -65,20 +65,20 @@ rm -rf goblin-converter
 
 ## Install local for development
 ```
-./install.sh
+rake install
 ```
 
-## Build package
+## Build Flatpak package
 ```
-flatpak-builder --force-clean build de.magynhard.GoblinConverter.yaml
+rake build_flatpak
 ```
 
 ## Run local package
 ```
-flatpak-builder --run build de.magynhard.GoblinConverter.yaml goblin-converter
+rake run_flatpak
 ```
 
-## Create resources
+## Create GTK resources
 ```
-glib-compile-resources data/goblin-converter.gresource.xml
+rake build_resources
 ```
