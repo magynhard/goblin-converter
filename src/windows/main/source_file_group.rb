@@ -35,7 +35,7 @@ module SourceFileGroup
     OpenFileDialog.show(parent: parent, title: _("Select Source File"), action: Gtk::FileChooserAction::OPEN) do |file|
       if file
         @source_file_row.subtitle = @form_data.source_path = file
-        @output_entry_row.subtitle = @form_data.target_path = file.gsub(/\.([a-zA-Z]{3,4})$/, "_sw.\\1")
+        @output_entry_row.subtitle = @form_data.target_path = file.gsub(/\.([a-zA-Z]{3,4})$/, "_converted.\\1")
       end
     end
   end

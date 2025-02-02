@@ -2,10 +2,12 @@ require 'ostruct'
 
 require_relative 'main/source_file_group'
 require_relative 'main/target_file_group'
+require_relative 'main/conversion_mode_group'
+require_relative 'main/convert_button_group'
 
 class MainWindow
 
-  extend SourceFileGroup, TargetFileGroup
+  extend SourceFileGroup, TargetFileGroup, ConversionModeGroup, ConvertButtonGroup
 
   def self.show(application)
     @@app = application
@@ -15,7 +17,7 @@ class MainWindow
       target_path: nil,
       options: OpenStruct.new(
         mode: "monochrome",
-        density: 300,
+        resolution: 300,
         threshold: 66,
         quality: 75,
         strip_metadata: true
@@ -24,7 +26,7 @@ class MainWindow
     window = Gtk::ApplicationWindow.new(application)
     window.set_application(application)
     window.set_title("Goblin Converter")
-    window.set_default_size(800, 600)
+    window.set_default_size(550, 600)
 
     vbox = Gtk::Box.new(:vertical, 10)
     vbox.margin_top = 20
@@ -34,216 +36,11 @@ class MainWindow
 
     create_menu(window)
 
-    source_button = Gtk::Button.new(label: _("Select Source File ..."))
-    output_button = Gtk::Button.new(label: _("Select Output File ..."))
-
-    @source_entry = Gtk::Entry.new
-    @source_entry.text = @source_entry.text = @@argument || ""
-
-    @output_entry = Gtk::Entry.new
-    @output_entry.text = @@argument.gsub(/\.([a-zA-Z]{3,4})$/, "_sw.\\1") || ""
-
-    source_button.signal_connect("clicked") do
-      OpenFileDialog.show(parent: window, title: _("Select Source File"), action: Gtk::FileChooserAction::OPEN) do |file|
-        if file
-          @source_entry.text = file
-          @output_entry.text = file.gsub(/\.([a-zA-Z]{3,4})$/, "_sw.\\1")
-        end
-      end
-    end
-
-    output_button.signal_connect("clicked") do
-      OpenFileDialog.show(parent: window, title: _("Select Output File"), action: Gtk::FileChooserAction::SAVE) do |file|
-        @output_entry.text = file if file
-      end
-    end
-
-    dropdown = Gtk::ComboBoxText.new
-    conversion_modes = {
-      _("Monochrome") => "monochrome",
-      _("Grayscale") => "grayscale",
-      _("Grayscale quality") => "grayscale_quality",
-      _("Color") => "color",
-    }
-    conversion_modes.each_key do |label|
-      dropdown.append_text(label)
-    end
-    dropdown.active = 0
-    vbox.append(Gtk::Label.new(_("Conversion Mode:")))
-    vbox.append(dropdown)
-
-    density_adjustment = Gtk::Adjustment.new(300, 50, 500, 25, 25, 0)
-    density_scale = Gtk::Scale.new(:horizontal, density_adjustment)
-    density_scale.value = 300
-    density_scale.draw_value = true
-    density_scale.value_pos = :top
-
-    density_scale.signal_connect("value-changed") do
-      value = density_scale.value
-      step = density_adjustment.step_increment
-      snapped_value = ((value / step).round) * step
-      density_adjustment.value = snapped_value unless value == snapped_value
-    end
-
-    # put the adjustment in a row
-
-    threshold_adjustment = Gtk::Adjustment.new(66, 0, 100, 1, 1, 0)
-    threshold_scale = Gtk::Scale.new(:horizontal, threshold_adjustment)
-    threshold_scale.value = 66
-    threshold_scale.draw_value = true
-    threshold_scale.value_pos = :top
-    threshold_scale.set_hexpand(true)
-
-    threshold_scale.signal_connect("value-changed") do
-      value = threshold_scale.value
-      step = threshold_adjustment.step_increment
-      snapped_value = ((value / step).round) * step
-      threshold_adjustment.value = snapped_value unless value == snapped_value
-    end
-
-    threshold_box = Gtk::Box.new(:horizontal, 10)
-    threshold_label = Gtk::Label.new(_("Threshold:"))
-    threshold_label.set_xalign(0) # Align to the left
-    threshold_box.append(threshold_label)
-    threshold_box.append(threshold_scale)
-    vbox.append(threshold_box)
-
-    # Preferences Group
-    preferences_group = Adwaita::PreferencesGroup.new
-    preferences_group.title = "Preferences"
-    vbox.append(preferences_group)
-
-    # Action Row: Mouse Speed
-    mouse_speed_row = Adwaita::ActionRow.new
-    mouse_speed_row.title = "Mouse Speed"
-    mouse_speed_row.subtitle = "Perfecto"
-
-    # Slider for Mouse Speed
-    adjustment = Gtk::Adjustment.new(5, 0, 10, 1, 0, 0)
-    speed_slider = Gtk::Scale.new(:horizontal, adjustment)
-    speed_slider.set_hexpand(true)
-
-    # Add slider to the action row
-    mouse_speed_row.add_suffix(speed_slider)
-    preferences_group.add(mouse_speed_row)
-
-    # Action Row: Natural Scrolling
-    natural_scroll_row = Adwaita::ActionRow.new
-    natural_scroll_row.title = "Natural Scrolling"
-
-    # Switch for Natural Scrolling
-    scroll_switch = Gtk::Switch.new
-    natural_scroll_row.add_suffix(scroll_switch)
-    preferences_group.add natural_scroll_row
-    vbox.append preferences_group
-
-    quality_adjustment = Gtk::Adjustment.new(75, 0, 100, 1, 1, 0)
-    quality_scale = Gtk::Scale.new(:horizontal, quality_adjustment)
-    quality_scale.value = 75
-    quality_scale.draw_value = true
-    quality_scale.value_pos = :top
-
-    quality_scale.signal_connect("value-changed") do
-      value = quality_scale.value
-      step = quality_adjustment.step_increment
-      snapped_value = ((value / step).round) * step
-      quality_adjustment.value = snapped_value unless value == snapped_value
-    end
-
+    create_conversion_mode_group box: vbox, parent: window
     create_source_file_group box: vbox, parent: window
     create_target_file_group box: vbox, parent: window
+    create_convert_button_group box: vbox, parent: window
 
-    vbox.append(Gtk::Label.new(_("Density:")))
-    vbox.append(density_scale)
-
-    vbox.append(Gtk::Label.new(_("Threshold:")))
-    vbox.append(threshold_scale)
-
-    vbox.append(Gtk::Label.new(_("Quality:")))
-    vbox.append(quality_scale)
-
-    # Add option to strip metadata
-    strip_metadata = Gtk::CheckButton.new(_("Strip Metadata"))
-    strip_metadata.active = true
-    vbox.append(strip_metadata)
-
-    vbox.append(Gtk::Label.new(_("Source File:")))
-    vbox.append(@source_entry)
-    vbox.append(source_button)
-
-    vbox.append(Gtk::Label.new(_("Output File:")))
-    vbox.append(@output_entry)
-    vbox.append(output_button)
-
-    convert_button = Gtk::Button.new(label: _("Convert"))
-    vbox.append(convert_button)
-
-    # Create an Adwaita::ButtonRow
-    button_row = Adwaita::ButtonRow.new
-    button_row.title = "Actions"
-
-    # Create a ListBox
-    list_box = Gtk::ListBox.new
-    list_box.selection_mode = :none
-    list_box.add_css_class("boxed-list-separate")
-
-    # Create a Suggested Button (Primary Action)
-    suggested_button = Adwaita::ButtonRow.new
-    suggested_button.title = _("Convert")
-    suggested_button.activatable = true
-    suggested_button.add_css_class "suggested-action" # Makes it a primary action
-    suggested_button.add_css_class "boxed-list-separate" # Makes it a primary action
-    suggested_button.set_end_icon_name "document-revert-rtl-symbolic"
-    suggested_button.signal_connect("activated") { puts "Continue button clicked!" }
-    list_box.append suggested_button
-
-    vbox.append(list_box)
-
-    convert_button.signal_connect("clicked") do
-      source_file = @source_entry.text
-      output_file = @output_entry.text
-      if File.exist?(output_file)
-        show_overwrite_dialog(window) do |response|
-          if response == "overwrite"
-            puts "User chose to overwrite the file."
-            # Overwrite file logic here
-          else
-            puts "User canceled the operation."
-            # Cancel logic here
-          end
-        end
-      end
-      mode = conversion_modes[dropdown.active_text]
-      density = density_scale.value.to_i
-      threshold = threshold_scale.value.to_i
-      quality = quality_scale.value.to_i
-
-      if !["", nil].include?(source_file) && !["", nil].include?(output_file)
-        info = show_custom_dialog(window, text: _("Converting..."), message_type: :info)
-        sleep 0.25
-        mode_parameter = if mode == "monochrome"
-                           "-threshold #{threshold}% -monochrome -compress Fax"
-                         elsif mode == "grayscale"
-                           "-colorspace Gray -compress Zip"
-                         elsif mode == "grayscale_quality"
-                           "-colorspace Gray -compress JPEG -quality #{quality}"
-                         elsif mode == "color"
-                           "-compress JPEG -quality #{quality}"
-                         else
-                           "monochrome"
-                         end
-        command = "magick -density #{density} #{Shellwords.escape(source_file)} #{mode_parameter} -strip #{Shellwords.escape(output_file)}"
-        ret = system(command)
-        info.destroy
-        if ret
-          show_custom_dialog(window, text: _("Conversion Complete!"), message_type: :info)
-        else
-          show_custom_dialog(window, text: _("An error occurred while conversion!"), message_type: :error)
-        end
-      else
-        show_custom_dialog(window, text: _("Please select both source and output files."), message_type: :error)
-      end
-    end
 
     window.child = vbox
     window.present
