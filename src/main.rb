@@ -28,12 +28,12 @@ class GoblinApp
     Gtk::Window.set_default_icon_name('de.magynhard.GoblinConverter')
 
     @app.signal_connect("activate") do |application|
-      MainWindow.show(application)
+      MainWindow.show(app: application)
     end
   end
 
 
-  def show_custom_dialog(parent, title: "Info", text:, message_type: :default)
+  def self.show_custom_dialog(parent, title: "Info", text:, message_type: :default)
     dialog = Gtk::Dialog.new(parent: parent, title: message_type == :info ? "Information" : "Error", flags: :modal)
     dialog.set_default_size(300, 150)
 
@@ -66,7 +66,7 @@ class GoblinApp
   end
 
   # @param [:destructive|:default|:suggested] message_type
-  def show_error_dialog(parent, title:, text:, message_type: :default)
+  def self.show_error_dialog(parent, title:, text:, message_type: :default)
     # Create the Adw.MessageDialog
     dialog = Adwaita::MessageDialog.new parent, title, text
 
@@ -89,7 +89,7 @@ class GoblinApp
     dialog
   end
 
-  def show_overwrite_dialog(parent_window)
+  def self.show_overwrite_dialog(parent_window)
     response = nil
 
     dialog = Adwaita::MessageDialog.new(

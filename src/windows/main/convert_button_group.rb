@@ -1,7 +1,7 @@
 
 module ConvertButtonGroup
   # @param [Gtk::Box] box to add the group to
-  def create_convert_button_group(box:, parent:)
+  def create_convert_button_group(box:, parent:, app:)
 
     # Create a ListBox
     list_box = Gtk::ListBox.new
@@ -19,10 +19,10 @@ module ConvertButtonGroup
     list_box.append suggested_button
 
     suggested_button.signal_connect("activated") do
-      source_file = @source_entry.text
-      output_file = @output_entry.text
+      source_file = @form_data.source_path.to_s
+      output_file = @form_data.target_path.to_s
       if File.exist?(output_file)
-        show_overwrite_dialog(window) do |response|
+        GoblinApp.show_overwrite_dialog(parent) do |response|
           if response == "overwrite"
             puts "User chose to overwrite the file."
             # Overwrite file logic here
@@ -32,13 +32,13 @@ module ConvertButtonGroup
           end
         end
       end
-      mode = conversion_modes[dropdown.active_text]
-      density = density_scale.value.to_i
-      threshold = threshold_scale.value.to_i
-      quality = quality_scale.value.to_i
+      mode = @form_data.options.mode
+      density = @form_data.options.resolution.to_i
+      threshold = @form_data.options.threshold.to_i
+      quality = @form_data.options.quality.to_i
 
       if !["", nil].include?(source_file) && !["", nil].include?(output_file)
-        info = show_custom_dialog(window, text: _("Converting..."), message_type: :info)
+        info = GoblinApp.show_custom_dialog(parent, text: _("Converting..."), message_type: :info)
         sleep 0.25
         mode_parameter = if mode == "monochrome"
                            "-threshold #{threshold}% -monochrome -compress Fax"
@@ -52,15 +52,16 @@ module ConvertButtonGroup
                            "monochrome"
                          end
         command = "magick -density #{density} #{Shellwords.escape(source_file)} #{mode_parameter} -strip #{Shellwords.escape(output_file)}"
+        puts "Executing command: #{command}"
         ret = system(command)
         info.destroy
         if ret
-          show_custom_dialog(window, text: _("Conversion Complete!"), message_type: :info)
+          GoblinApp.show_custom_dialog(parent, text: _("Conversion Complete!"), message_type: :info)
         else
-          show_custom_dialog(window, text: _("An error occurred while conversion!"), message_type: :error)
+          GoblinApp.show_custom_dialog(parent, text: _("An error occurred while conversion!"), message_type: :error)
         end
       else
-        show_custom_dialog(window, text: _("Please select both source and output files."), message_type: :error)
+        GoblinApp.show_custom_dialog(parent, text: _("Please select both source and output files."), message_type: :error)
       end
     end
 

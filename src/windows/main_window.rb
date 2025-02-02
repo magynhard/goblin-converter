@@ -9,8 +9,8 @@ class MainWindow
 
   extend SourceFileGroup, TargetFileGroup, ConversionModeGroup, ConvertButtonGroup
 
-  def self.show(application)
-    @@app = application
+  def self.show(app:)
+    @@app = app
     @@argument = ARGV.join(" ")
     @form_data = OpenStruct.new(
       source_path: @@argument || nil,
@@ -23,8 +23,8 @@ class MainWindow
         strip_metadata: true
       )
     )
-    window = Gtk::ApplicationWindow.new(application)
-    window.set_application(application)
+    window = Gtk::ApplicationWindow.new(app)
+    window.set_application(app)
     window.set_title("Goblin Converter")
     window.set_default_size(550, 600)
 
@@ -39,7 +39,7 @@ class MainWindow
     create_conversion_mode_group box: vbox, parent: window
     create_source_file_group box: vbox, parent: window
     create_target_file_group box: vbox, parent: window
-    create_convert_button_group box: vbox, parent: window
+    create_convert_button_group box: vbox, parent: window, app: app
 
 
     window.child = vbox

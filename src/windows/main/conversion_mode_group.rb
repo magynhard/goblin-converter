@@ -166,12 +166,12 @@ module ConversionModeGroup
     @conversion_threshold_row.add_prefix(label_box)
 
     # create range for resolution suffix
-    adjustment = Gtk::Adjustment.new(75, 1, 100, 1, 1, 0)
+    adjustment = Gtk::Adjustment.new(66, 1, 100, 1, 1, 0)
     scale = Gtk::Scale.new(:horizontal, adjustment)
     scale.set_hexpand(true)
     scale.draw_value = true
     scale.set_size_request(300, -1)
-    scale.value = 75
+    scale.value = 66
     scale.draw_value = true
     scale.value_pos = :right
 
