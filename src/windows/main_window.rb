@@ -1,9 +1,26 @@
+require 'ostruct'
+
+require_relative 'main/source_file_group'
+require_relative 'main/target_file_group'
 
 class MainWindow
+
+  extend SourceFileGroup, TargetFileGroup
 
   def self.show(application)
     @@app = application
     @@argument = ARGV.join(" ")
+    @form_data = OpenStruct.new(
+      source_path: @@argument || nil,
+      target_path: nil,
+      options: OpenStruct.new(
+        mode: "monochrome",
+        density: 300,
+        threshold: 66,
+        quality: 75,
+        strip_metadata: true
+      )
+    )
     window = Gtk::ApplicationWindow.new(application)
     window.set_application(application)
     window.set_title("Goblin Converter")
@@ -133,6 +150,9 @@ class MainWindow
       quality_adjustment.value = snapped_value unless value == snapped_value
     end
 
+    create_source_file_group box: vbox, parent: window
+    create_target_file_group box: vbox, parent: window
+
     vbox.append(Gtk::Label.new(_("Density:")))
     vbox.append(density_scale)
 
@@ -157,6 +177,27 @@ class MainWindow
 
     convert_button = Gtk::Button.new(label: _("Convert"))
     vbox.append(convert_button)
+
+    # Create an Adwaita::ButtonRow
+    button_row = Adwaita::ButtonRow.new
+    button_row.title = "Actions"
+
+    # Create a ListBox
+    list_box = Gtk::ListBox.new
+    list_box.selection_mode = :none
+    list_box.add_css_class("boxed-list-separate")
+
+    # Create a Suggested Button (Primary Action)
+    suggested_button = Adwaita::ButtonRow.new
+    suggested_button.title = _("Convert")
+    suggested_button.activatable = true
+    suggested_button.add_css_class "suggested-action" # Makes it a primary action
+    suggested_button.add_css_class "boxed-list-separate" # Makes it a primary action
+    suggested_button.set_end_icon_name "document-revert-rtl-symbolic"
+    suggested_button.signal_connect("activated") { puts "Continue button clicked!" }
+    list_box.append suggested_button
+
+    vbox.append(list_box)
 
     convert_button.signal_connect("clicked") do
       source_file = @source_entry.text
@@ -210,7 +251,6 @@ class MainWindow
     # show_error_dialog(window, title: "Error", text: "This is an error message")
     # show_custom_dialog(window, title: "Error", text: "This is an error message")
   end
-
 
   def self.create_menu(window)
     # Create a box to hold the menu button

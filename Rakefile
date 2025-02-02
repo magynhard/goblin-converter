@@ -132,3 +132,5 @@ desc "Run the application"
 task :run do
   sh "bash -lc 'ruby src/main.rb'"
 end
+
+task :start => :run
