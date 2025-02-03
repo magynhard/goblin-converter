@@ -2,7 +2,7 @@
 
 require_relative "dependency_check"
 
-require_relative '../lib/gettext_setup'
+require_relative 'lib/gettext_setup'
 GetTextSetup.initialize
 include GetText
 
