@@ -86,7 +86,7 @@ class MainWindow
 
     # Create a Gio::Menu for the popover
     menu_model = Gio::Menu.new
-    menu_model.append(_('Settings'), 'app.settings')
+    #menu_model.append(_('Settings'), 'app.settings')
     menu_model.append(_('About'), 'app.about')
 
     # Set the menu model to the popover
@@ -94,7 +94,10 @@ class MainWindow
 
     # Add actions for the menu items
     @@app.add_action(Gio::SimpleAction.new('settings').tap { |action|
-      action.signal_connect('activate') { puts 'Settings clicked!' }
+      action.signal_connect('activate') {
+        GoblinApp.show_custom_dialog window, title: "", text: "", message_type: :info
+        puts 'Settings clicked!'
+      }
     })
     @@app.add_action(Gio::SimpleAction.new('about').tap { |action|
       action.signal_connect('activate') { AboutDialog.show(window) }

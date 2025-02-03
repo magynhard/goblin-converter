@@ -1,13 +1,14 @@
 require 'rake'
 require 'fileutils'
-
+require 'colorize'
 
 
 desc "Install the application"
 task :install do
   # Check if bundle command is available
   unless system("bash -lc 'command -v bundle > /dev/null'")
-    puts "Error: Bundler is not installed. Running 'gem install bundler' to install it ..."
+    puts "Error: Bundler is not installed.".red
+    puts "Running 'gem install bundler' to install it ...".green
     sh "bash -lc 'gem install bundler'"
   end
 
@@ -43,9 +44,10 @@ task :install do
   sh "sudo cp '#{File.dirname(__FILE__)}/.ruby-version' /usr/share/goblin-converter/.ruby-version"
   sh "sudo cp -r '#{File.dirname(__FILE__)}/data' /usr/share/goblin-converter"
   sh "sudo cp -r '#{File.dirname(__FILE__)}/src' /usr/share/goblin-converter"
-  sh "sudo cp -r '#{File.dirname(__FILE__)}/lib' /usr/share/goblin-converter"
 
-  puts "Installation complete. You can now run Goblin Converter from the applications menu."
+  puts
+  puts "Installation complete. You can now run Goblin Converter from the applications menu!".green
+  puts
 end
 
 
