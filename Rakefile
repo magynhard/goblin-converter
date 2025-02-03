@@ -149,6 +149,17 @@ task :install_flatpak do |t|
 end
 
 
+desc "Run installed flatpack package"
+task :run_installed_flatpak do |t|
+  system "flatpak run de.magynhard.GoblinConverter"
+end
+
+
+desc "Update flatpak rubygems sources"
+task :update_flatpak_rubygems_sources do |t|
+  system "ruby flatpak/flatpak_rubygems_generator.rb -o flatpak/rubygems.yaml"
+end
+
 
 desc "Setup flatpak builder"
 task :setup_flatpak do |t|

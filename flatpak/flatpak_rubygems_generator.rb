@@ -54,7 +54,7 @@ sources.unshift(params[:source]) unless params[:source].nil?
 main_module = {
   name: 'rubygems',
   buildsystem: 'simple',
-  'build-commands' => [bundle_command],
+  # 'build-commands' => [bundle_command],
   sources: sources
 }
 
