@@ -23,7 +23,7 @@ This app is distributed as a Flatpak package or can be installed locally.
 
 ## Flatpak
 ```ruby
-# not available yet
+# Not available yet, follow the Local installation guide
 flatpak install flathub de.magynhard.GoblinConverter
 ```
 
@@ -34,6 +34,7 @@ Beside, you need to have build tools and other dependencies to be installed.
 ```
 # Ubuntu
 sudo apt install build-essential libcairo2-dev libgirepository1.0-dev libgdk-pixbuf2.0-dev libgtk-4-common libgtk-4-dev libadwaita-1-0 libadwaita-1-dev imagemagick
+
 # Manjaro/Arch
 sudo pacman -S base-devel libcairo gobject-introspection libgdk-pixbuf libgtk gtk+ adwaita imagemagick
 ```
@@ -89,6 +90,6 @@ rake build_resources
 git tag 0.X.X
 git push origin 0.X.X
 ```
-### Create release
+### Create flatpak release
 ```
-rake generate_lo
+rake build
