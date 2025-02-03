@@ -73,8 +73,10 @@
       "name": "run-script",
       "buildsystem": "simple",
       "build-commands": [
-        "install -D goblin-converter ${FLATPAK_DEST}/bin/goblin-converter",
-        "install -D src/main.rb ${FLATPAK_DEST}/bin/src/main.rb",
+        "install -D flatpak/goblin-converter-flatpak ${FLATPAK_DEST}/bin/goblin-converter",
+        "install -d ${FLATPAK_DEST}/bin/src",
+        # "install -D src/*.rb ${FLATPAK_DEST}/bin/src",
+        "cp -r src ${FLATPAK_DEST}/bin/src",
         "install -D data/de.magynhard.GoblinConverter.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinConverter.metainfo.xml",
         "install -D data/screenshots/01-goblin-converter-main.png ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.png",
         "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinConverter.svg",
