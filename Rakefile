@@ -137,6 +137,15 @@ end
 desc "Build flatpak package"
 task :build_flatpak do |t|
   system "flatpak-builder --force-clean build flatpak/de.magynhard.GoblinConverter.yaml"
+  system "flatpak build-export local-repo build"
+  system "flatpak build-bundle local-repo goblin-converter.flatpak de.magynhard.GoblinConverter"
+end
+
+
+
+desc "Install flatpak package"
+task :install_flatpak do |t|
+  system "flatpak --user install goblin-converter.flatpak"
 end
 
 

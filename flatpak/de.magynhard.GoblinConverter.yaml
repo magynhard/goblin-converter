@@ -78,7 +78,7 @@
         # "install -D src/*.rb ${FLATPAK_DEST}/bin/src",
         "cp -r src ${FLATPAK_DEST}/bin/src",
         "install -D data/de.magynhard.GoblinConverter.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinConverter.metainfo.xml",
-        "install -D data/screenshots/01-goblin-converter-main.png ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.png",
+        "install -D data/screenshots/01-goblin-converter-main.jpg ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.jpg",
         "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinConverter.svg",
         "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/de.magynhard.GoblinConverter.svg",
       ],
