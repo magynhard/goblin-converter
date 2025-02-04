@@ -39,6 +39,23 @@ module TargetFileGroup
       end
     end
 
+    # Set up Drag & Drop target for files
+    drop_target = Gtk::DropTarget.new(Gdk::FileList, Gdk::DragAction::COPY)
+
+    drop_target.signal_connect "drop" do |_, value|
+      file_list = value.value # Extracts the Gdk::FileList object from GLib::Value
+      if file_list.is_a?(Gdk::FileList)
+        files = file_list.files.map { |file| file.path } # Get file paths
+        @output_entry_row.subtitle = @form_data.target_path = files.first
+      else
+        puts "Invalid drop format"
+      end
+      true
+    end
+
+    # Attach drop target to the row
+    @output_entry_row.add_controller(drop_target)
+
     group.add @output_entry_row
     box.append(group)
   end
@@ -54,9 +71,12 @@ module TargetFileGroup
   def on_target_row_edit_clicked(parent:, text: "")
     dialog = Gtk::Dialog.new(title: _("Edit path"), parent: parent, flags: :modal)
     dialog.set_default_size(640, 64)
-    dialog.add_button("_Cancel", Gtk::ResponseType::CANCEL)
+    cancel_button = dialog.add_button("_Cancel", Gtk::ResponseType::CANCEL)
     apply_button = dialog.add_button("_Apply", Gtk::ResponseType::APPLY)
     apply_button.set_css_classes(["suggested-action"])
+    apply_button.margin_end = 15
+    apply_button.margin_bottom = 15
+    cancel_button.margin_bottom = 15
 
     content_area = dialog.content_area
     content_area.margin_top = 20

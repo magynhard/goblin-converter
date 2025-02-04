@@ -27,6 +27,25 @@ module SourceFileGroup
 
     source_button.signal_connect("clicked") { on_source_row_clicked parent: parent }
 
+    # Set up Drag & Drop target for files
+    drop_target = Gtk::DropTarget.new(Gdk::FileList, Gdk::DragAction::COPY)
+
+    drop_target.signal_connect "drop" do |_, value|
+      file_list = value.value # Extracts the Gdk::FileList object from GLib::Value
+
+      if file_list.is_a?(Gdk::FileList)
+        files = file_list.files.map { |file| file.path } # Get file paths
+        @source_file_row.subtitle = @form_data.source_path = files.first
+        @output_entry_row.subtitle = @form_data.target_path = files.first.gsub(/\.([a-zA-Z]{3,4})$/, "_converted.\\1")
+      else
+        puts "Invalid drop format"
+      end
+      true
+    end
+
+    # Attach drop target to the row
+    @source_file_row.add_controller(drop_target)
+
     group.add @source_file_row
     box.append(group)
   end
