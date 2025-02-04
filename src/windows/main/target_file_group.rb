@@ -32,9 +32,9 @@ module TargetFileGroup
   end
 
   def on_target_row_clicked(parent:)
-    OpenFileDialog.show(parent: parent, title: _("Select target file"), action: Gtk::FileChooserAction::SAVE) do |file|
+    OpenFileDialog.show(parent: parent, title: _("Select target file"), action: Gtk::FileChooserAction::SAVE, file: @form_data.target_path) do |file|
       if file
-        @output_entry_row.subtitle = @output_entry = file
+        @output_entry_row.subtitle = @form_data.target_path = file
       end
     end
   end
