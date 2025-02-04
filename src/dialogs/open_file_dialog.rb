@@ -2,8 +2,12 @@ class OpenFileDialog
   def self.show(parent:, title:, action:, file: nil)
     dialog = Gtk::FileChooserDialog.new(title: title, parent: parent, action: action)
     dialog.add_button("_Cancel", Gtk::ResponseType::CANCEL)
-    dialog.add_button("_Open", Gtk::ResponseType::ACCEPT) if action == Gtk::FileChooserAction::OPEN
-    dialog.add_button("_Apply", Gtk::ResponseType::ACCEPT) if action == Gtk::FileChooserAction::SAVE
+    primary_button = if action == Gtk::FileChooserAction::OPEN
+                       dialog.add_button("_Open", Gtk::ResponseType::ACCEPT)
+                     elsif action == Gtk::FileChooserAction::SAVE
+                       dialog.add_button("_Apply", Gtk::ResponseType::ACCEPT)
+                     end
+    primary_button.add_css_class "suggested-action"
     dialog.set_modal(true)
     puts "FILE: #{file}"
     if file && !file.empty?
