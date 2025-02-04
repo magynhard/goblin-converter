@@ -6,7 +6,7 @@ class AboutDialog
     dialog.application_icon = "de.magynhard.GoblinConverter"
     dialog.website = "https://github.com/magynhard/goblin-converter?tab=readme-ov-file#readme"
     dialog.issue_url = "https://github.com/magynhard/goblin-converter/issues"
-    dialog.version = "0.4.0"
+    dialog.version = "0.4.1"
     dialog.developers = ["Matthäus J. N. Beyrle <goblin-converter.github.com@mail.magynhard.de>"]
     dialog.license_type = Gtk::License::MIT_X11
     dialog.show
