@@ -100,6 +100,7 @@ class GoblinApp
 
     dialog.add_response("cancel", "_Cancel")
     dialog.add_response("overwrite", "_Overwrite")
+    dialog.set_response_appearance("overwrite", :destructive)
 
     dialog.set_default_response("overwrite")
     dialog.set_close_response("cancel")
@@ -111,9 +112,15 @@ class GoblinApp
 
     dialog.present
 
-    while response.nil?
-      Gtk.main_iteration
+    # Start a temporary Gtk application to handle the dialog
+    temp_app = Gtk::Application.new("com.example.temp", :flags_none)
+    temp_app.signal_connect("activate") do
+      # No additional setup needed
     end
+
+    temp_app.register
+    temp_app.add_window(dialog)
+    temp_app.run
 
     response
   end
