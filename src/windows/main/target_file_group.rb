@@ -67,36 +67,31 @@ module TargetFileGroup
       end
     end
   end
-
   def on_target_row_edit_clicked(parent:, text: "")
-    dialog = Gtk::Dialog.new(title: _("Edit path"), parent: parent, flags: :modal)
-    dialog.set_default_size(640, 64)
-    cancel_button = dialog.add_button("_Cancel", Gtk::ResponseType::CANCEL)
-    apply_button = dialog.add_button("_Apply", Gtk::ResponseType::APPLY)
-    apply_button.set_css_classes(["suggested-action"])
-    apply_button.margin_end = 15
-    apply_button.margin_bottom = 15
-    cancel_button.margin_bottom = 15
+    dialog = Adwaita::MessageDialog.new(parent, _("Edit path"), "")
+    dialog.set_default_size(800, 150)
 
-    content_area = dialog.content_area
-    content_area.margin_top = 20
-    content_area.margin_bottom = 20
-    content_area.margin_start = 20
-    content_area.margin_end = 20
-
+    # Fügen Sie ein Eingabefeld hinzu
     entry = Gtk::Entry.new
     entry.text = text || ""
-    content_area.append(entry)
+    dialog.set_extra_child(entry)
 
-    dialog.set_default_response(Gtk::ResponseType::APPLY)
+    # Fügen Sie die Schaltflächen hinzu
+    dialog.add_response("cancel", "_Cancel")
+    dialog.add_response("apply", "_Apply")
+    dialog.set_response_appearance("apply", :suggested)
 
-    dialog.signal_connect("response") do |dia, response|
-      if response == Gtk::ResponseType::APPLY
+    dialog.set_default_response("apply")
+    dialog.set_close_response("cancel")
+
+    dialog.signal_connect("response") do |_, response|
+      if response == "apply"
         @output_entry_row.subtitle = @form_data.target_path = entry.text
       end
-      dia.destroy
+      dialog.destroy
     end
-    dialog.show
+
+    dialog.present
   end
 
 end
