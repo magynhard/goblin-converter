@@ -5,12 +5,15 @@
 # we want to ensure that the gems are installed for the new default version automatically.
 #
 
+unless ENV['SKIP_DEPENDENCY_CHECK'] == 'true'
 
-# Check if bundle command is available
-unless system("bash -lc 'command -v bundle > /dev/null'")
-  puts "Error: Bundler is not installed. Running 'gem install bundler' to install it ..."
-  system "bash -lc 'gem install bundler'"
+  # Check if bundle command is available
+  unless system("bash -lc 'command -v bundle > /dev/null'")
+    puts "Error: Bundler is not installed. Running 'gem install bundler' to install it ..."
+    system "bash -lc 'gem install bundler'"
+  end
+
+  # Run bundle install to install dependencies
+  system "bash -lc 'bundle install'"
+
 end
-
-# Run bundle install to install dependencies
-system "bash -lc 'bundle install'"

@@ -1,108 +1,77 @@
-{
-  "app-id": "de.magynhard.GoblinConverter",
-  "runtime": "org.gnome.Platform",
-  "runtime-version": "47",
-  "sdk": "org.gnome.Sdk",
-  "command": "goblin-converter",
-  "finish-args": [
-    "--device=dri",
-    "--share=ipc",
-    "--socket=session-bus",
-    "--socket=fallback-x11",
-    "--socket=wayland",
-    "--share=network",
-    "--filesystem=host",
-    "--filesystem=xdg-run/gvfsd"
-  ],
-  "modules": [
-    {
-      "name": "ruby",
-      "config-opts": [
-        "--disable-install-doc"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.6.tar.gz",
-          "sha256": "d9cb65ecdf3f18669639f2638b63379ed6fbb17d93ae4e726d4eb2bf68a48370"
-        }
-      ]
-    },
-    {
-      "name": "bundler",
-      "buildsystem": "simple",
-      "build-commands": [
-        "gem install --local bundler-2.6.2.gem"
-      ],
-      "sources": [
-        {
-          "type": "file",
-          "url": "https://rubygems.org/downloads/bundler-2.6.2.gem",
-          "sha256": "4b89756e1b05390ff678491119a10f0973a2045cc9fcb227b02a9396b28f7d74"
-        }
-      ]
-    },
-    {
-      "name": "ghostscript",
-      "buildsystem": "autotools",
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10040/ghostscript-10.04.0.tar.gz",
-          "sha256": "c764dfbb7b13fc71a7a05c634e014f9bb1fb83b899fe39efc0b6c3522a9998b1"
-        }
-      ]
-    },
-    {
-      "name": "imagemagick",
-      "buildsystem": "autotools",
-      "config-opts": [
-        "--disable-static",
-        "--with-modules",
-        "--without-perl"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://download.imagemagick.org/archive/releases/ImageMagick-7.1.1-43.tar.gz",
-          "sha256": "81c03fe273d8dd33c36dc5b967ae279f87e3be5bb5070e6fbeb893ddd40b0340",
-        }
-      ]
-    },
-    {
-      "name": "run-script",
-      "buildsystem": "simple",
-      "build-commands": [
-        "install -D flatpak/goblin-converter-flatpak ${FLATPAK_DEST}/bin/goblin-converter",
-        # "install -D src/*.rb ${FLATPAK_DEST}/bin/src",
-        "cp -r src ${FLATPAK_DEST}/bin",
-        "cp -r data ${FLATPAK_DEST}/bin",
-        "install -D data/de.magynhard.GoblinConverter.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinConverter.metainfo.xml",
-        "install -D data/screenshots/01-goblin-converter-main.jpg ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.jpg",
-        "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinConverter.svg",
-        "install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/de.magynhard.GoblinConverter.svg",
-      ],
-      "sources": [
-        {
-          "type": "dir",
-          "path": "./.."
-        }
-      ]
-    },
-    {
-      "name": "goblin",
-      "buildsystem": "simple",
-      "build-commands": [
-        "bundle install --local"
-      ],
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://github.com/magynhard/goblin-converter.git",
-          "tag": "0.3.1"
-        }
-      ]
-    },
-    "rubygems.yaml"
-  ]
-}
+app-id: de.magynhard.GoblinConverter
+runtime: org.gnome.Platform
+runtime-version: '47'
+sdk: org.gnome.Sdk
+command: goblin-converter
+finish-args:
+  - --device=dri
+  - --share=ipc
+  - --socket=session-bus
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=network
+  - --filesystem=host
+  - --filesystem=xdg-run/gvfsd
+environment:
+  GEM_PATH: /app/lib/ruby/gems/3.2.0
+  GEM_HOME: /app/lib/ruby/gems/3.2.0
+  RUBYLIB: /app/lib/ruby/3.2.0
+  MY_RUBY_HOME: /app/lib/ruby/3.2.0
+  RUBY_HOME: /app/lib/ruby/3.2.0
+modules:
+  - name: ruby
+    config-opts:
+      - --disable-install-doc
+    sources:
+      - type: archive
+        url: https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.6.tar.gz
+        sha256: d9cb65ecdf3f18669639f2638b63379ed6fbb17d93ae4e726d4eb2bf68a48370
+  - name: bundler
+    buildsystem: simple
+    build-commands:
+      - gem install --local bundler-2.6.2.gem
+    sources:
+      - type: file
+        url: https://rubygems.org/downloads/bundler-2.6.2.gem
+        sha256: 4b89756e1b05390ff678491119a10f0973a2045cc9fcb227b02a9396b28f7d74
+  - name: ghostscript
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10040/ghostscript-10.04.0.tar.gz
+        sha256: c764dfbb7b13fc71a7a05c634e014f9bb1fb83b899fe39efc0b6c3522a9998b1
+  - name: imagemagick
+    buildsystem: autotools
+    config-opts:
+      - --disable-static
+      - --with-modules
+      - --without-perl
+    sources:
+      - type: archive
+        url: https://download.imagemagick.org/archive/releases/ImageMagick-7.1.1-43.tar.gz
+        sha256: 81c03fe273d8dd33c36dc5b967ae279f87e3be5bb5070e6fbeb893ddd40b0340
+  - name: run-script
+    buildsystem: simple
+    build-commands:
+      - install -D flatpak/goblin-converter-flatpak ${FLATPAK_DEST}/bin/goblin-converter
+      - mkdir ${FLATPAK_DEST}/lib/goblin-converter
+      - cp -r src ${FLATPAK_DEST}/lib/goblin-converter
+      - cp -r data ${FLATPAK_DEST}/lib/goblin-converter
+      - cp -r po ${FLATPAK_DEST}/lib/goblin-converter
+      - cp -r vendor ${FLATPAK_DEST}/lib/goblin-converter
+      - cp -r .bundle ${FLATPAK_DEST}/lib/goblin-converter
+      - install -D data/de.magynhard.GoblinConverter.metainfo.xml ${FLATPAK_DEST}/share/metainfo/de.magynhard.GoblinConverter.metainfo.xml
+      - install -D data/screenshots/01-goblin-converter-main.jpg ${FLATPAK_DEST}/share/appdata/screenshots/screenshot1.jpg
+      - install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/de.magynhard.GoblinConverter.svg
+      - install -D data/icons/app-icon.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/de.magynhard.GoblinConverter.svg
+    sources:
+      - type: dir
+        path: ./..
+  - name: goblin
+    buildsystem: simple
+    build-commands:
+      - bundle install --local
+    sources:
+      - type: git
+        url: https://github.com/magynhard/goblin-converter.git
+        tag: '0.3.1'

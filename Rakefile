@@ -18,7 +18,7 @@ task :install do
   ruby_version = match[1] if match
 
   # Create .ruby-version file with current Ruby version
-  File.write('.ruby-version', ruby_version)
+  # File.write('.ruby-version', ruby_version)
 
   # Get current path
   current_path = Dir.pwd

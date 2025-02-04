@@ -4,4 +4,12 @@ echo "Running goblin-converter"
 echo "Ruby version: $(ruby -v)"
 echo "PWD: $(pwd)"
 
-/app/bin/ruby /app/bin/src/main.rb $*
+export GEM_PATH=/app/lib/ruby/gems/3.2.0
+export GEM_HOME=/app/lib/ruby/gems/3.2.0
+export RUBYLIB=/app/lib/ruby/3.2.0
+export MY_RUBY_HOME=/app/lib/ruby/3.2.0
+export RUBY_HOME=/app/lib/ruby/3.2.0
+
+export SKIP_DEPENDENCY_CHECK=true
+
+/app/bin/ruby /app/lib/goblin-converter/src/main.rb $*
