@@ -1,0 +1,21 @@
+name: imagemagick
+config-opts:
+  - --enable-shared
+  - --disable-static
+  - --with-modules
+  - --with-x
+  - --with-threads
+  - --with-magick_plus_plus
+  - --with-gslib
+  - --with-wmf
+  - --with-webp
+  - --with-openexr
+  - --with-rsvg
+  - --with-xml
+  - --with-jbig
+  - --with-openjp2
+sources:
+  - type: git
+    url: https://github.com/ImageMagick/ImageMagick.git
+    tag: "7.1.1-12"
+    commit: a09d8dd5e3a92362cf70c184670b23163587e6f8

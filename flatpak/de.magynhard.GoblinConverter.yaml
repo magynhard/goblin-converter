@@ -26,6 +26,7 @@ modules:
       - type: archive
         url: https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.6.tar.gz
         sha256: d9cb65ecdf3f18669639f2638b63379ed6fbb17d93ae4e726d4eb2bf68a48370
+
   - name: bundler
     buildsystem: simple
     build-commands:
@@ -34,22 +35,7 @@ modules:
       - type: file
         url: https://rubygems.org/downloads/bundler-2.6.2.gem
         sha256: 4b89756e1b05390ff678491119a10f0973a2045cc9fcb227b02a9396b28f7d74
-  - name: ghostscript
-    buildsystem: autotools
-    sources:
-      - type: archive
-        url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10040/ghostscript-10.04.0.tar.gz
-        sha256: c764dfbb7b13fc71a7a05c634e014f9bb1fb83b899fe39efc0b6c3522a9998b1
-  - name: imagemagick
-    buildsystem: autotools
-    config-opts:
-      - --disable-static
-      - --with-modules
-      - --without-perl
-    sources:
-      - type: archive
-        url: https://download.imagemagick.org/archive/releases/ImageMagick-7.1.1-43.tar.gz
-        sha256: 81c03fe273d8dd33c36dc5b967ae279f87e3be5bb5070e6fbeb893ddd40b0340
+
   - name: run-script
     buildsystem: simple
     build-commands:
@@ -67,11 +53,16 @@ modules:
     sources:
       - type: dir
         path: ./..
+
   - name: goblin
     buildsystem: simple
+    config-opts:
+      - --with-magick
     build-commands:
       - bundle install --local
     sources:
       - type: git
         url: https://github.com/magynhard/goblin-converter.git
         tag: '0.3.1'
+
+  - imagemagick.yaml
