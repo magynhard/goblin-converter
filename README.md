@@ -1,11 +1,13 @@
+<div align="center">
+  <img src="data/icons/app-icon.svg" width="96" height="96" alt="Goblin Converter icon">
+</div>
+
 # Goblin Converter
 ![GitHub Release](https://img.shields.io/github/v/release/magynhard/goblin?style=plastic&color=default&label=GitHub&logo=github)
 [![Flatpak](https://img.shields.io/badge/_-Flatpak-Sub?style=plastic&color=gray&logo=flatpak&logoColor=blu)](#)
 [![Crystal](https://img.shields.io/badge/_-Crystal-Sub?style=plastic&color=gray&logo=crystal&logoColor=white)](#)
 [![GTK](https://img.shields.io/badge/_-GTK-Sub?style=plastic&color=gray&logo=gtk&logoColor=green)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=plastic&logo=mit)](LICENSE)
-
-<img src="data/icons/app-icon.svg" style="height: 96px;">
 
 >
 > A simple document converter GUI for GTK using magick
