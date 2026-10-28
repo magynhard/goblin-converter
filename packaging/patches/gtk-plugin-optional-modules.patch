@@ -1,0 +1,10 @@
+--- a/linuxdeploy-plugin-gtk.sh
++++ b/linuxdeploy-plugin-gtk.sh
+@@ -350,4 +350,6 @@
+         gtk4_libdir="$(get_pkgconf_variable "libdir" "gtk4")/gtk-4.0"
+         gtk4_path="$gtk4_libdir"
+-        copy_lib_tree "$gtk4_libdir" "$APPDIR/"
++        if [ -d "$gtk4_libdir" ]; then
++            copy_lib_tree "$gtk4_libdir" "$APPDIR/"
++        fi
+         cat >> "$HOOKFILE" <<EOF

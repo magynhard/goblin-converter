@@ -11,9 +11,12 @@ Repo language is English — keep code, comments, docs, and commit messages in E
 - Build: `make build` (= `crystal build src/goblin-converter.cr -o bin/goblin-converter`)
 - Run (needs display + `magick`): `make run`
 - Format check: `crystal tool format --check src/` / fix with `crystal tool format src/`
-- Install: `make install` (prefix `/usr/local`, app data copied to `/usr/local/share/goblin-converter` incl. `src/`, `po/`, `data/`, `shard.yml`)
+- Install: `make install` (prefix `/usr/local`, override with `PREFIX=...`; binary, desktop/metainfo, hicolor icons and translations installed under standard `bin/` and `share/` directories)
+- Linux packages: `make appimage` (Docker, Ubuntu 26.04, x86_64), `make flatpak` (GNOME SDK 51); outputs and checksums in `dist/`. See `doc/packaging.md`. Both bundle pinned ImageMagick 7 and Ghostscript builds.
+- Packaging checks: `make validate-metadata`, `make test-packaging`; package builds also run `scripts/test-conversion.sh` against the bundled PDF delegate/codecs. Source/tool/shard pins live in `packaging/sources.json`; keep them synchronized with local `shard.lock` when updating dependencies. Packaging also works without the ignored lockfile.
 - Uninstall / clean: `make uninstall` / `make clean`
 - Tests: headless specs via `make test` (= `crystal spec`; note: there is no `crystal test` command). GUI code is untestable headless — keep new logic in pure `GoblinApp.*` helpers in `src/modules/functions/conversion_logic.cr` and cover them in `spec/`. Specs must never instantiate GTK widgets.
+- File-opening integration: `make test-file-opening` uses a private D-Bus session and Xvfb. Covers multiple paths, escaped `file://` URIs, and forwarding from another working directory to an existing instance. Requires Python 3, gdbus, dbus-run-session, xvfb-run and xauth.
 
 ## Deps
 - Crystal 1.21+ (gi-crystal 0.26.0 in shard.lock needs `Fiber::ExecutionContext`; the `>= 1.10` bound in shard.yml is stale).
@@ -23,6 +26,7 @@ Repo language is English — keep code, comments, docs, and commit messages in E
 
 ## Architecture
 - Entry `src/goblin-converter.cr` → `GoblinApp::App < Adw::Application` → `MainWindow` in `src/modules/views/main_window.cr`.
+- The app uses `HandlesOpen`: each local file argument opens its own window with source and suggested target populated. GApplication forwards file requests to an existing instance. About and folder actions are window-scoped (`win.*`) so separate documents cannot overwrite one another's action handlers.
 - `MainWindow` is reopened across `src/modules/views/*.cr` (`class MainWindow`); each `create_*_group(vbox)` builds one UI section. State lives in `ConversionOptions`/`FormData` structs in `main_window.cr`.
 - Convert logic only in `src/modules/views/convert_button_group.cr:start_conversion`: runs `magick` via `Gio::SubprocessLauncher` (argv, no shell) with stdout/stderr redirected to tempfiles, polls completion with raw `waitpid(WNOHANG)` from a `GLib.timeout` (ECHILD means GLib's child watch reaped it → ask `proc.successful`). On Windows (`{% if flag?(:win32) %}`) there is no waitpid and File fds aren't C ints: stdio is inherited and completion comes via patched `wait_check_async` (see `subprocess_patch.cr`); exit-status helpers in `conversion_logic.cr` have trivial win32 branches.
 - Windows notes: no cross-compile from Linux — build must run on a Windows machine; win32 code paths can't be spec'd headless on Linux, verify them via `crystal build --cross-compile --target x86_64-windows-msvc -o /tmp/goblin-win src/goblin-converter.cr` (typecheck + codegen, skips link) plus testing on Windows. `make install` is Unix-only. Per-shell env via `. .\scripts\goblin-env.ps1` (loads vcvars64, strips VC98/VS6 entries that otherwise shadow MSVC 19.x, wires gvsbuild `LIB`/`INCLUDE`/`PKG_CONFIG_PATH`); `make` is unavailable on Windows — use the `crystal` commands directly. Verified 2026-10-02: `shards install` → `.\bin\gi-crystal.exe` (generates `lib/gi-crystal/src/auto/`) → `crystal build src/goblin-converter.cr -o bin/goblin-converter.exe` → `crystal spec` (18 examples, 0 failures) → exe launches with window.
@@ -32,7 +36,8 @@ Repo language is English — keep code, comments, docs, and commit messages in E
 - Drag & drop delivers `GObject::Value`, never `Gdk::FileList`: unwrap via `LibGObject.g_value_get_boxed` + type check (see `dropped_file_path`), return `false` when unhandled.
 - Never use Crystal `Thread`/`spawn`/`Channel` or `Process` with pipe-like redirects (`IO::Memory`, `Redirect::Pipe`) for subprocesses: fibers don't run while GTK blocks the main thread, and `Process` waiting hangs on worker threads (proven via headless harness). `Process.quote` as a pure string helper is fine.
 - Dialogs: `src/modules/functions/dialogs.cr`; file picker: `open_file_dialog.cr`.
-- `src/modules/prerequisites.cr`: `VERSION` via `read_file("./shard.yml")` macro — bump version only in `shard.yml`; Gettext domain `de.magynhard.GoblinConverter` with path relative to `po/`.
+- `src/modules/prerequisites.cr`: `VERSION` via `read_file("./shard.yml")` macro; Gettext domain `de.magynhard.GoblinConverter`.
+- For releases, keep the first AppStream release version in sync with `shard.yml`. Gettext searches installed `../share/locale` relative to the executable, falling back to the source `po/` directory; `GOBLIN_LOCALE_DIR` overrides this for AppImage relocation.
 
 ## i18n
 - `make locales` after every `.po` change (compiles `.po` → `.mo` via `msgfmt` for langs in `po/LINGUAS`).

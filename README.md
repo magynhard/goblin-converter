@@ -3,8 +3,8 @@
 </div>
 
 # Goblin Converter
-![GitHub Release](https://img.shields.io/github/v/release/magynhard/goblin?style=plastic&color=default&label=GitHub&logo=github)
-[![Flatpak](https://img.shields.io/badge/_-Flatpak-Sub?style=plastic&color=gray&logo=flatpak&logoColor=blu)](#)
+![GitHub Release](https://img.shields.io/github/v/release/magynhard/goblin-converter.cr?style=plastic&color=default&label=GitHub&logo=github)
+[![Linux packages](https://github.com/magynhard/goblin-converter.cr/actions/workflows/linux-packages.yml/badge.svg)](https://github.com/magynhard/goblin-converter.cr/actions/workflows/linux-packages.yml)
 [![Crystal](https://img.shields.io/badge/_-Crystal-Sub?style=plastic&color=gray&logo=crystal&logoColor=white)](#)
 [![GTK](https://img.shields.io/badge/_-GTK-Sub?style=plastic&color=gray&logo=gtk&logoColor=green)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=plastic&logo=mit)](LICENSE)
@@ -21,13 +21,35 @@ E.g. a PDF document with 300ppi and about 3-4MB in grayscale can be reduced to a
 ```
 
 # Setup
-This app is distributed as a Flatpak package or can be installed locally.
+Build AppImage or local Flatpak bundles, or install from source. The GitHub
+Actions workflow attaches packages to newly published [GitHub Releases](https://github.com/magynhard/goblin-converter.cr/releases).
 
 ## Flatpak
 ```bash
-# Not available yet, follow the Local installation guide
-flatpak install flathub de.magynhard.GoblinConverter
+flatpak install --user ./Goblin_Converter-0.0.1-x86_64.flatpak
+flatpak run de.magynhard.GoblinConverter
 ```
+
+## AppImage
+
+```sh
+chmod +x Goblin_Converter-0.0.1-x86_64.AppImage
+./Goblin_Converter-0.0.1-x86_64.AppImage
+```
+
+Replace `0.0.1` with the downloaded version. Both formats include ImageMagick and
+Ghostscript. AppImage requires Ubuntu 26.04/glibc 2.43 or newer; use Flatpak on
+older distributions. The Flatpak is a downloadable local bundle.
+
+## Build Linux packages
+
+```sh
+make appimage   # Docker-based x86_64 build
+make flatpak   # GNOME SDK 51 build
+```
+
+Packages and SHA-256 files are written to `dist/`. See [Linux packaging](doc/packaging.md)
+for prerequisites, verification and the GitHub Actions release workflow.
 
 ## Local
 Ensure, Crystal is installed.
@@ -56,6 +78,21 @@ make uninstall
 ```
 
 # Development
+## Opening files
+
+Pass local file paths or `file://` URIs to prefill the source and suggested target:
+
+```sh
+goblin-converter "/path/to/my document.pdf"
+goblin-converter first.pdf second.pdf
+```
+
+Each file opens in its own window, including when the application is already
+running. The desktop entry supports the file manager's **Open With** action.
+Run `make test-file-opening` to check startup and running-instance file delivery
+with a private session bus and Xvfb (requires Python 3, `gdbus`, `dbus-run-session`,
+`xvfb-run` and `xauth`).
+
 Target platforms are Linux (primary) and Windows. macOS is not planned.
 
 ## Requirements (development)
@@ -115,7 +152,7 @@ make clean
 ```
 
 ## Create new version
-### Update version in shard.yml
+### Update version in shard.yml and the first AppStream release entry
 ```yaml
 version: 0.X.X
 ```
@@ -125,3 +162,6 @@ version: 0.X.X
 git tag 0.X.X
 git push origin 0.X.X
 ```
+
+Publish the GitHub release for that tag to build and attach AppImage and Flatpak
+packages automatically. See [Linux packaging](doc/packaging.md#verification-and-releases).

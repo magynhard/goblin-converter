@@ -16,4 +16,4 @@ dependencies:
   gettext:
     git: https://codeberg.org/GeopJr/gettext.cr.git
 
-crystal: ">= 1.10.0"
+crystal: ">= 1.21.0"

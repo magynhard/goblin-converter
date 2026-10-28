@@ -28,3 +28,9 @@ Thumbs.db
 
 # Locale compiled files
 *.mo
+
+# Linux packaging
+/build/
+/dist/
+/.flatpak-builder/
+__pycache__/

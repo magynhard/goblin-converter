@@ -64,7 +64,7 @@ module GoblinApp
     property source_file_row : Adw::ActionRow? = nil
     property output_entry_row : Adw::ActionRow? = nil
 
-    def initialize(@app)
+    def initialize(@app, source_path : String? = nil)
       @window = Gtk::ApplicationWindow.new(@app)
       @window.title = "Goblin Converter"
       @window.resizable = false
@@ -82,6 +82,7 @@ module GoblinApp
       create_target_file_group(vbox)
       create_convert_button_group(vbox)
 
+      set_source_file(source_path, "file argument") if source_path
       @window.child = vbox
       @window.present
     end
@@ -113,7 +114,7 @@ module GoblinApp
       burger_menu.popover = popover
 
       menu_model = Gio::Menu.new
-      menu_model.append(GoblinApp.translate("About"), "app.about")
+      menu_model.append(GoblinApp.translate("About"), "win.about")
 
       popover.menu_model = menu_model
 
@@ -121,7 +122,7 @@ module GoblinApp
       about_action.activate_signal.connect do
         show_about_dialog
       end
-      @app.add_action(about_action)
+      @window.add_action(about_action)
 
       header_bar.pack_end(burger_menu)
 

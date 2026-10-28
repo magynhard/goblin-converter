@@ -12,7 +12,8 @@ module GoblinApp
   VERSION = {{read_file("./shard.yml").split("version: ")[1].split("\n")[0]}}
 
   # Initialize gettext for i18n
-  locale_dir = File.join(File.dirname(__FILE__), "..", "..", "po")
+  installed_locales = File.expand_path("../share/locale", File.dirname(Process.executable_path || PROGRAM_NAME))
+  locale_dir = ENV["GOBLIN_LOCALE_DIR"]? || (Dir.exists?(installed_locales) ? installed_locales : File.expand_path("../../po", __DIR__))
   {% if flag?(:win32) %}
     # MSVC numbers locale categories differently than glibc (which the
     # gettext shard assumes: LC::ALL = 6). On MSVC, LC_ALL = 0; passing 6

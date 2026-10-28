@@ -12,7 +12,16 @@ require "./modules/views/main_window"
 module GoblinApp
   class App < Adw::Application
     def initialize
-      super(application_id: "de.magynhard.GoblinConverter", flags: Gio::ApplicationFlags::None)
+      super(application_id: "de.magynhard.GoblinConverter", flags: Gio::ApplicationFlags::HandlesOpen)
+      open_signal.connect do |files, _hint|
+        files.each do |file|
+          if path = file.path
+            MainWindow.new(self, source_path: path.to_s)
+          else
+            GoblinApp.log("File ignored: only local files are supported: #{file.uri}")
+          end
+        end
+      end
     end
 
     @[GObject::Virtual]

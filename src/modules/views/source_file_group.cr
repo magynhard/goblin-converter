@@ -11,7 +11,7 @@ module GoblinApp
 
       button_box = Gtk::Box.new(:horizontal, 0)
       button_box.append(source_button)
-      button_box.append(folder_menu_button("app.open-source-folder", "open-source-folder") do
+      button_box.append(folder_menu_button("win.open-source-folder", "open-source-folder") do
         open_containing_folder(@form_data.source_path)
       end)
 
@@ -33,13 +33,7 @@ module GoblinApp
       drop_target = Gtk::DropTarget.new(Gdk::FileList.g_type, Gdk::DragAction::Copy)
       drop_target.drop_signal.connect do |value, x, y|
         if path = dropped_file_path(value)
-          @form_data = @form_data.copy_with(source_path: path)
-          @source_file_row.not_nil!.subtitle = path
-          GoblinApp.log("Source changed (drag & drop): #{path}")
-          auto_target = GoblinApp.auto_target_path(path)
-          @form_data = @form_data.copy_with(target_path: auto_target)
-          @output_entry_row.not_nil!.subtitle = auto_target
-          GoblinApp.log("Target auto-set: #{auto_target}")
+          set_source_file(path, "drag & drop")
           true
         else
           GoblinApp.log("Drop ignored: no local file")
@@ -55,14 +49,17 @@ module GoblinApp
 
     private def on_source_row_clicked
       OpenFileDialog.show(@window, GoblinApp.translate("Select Source File"), Gtk::FileChooserAction::Open, @form_data.source_path) do |file|
-        @form_data = @form_data.copy_with(source_path: file)
-        @source_file_row.not_nil!.subtitle = file
-        GoblinApp.log("Source changed (file dialog): #{file}")
-        auto_target = GoblinApp.auto_target_path(file)
-        @form_data = @form_data.copy_with(target_path: auto_target)
-        @output_entry_row.not_nil!.subtitle = auto_target
-        GoblinApp.log("Target auto-set: #{auto_target}")
+        set_source_file(file, "file dialog")
       end
+    end
+
+    private def set_source_file(path : String, origin : String) : Nil
+      target = GoblinApp.auto_target_path(path)
+      @form_data = @form_data.copy_with(source_path: path, target_path: target)
+      @source_file_row.not_nil!.subtitle = path
+      @output_entry_row.not_nil!.subtitle = target
+      GoblinApp.log("Source changed (#{origin}): #{path}")
+      GoblinApp.log("Target auto-set: #{target}")
     end
 
     # "..." menu button with an "Open folder" entry calling the block.
@@ -86,7 +83,7 @@ module GoblinApp
       action.activate_signal.connect do
         callback.call
       end
-      @app.add_action(action)
+      @window.add_action(action)
 
       menu_button
     end

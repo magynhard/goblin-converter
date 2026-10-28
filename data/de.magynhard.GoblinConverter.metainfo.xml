@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
-  <id>de.magynhard.GoblinConverter.desktop</id>
+<component type="desktop-application">
+  <id>de.magynhard.GoblinConverter</id>
 
   <name>Goblin Converter</name>
   <summary>Simple document converter</summary>
@@ -8,20 +8,24 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
 
-  <url type="homepage">https://github.com/magynhard/goblin-converter</url>
-  <url type="bugtracker">https://github.com/magynhard/goblin-converter/issues/</url>
-  <url type="vcs-browser">https://github.com/magynhard/goblin-converter/</url>
+  <url type="homepage">https://github.com/magynhard/goblin-converter.cr</url>
+  <url type="bugtracker">https://github.com/magynhard/goblin-converter.cr/issues/</url>
+  <url type="vcs-browser">https://github.com/magynhard/goblin-converter.cr/</url>
 
   <developer id="de.magynhard">
     <name translatable="no">Matthäus J. N. Beyrle</name>
   </developer>
   <update_contact>goblin-converter.github.com@mail.magynhard.de</update_contact>
 
-  <translation type="gettext">goblin-converter</translation>
+  <translation type="gettext">de.magynhard.GoblinConverter</translation>
   <launchable type="desktop-id">de.magynhard.GoblinConverter.desktop</launchable>
 
   <categories>
     <category>Utility</category>
+    <category>Graphics</category>
+    <category>Office</category>
+    <category>Archiving</category>
+    <category>Compression</category>
   </categories>
 
   <requires>
@@ -34,14 +38,11 @@
     <control>touch</control>
   </recommends>
 
-  <content_rating type="oars-1.1">
-    <content_attribute id="social-chat">intense</content_attribute>
-    <content_attribute id="social-contacts">intense</content_attribute>
-  </content_rating>
+  <content_rating type="oars-1.1"/>
 
   <description>
     <p>
-      A simple document converter written in GTK4 and Ruby.
+      A simple document converter written in Crystal with GTK4 and libadwaita.
 
       It is based on ImageMagick and can convert between various document formats.
       It is designed to be simple and easy to use to convert documents for digital storage or sharing.
@@ -49,7 +50,7 @@
   </description>
 
   <releases>
-    <release version="0.1" date="2025-01-07">
+    <release version="0.0.1" date="2026-10-28">
       <description>
         <p>Initial beta release with basic features.</p>
       </description>
@@ -60,7 +61,8 @@
 
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/magynhard/goblin-converter/refs/heads/master/data/screenshots/01-goblin-converter-main.jpg</image>
+      <caption>Document conversion options</caption>
+      <image type="source">https://raw.githubusercontent.com/magynhard/goblin-converter.cr/refs/heads/master/data/screenshots/01-goblin-converter-main.jpg</image>
     </screenshot>
   </screenshots>
 </component>
