@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-02 12:16+0200\n"
+"POT-Creation-Date: 2026-10-28 23:21+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,43 +17,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/modules/views/main_window.cr:99
+#: src/modules/views/main_window.cr:100
 msgid "A simple document converter"
 msgstr "Un convertisseur de documents simple"
 
-#: src/modules/views/main_window.cr:116
+#: src/modules/views/main_window.cr:117
 msgid "About"
 msgstr "À propos"
 
-#: src/modules/views/conversion_mode_group.cr:12
+#: src/modules/views/conversion_mode_group.cr:11
 msgid "Conversion"
 msgstr "Conversion"
 
-#: src/modules/views/conversion_mode_group.cr:16
+#: src/modules/views/conversion_mode_group.cr:15
 msgid "Mode"
 msgstr "Mode"
 
-#: src/modules/views/conversion_mode_group.cr:20
+#: src/modules/views/conversion_mode_group.cr:19
 msgid "Monochrome"
 msgstr "Monochrome"
 
-#: src/modules/views/conversion_mode_group.cr:21
+#: src/modules/views/conversion_mode_group.cr:20
 msgid "Grayscale"
 msgstr "Niveaux de gris"
 
-#: src/modules/views/conversion_mode_group.cr:22
-msgid "Grayscale Quality"
-msgstr "Niveaux de gris (qualité)"
-
-#: src/modules/views/conversion_mode_group.cr:23
+#: src/modules/views/conversion_mode_group.cr:21
 msgid "Color"
 msgstr "Couleur"
 
-#: src/modules/views/conversion_mode_group.cr:34
+#: src/modules/views/conversion_mode_group.cr:29
 msgid "Threshold"
 msgstr "Seuil"
 
-#: src/modules/views/conversion_mode_group.cr:35
+#: src/modules/views/conversion_mode_group.cr:30
 msgid ""
 "Decrease for more black.\n"
 "66 is a good fit for colored docs.\n"
@@ -65,27 +61,27 @@ msgstr ""
 "Pour les documents en niveaux de gris, 50-60 est\n"
 "souvent un bon choix."
 
-#: src/modules/views/conversion_mode_group.cr:44
+#: src/modules/views/conversion_mode_group.cr:39
 msgid "Resolution"
 msgstr "Résolution"
 
-#: src/modules/views/conversion_mode_group.cr:45
+#: src/modules/views/conversion_mode_group.cr:40
 msgid "Density of the resolution in dpi for your output"
 msgstr "Densité de la résolution en ppp pour votre sortie"
 
-#: src/modules/views/conversion_mode_group.cr:54
+#: src/modules/views/conversion_mode_group.cr:49
 msgid "Quality"
 msgstr "Qualité"
 
-#: src/modules/views/conversion_mode_group.cr:55
+#: src/modules/views/conversion_mode_group.cr:50
 msgid "Lossy compression quality"
 msgstr "Qualité de compression avec pertes"
 
-#: src/modules/views/conversion_mode_group.cr:64
+#: src/modules/views/conversion_mode_group.cr:70
 msgid "Strip metadata"
 msgstr "Supprimer les métadonnées"
 
-#: src/modules/views/conversion_mode_group.cr:65
+#: src/modules/views/conversion_mode_group.cr:71
 msgid "Remove metadata like EXIF, IPTC, XMP, and ICC profiles from output file"
 msgstr ""
 "Supprime les métadonnées comme EXIF, IPTC, XMP et les profils ICC du fichier "
@@ -96,19 +92,19 @@ msgid "Source"
 msgstr "Source"
 
 #: src/modules/views/source_file_group.cr:19
-#: src/modules/views/source_file_group.cr:57
+#: src/modules/views/source_file_group.cr:51
 msgid "Select Source File"
 msgstr "Sélectionner le fichier source"
 
-#: src/modules/views/source_file_group.cr:81
+#: src/modules/views/source_file_group.cr:79
 msgid "Open folder"
 msgstr "Ouvrir le dossier"
 
-#: src/modules/views/source_file_group.cr:97
+#: src/modules/views/source_file_group.cr:95
 msgid "Please select a file first."
 msgstr "Veuillez d'abord sélectionner un fichier."
 
-#: src/modules/views/source_file_group.cr:107
+#: src/modules/views/source_file_group.cr:105
 msgid "Could not open folder."
 msgstr "Impossible d'ouvrir le dossier."
 
@@ -142,13 +138,13 @@ msgstr "Convertir"
 msgid "Please select both source and output files."
 msgstr "Veuillez sélectionner à la fois les fichiers source et de sortie."
 
-#: src/modules/views/convert_button_group.cr:99
-#: src/modules/views/convert_button_group.cr:109
-#: src/modules/views/convert_button_group.cr:149
+#: src/modules/views/convert_button_group.cr:86
+#: src/modules/views/convert_button_group.cr:111
+#: src/modules/views/convert_button_group.cr:152
 msgid "An error occurred while conversion!"
 msgstr "Une erreur est survenue pendant la conversion !"
 
-#: src/modules/views/convert_button_group.cr:144
+#: src/modules/views/convert_button_group.cr:147
 msgid "Conversion Complete!"
 msgstr "Conversion terminée !"
 

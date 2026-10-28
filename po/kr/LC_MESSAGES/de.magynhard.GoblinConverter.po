@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-02 12:16+0200\n"
+"POT-Creation-Date: 2026-10-28 23:21+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,43 +17,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/modules/views/main_window.cr:99
+#: src/modules/views/main_window.cr:100
 msgid "A simple document converter"
 msgstr "간단한 문서 변환기"
 
-#: src/modules/views/main_window.cr:116
+#: src/modules/views/main_window.cr:117
 msgid "About"
 msgstr "정보"
 
-#: src/modules/views/conversion_mode_group.cr:12
+#: src/modules/views/conversion_mode_group.cr:11
 msgid "Conversion"
 msgstr "변환"
 
-#: src/modules/views/conversion_mode_group.cr:16
+#: src/modules/views/conversion_mode_group.cr:15
 msgid "Mode"
 msgstr "모드"
 
-#: src/modules/views/conversion_mode_group.cr:20
+#: src/modules/views/conversion_mode_group.cr:19
 msgid "Monochrome"
 msgstr "모노크롬"
 
-#: src/modules/views/conversion_mode_group.cr:21
+#: src/modules/views/conversion_mode_group.cr:20
 msgid "Grayscale"
 msgstr "그레이스케일"
 
-#: src/modules/views/conversion_mode_group.cr:22
-msgid "Grayscale Quality"
-msgstr "그레이스케일(품질)"
-
-#: src/modules/views/conversion_mode_group.cr:23
+#: src/modules/views/conversion_mode_group.cr:21
 msgid "Color"
 msgstr "컬러"
 
-#: src/modules/views/conversion_mode_group.cr:34
+#: src/modules/views/conversion_mode_group.cr:29
 msgid "Threshold"
 msgstr "임계값"
 
-#: src/modules/views/conversion_mode_group.cr:35
+#: src/modules/views/conversion_mode_group.cr:30
 msgid ""
 "Decrease for more black.\n"
 "66 is a good fit for colored docs.\n"
@@ -65,27 +61,27 @@ msgstr ""
 "그레이스케일 문서에는 50-60이\n"
 "적합한 경우가 많습니다."
 
-#: src/modules/views/conversion_mode_group.cr:44
+#: src/modules/views/conversion_mode_group.cr:39
 msgid "Resolution"
 msgstr "해상도"
 
-#: src/modules/views/conversion_mode_group.cr:45
+#: src/modules/views/conversion_mode_group.cr:40
 msgid "Density of the resolution in dpi for your output"
 msgstr "출력물의 해상도 밀도(dpi)"
 
-#: src/modules/views/conversion_mode_group.cr:54
+#: src/modules/views/conversion_mode_group.cr:49
 msgid "Quality"
 msgstr "품질"
 
-#: src/modules/views/conversion_mode_group.cr:55
+#: src/modules/views/conversion_mode_group.cr:50
 msgid "Lossy compression quality"
 msgstr "손실 압축 품질"
 
-#: src/modules/views/conversion_mode_group.cr:64
+#: src/modules/views/conversion_mode_group.cr:70
 msgid "Strip metadata"
 msgstr "메타데이터 제거"
 
-#: src/modules/views/conversion_mode_group.cr:65
+#: src/modules/views/conversion_mode_group.cr:71
 msgid "Remove metadata like EXIF, IPTC, XMP, and ICC profiles from output file"
 msgstr ""
 "출력 파일에서 EXIF, IPTC, XMP, ICC 프로파일 등의 메타데이터를 제거합니다"
@@ -95,19 +91,19 @@ msgid "Source"
 msgstr "소스"
 
 #: src/modules/views/source_file_group.cr:19
-#: src/modules/views/source_file_group.cr:57
+#: src/modules/views/source_file_group.cr:51
 msgid "Select Source File"
 msgstr "소스 파일 선택"
 
-#: src/modules/views/source_file_group.cr:81
+#: src/modules/views/source_file_group.cr:79
 msgid "Open folder"
 msgstr "폴더 열기"
 
-#: src/modules/views/source_file_group.cr:97
+#: src/modules/views/source_file_group.cr:95
 msgid "Please select a file first."
 msgstr "먼저 파일을 선택하십시오."
 
-#: src/modules/views/source_file_group.cr:107
+#: src/modules/views/source_file_group.cr:105
 msgid "Could not open folder."
 msgstr "폴더를 열 수 없습니다."
 
@@ -141,13 +137,13 @@ msgstr "변환"
 msgid "Please select both source and output files."
 msgstr "소스 파일과 출력 파일을 모두 선택하십시오."
 
-#: src/modules/views/convert_button_group.cr:99
-#: src/modules/views/convert_button_group.cr:109
-#: src/modules/views/convert_button_group.cr:149
+#: src/modules/views/convert_button_group.cr:86
+#: src/modules/views/convert_button_group.cr:111
+#: src/modules/views/convert_button_group.cr:152
 msgid "An error occurred while conversion!"
 msgstr "변환 중 오류가 발생했습니다."
 
-#: src/modules/views/convert_button_group.cr:144
+#: src/modules/views/convert_button_group.cr:147
 msgid "Conversion Complete!"
 msgstr "변환 완료!"
 

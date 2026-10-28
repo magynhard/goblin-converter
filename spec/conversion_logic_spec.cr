@@ -1,6 +1,32 @@
 require "./spec_helper"
 
 describe GoblinApp do
+  describe ".mode_defaults" do
+    it "preserves the original monochrome defaults" do
+      options = GoblinApp.mode_defaults("monochrome")
+      options.mode.should eq "monochrome"
+      options.resolution.should eq 300
+      options.quality.should eq 75
+      options.threshold.should eq 66
+    end
+
+    it "uses 140 dpi and quality 50 for color" do
+      options = GoblinApp.mode_defaults("color")
+      options.mode.should eq "color"
+      options.resolution.should eq 140
+      options.quality.should eq 50
+      options.threshold.should eq 66
+    end
+
+    it "uses 170 dpi and quality 40 for grayscale" do
+      options = GoblinApp.mode_defaults("grayscale")
+      options.mode.should eq "grayscale"
+      options.resolution.should eq 170
+      options.quality.should eq 40
+      options.threshold.should eq 66
+    end
+  end
+
   describe ".auto_target_path" do
     it "inserts _converted before the extension" do
       GoblinApp.auto_target_path("/tmp/doc.pdf").should eq "/tmp/doc_converted.pdf"
@@ -23,20 +49,29 @@ describe GoblinApp do
       ]
     end
 
-    it "builds grayscale argv without threshold" do
-      options = GoblinApp::ConversionOptions.new.copy_with(mode: "grayscale")
+    it "builds grayscale argv using its default density and JPEG quality" do
+      options = GoblinApp.mode_defaults("grayscale")
       GoblinApp.magick_args("/tmp/a.pdf", "/tmp/b.pdf", options).should eq [
-        "magick", "-density", "300", "/tmp/a.pdf",
-        "-colorspace", "Gray", "-compress", "Zip",
+        "magick", "-density", "170", "/tmp/a.pdf",
+        "-colorspace", "Gray", "-compress", "JPEG", "-quality", "40",
         "-strip", "/tmp/b.pdf",
       ]
     end
 
-    it "builds grayscale-quality argv with quality" do
-      options = GoblinApp::ConversionOptions.new.copy_with(mode: "grayscale_quality", quality: 90)
+    it "honors custom grayscale quality and resolution" do
+      options = GoblinApp.mode_defaults("grayscale").copy_with(quality: 90, resolution: 200)
       GoblinApp.magick_args("/tmp/a.pdf", "/tmp/b.pdf", options).should eq [
-        "magick", "-density", "300", "/tmp/a.pdf",
+        "magick", "-density", "200", "/tmp/a.pdf",
         "-colorspace", "Gray", "-compress", "JPEG", "-quality", "90",
+        "-strip", "/tmp/b.pdf",
+      ]
+    end
+
+    it "builds color argv using its default density and JPEG quality" do
+      options = GoblinApp.mode_defaults("color")
+      GoblinApp.magick_args("/tmp/a.pdf", "/tmp/b.pdf", options).should eq [
+        "magick", "-density", "140", "/tmp/a.pdf",
+        "-compress", "JPEG", "-quality", "50",
         "-strip", "/tmp/b.pdf",
       ]
     end

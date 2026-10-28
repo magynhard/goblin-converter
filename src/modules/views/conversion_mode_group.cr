@@ -1,10 +1,9 @@
 module GoblinApp
   class MainWindow
     CONVERSION_MODES = {
-      "Monochrome"        => "monochrome",
-      "Grayscale"         => "grayscale",
-      "Grayscale Quality" => "grayscale_quality",
-      "Color"             => "color",
+      "Monochrome" => "monochrome",
+      "Grayscale"  => "grayscale",
+      "Color"      => "color",
     }
 
     private def create_conversion_mode_group(box)
@@ -19,45 +18,52 @@ module GoblinApp
       mode_names = [
         GoblinApp.translate("Monochrome"),
         GoblinApp.translate("Grayscale"),
-        GoblinApp.translate("Grayscale Quality"),
         GoblinApp.translate("Color"),
       ]
       mode_row.model = Gtk::StringList.new(mode_names)
       mode_row.selected = 0
-      mode_row.notify_signal.connect do
-        @form_data = @form_data.copy_with(options: @form_data.options.copy_with(mode: CONVERSION_MODES.values[mode_row.selected]))
-      end
       group.add(mode_row)
 
       # Threshold
-      threshold_row = create_scale_row(
+      threshold_row, threshold_scale = create_scale_row(
         title: GoblinApp.translate("Threshold"),
         subtitle: GoblinApp.translate("Decrease for more black.\n66 is a good fit for colored docs.\nFor grayscaled documents 50-60 is\noften a good choice."),
-        min: 1.0, max: 100.0, step: 1.0, default: 66.0
+        min: 1.0, max: 100.0, step: 1.0, default: @form_data.options.threshold.to_f
       ) do |value|
         @form_data = @form_data.copy_with(options: @form_data.options.copy_with(threshold: value.to_i))
       end
       group.add(threshold_row)
 
       # Resolution
-      resolution_row = create_scale_row(
+      resolution_row, resolution_scale = create_scale_row(
         title: GoblinApp.translate("Resolution"),
         subtitle: GoblinApp.translate("Density of the resolution in dpi for your output"),
-        min: 50.0, max: 500.0, step: 10.0, default: 300.0
+        min: 50.0, max: 500.0, step: 10.0, default: @form_data.options.resolution.to_f
       ) do |value|
         @form_data = @form_data.copy_with(options: @form_data.options.copy_with(resolution: value.to_i))
       end
       group.add(resolution_row)
 
       # Quality
-      quality_row = create_scale_row(
+      quality_row, quality_scale = create_scale_row(
         title: GoblinApp.translate("Quality"),
         subtitle: GoblinApp.translate("Lossy compression quality"),
-        min: 1.0, max: 100.0, step: 1.0, default: 75.0
+        min: 1.0, max: 100.0, step: 1.0, default: @form_data.options.quality.to_f
       ) do |value|
         @form_data = @form_data.copy_with(options: @form_data.options.copy_with(quality: value.to_i))
       end
       group.add(quality_row)
+
+      mode_row.notify_signal.connect do |property|
+        if property.name == "selected"
+          mode = CONVERSION_MODES.values[mode_row.selected]
+          options = GoblinApp.mode_defaults(mode).copy_with(strip_metadata: @form_data.options.strip_metadata)
+          @form_data = @form_data.copy_with(options: options)
+          threshold_scale.value = options.threshold.to_f
+          resolution_scale.value = options.resolution.to_f
+          quality_scale.value = options.quality.to_f
+        end
+      end
 
       # Strip metadata
       strip_row = Adw::ActionRow.new
@@ -81,7 +87,7 @@ module GoblinApp
       box.append(group)
     end
 
-    private def create_scale_row(title, subtitle, min, max, step, default, &block : Float64 ->) : Adw::ActionRow
+    private def create_scale_row(title, subtitle, min, max, step, default, &block : Float64 ->) : Tuple(Adw::ActionRow, Gtk::Scale)
       row = Adw::ActionRow.new
 
       label_box = Gtk::Box.new(:vertical, 5)
@@ -121,7 +127,7 @@ module GoblinApp
       end
 
       row.add_suffix(scale)
-      row
+      {row, scale}
     end
   end
 end

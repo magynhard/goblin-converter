@@ -6,7 +6,7 @@ SHAREDIR = $(PREFIX)/share
 APPDIR = $(SHAREDIR)/goblin-converter
 LOCALEDIR = $(SHAREDIR)/locale
 
-.PHONY: build run install uninstall locales clean test appimage flatpak validate-metadata test-packaging test-file-opening
+.PHONY: build run install uninstall locales clean test appimage flatpak validate-metadata test-packaging test-file-opening test-conversion-modes
 
 build:
 	mkdir -p bin
@@ -83,3 +83,6 @@ test-packaging:
 
 test-file-opening: build
 	dbus-run-session -- xvfb-run -a python3 tests/file_opening.py bin/goblin-converter
+
+test-conversion-modes:
+	dbus-run-session -- xvfb-run -a env GDK_BACKEND=x11 GSK_RENDERER=cairo crystal run tests/conversion_modes.cr

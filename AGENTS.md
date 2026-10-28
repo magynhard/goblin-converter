@@ -17,6 +17,7 @@ Repo language is English — keep code, comments, docs, and commit messages in E
 - Uninstall / clean: `make uninstall` / `make clean`
 - Tests: headless specs via `make test` (= `crystal spec`; note: there is no `crystal test` command). GUI code is untestable headless — keep new logic in pure `GoblinApp.*` helpers in `src/modules/functions/conversion_logic.cr` and cover them in `spec/`. Specs must never instantiate GTK widgets.
 - File-opening integration: `make test-file-opening` uses a private D-Bus session and Xvfb. Covers multiple paths, escaped `file://` URIs, and forwarding from another working directory to an existing instance. Requires Python 3, gdbus, dbus-run-session, xvfb-run and xauth.
+- Mode-switching integration: `make test-conversion-modes` checks actual GTK sliders and form state under Xvfb. Mode presets live in `GoblinApp.mode_defaults`: monochrome 300 dpi/75, grayscale 170 dpi/40, color 140 dpi/50; threshold 66 for all. Grayscale/color use JPEG compression. Switching modes reapplies presets while preserving strip-metadata.
 
 ## Deps
 - Crystal 1.21+ (gi-crystal 0.26.0 in shard.lock needs `Fiber::ExecutionContext`; the `>= 1.10` bound in shard.yml is stale).

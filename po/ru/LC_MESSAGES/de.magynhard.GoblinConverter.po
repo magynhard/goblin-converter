@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-02 12:16+0200\n"
+"POT-Creation-Date: 2026-10-28 23:21+0100\n"
 "PO-Revision-Date: 2025-01-09 21:31+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,43 +18,39 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/modules/views/main_window.cr:99
+#: src/modules/views/main_window.cr:100
 msgid "A simple document converter"
 msgstr "Простой конвертер документов"
 
-#: src/modules/views/main_window.cr:116
+#: src/modules/views/main_window.cr:117
 msgid "About"
 msgstr "О программе"
 
-#: src/modules/views/conversion_mode_group.cr:12
+#: src/modules/views/conversion_mode_group.cr:11
 msgid "Conversion"
 msgstr "Конвертация"
 
-#: src/modules/views/conversion_mode_group.cr:16
+#: src/modules/views/conversion_mode_group.cr:15
 msgid "Mode"
 msgstr "Режим"
 
-#: src/modules/views/conversion_mode_group.cr:20
+#: src/modules/views/conversion_mode_group.cr:19
 msgid "Monochrome"
 msgstr "Монохромный"
 
-#: src/modules/views/conversion_mode_group.cr:21
+#: src/modules/views/conversion_mode_group.cr:20
 msgid "Grayscale"
 msgstr "Оттенки серого"
 
-#: src/modules/views/conversion_mode_group.cr:22
-msgid "Grayscale Quality"
-msgstr "Оттенки серого (качество)"
-
-#: src/modules/views/conversion_mode_group.cr:23
+#: src/modules/views/conversion_mode_group.cr:21
 msgid "Color"
 msgstr "Цветной"
 
-#: src/modules/views/conversion_mode_group.cr:34
+#: src/modules/views/conversion_mode_group.cr:29
 msgid "Threshold"
 msgstr "Порог"
 
-#: src/modules/views/conversion_mode_group.cr:35
+#: src/modules/views/conversion_mode_group.cr:30
 msgid ""
 "Decrease for more black.\n"
 "66 is a good fit for colored docs.\n"
@@ -66,27 +62,27 @@ msgstr ""
 "Для документов в градациях серого часто\n"
 "подходит значение 50-60."
 
-#: src/modules/views/conversion_mode_group.cr:44
+#: src/modules/views/conversion_mode_group.cr:39
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: src/modules/views/conversion_mode_group.cr:45
+#: src/modules/views/conversion_mode_group.cr:40
 msgid "Density of the resolution in dpi for your output"
 msgstr "Плотность разрешения в dpi для выходного файла"
 
-#: src/modules/views/conversion_mode_group.cr:54
+#: src/modules/views/conversion_mode_group.cr:49
 msgid "Quality"
 msgstr "Качество"
 
-#: src/modules/views/conversion_mode_group.cr:55
+#: src/modules/views/conversion_mode_group.cr:50
 msgid "Lossy compression quality"
 msgstr "Качество сжатия с потерями"
 
-#: src/modules/views/conversion_mode_group.cr:64
+#: src/modules/views/conversion_mode_group.cr:70
 msgid "Strip metadata"
 msgstr "Удалять метаданные"
 
-#: src/modules/views/conversion_mode_group.cr:65
+#: src/modules/views/conversion_mode_group.cr:71
 msgid "Remove metadata like EXIF, IPTC, XMP, and ICC profiles from output file"
 msgstr ""
 "Удаляет метаданные, такие как EXIF, IPTC, XMP и ICC-профили, из выходного "
@@ -97,19 +93,19 @@ msgid "Source"
 msgstr "Источник"
 
 #: src/modules/views/source_file_group.cr:19
-#: src/modules/views/source_file_group.cr:57
+#: src/modules/views/source_file_group.cr:51
 msgid "Select Source File"
 msgstr "Выберите исходный файл"
 
-#: src/modules/views/source_file_group.cr:81
+#: src/modules/views/source_file_group.cr:79
 msgid "Open folder"
 msgstr "Открыть папку"
 
-#: src/modules/views/source_file_group.cr:97
+#: src/modules/views/source_file_group.cr:95
 msgid "Please select a file first."
 msgstr "Сначала выберите файл."
 
-#: src/modules/views/source_file_group.cr:107
+#: src/modules/views/source_file_group.cr:105
 msgid "Could not open folder."
 msgstr "Не удалось открыть папку."
 
@@ -143,13 +139,13 @@ msgstr "Конвертировать"
 msgid "Please select both source and output files."
 msgstr "Пожалуйста, выберите оба файла: исходный и выходной."
 
-#: src/modules/views/convert_button_group.cr:99
-#: src/modules/views/convert_button_group.cr:109
-#: src/modules/views/convert_button_group.cr:149
+#: src/modules/views/convert_button_group.cr:86
+#: src/modules/views/convert_button_group.cr:111
+#: src/modules/views/convert_button_group.cr:152
 msgid "An error occurred while conversion!"
 msgstr "Во время конвертации произошла ошибка!"
 
-#: src/modules/views/convert_button_group.cr:144
+#: src/modules/views/convert_button_group.cr:147
 msgid "Conversion Complete!"
 msgstr "Конвертация завершена!"
 

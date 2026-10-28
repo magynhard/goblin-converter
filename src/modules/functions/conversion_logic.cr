@@ -2,6 +2,18 @@ module GoblinApp
   # Pure conversion logic (no GTK widgets involved), covered by specs in spec/.
   # Keep every method free of UI calls so tests run headless.
 
+  # Apply these presets when selecting a mode, not when adjusting its sliders.
+  def self.mode_defaults(mode : String) : ConversionOptions
+    case mode
+    when "color"
+      ConversionOptions.new(mode: mode, resolution: 140, quality: 50)
+    when "grayscale"
+      ConversionOptions.new(mode: mode, resolution: 170, quality: 40)
+    else
+      ConversionOptions.new
+    end
+  end
+
   # Derives the default target path by inserting "_converted" before
   # the file extension. Returns the input unchanged without extension.
   def self.auto_target_path(source : String) : String
@@ -14,8 +26,6 @@ module GoblinApp
                 when "monochrome"
                   ["-threshold", "#{options.threshold}%", "-monochrome", "-compress", "Fax"]
                 when "grayscale"
-                  ["-colorspace", "Gray", "-compress", "Zip"]
-                when "grayscale_quality"
                   ["-colorspace", "Gray", "-compress", "JPEG", "-quality", options.quality.to_s]
                 when "color"
                   ["-compress", "JPEG", "-quality", options.quality.to_s]
