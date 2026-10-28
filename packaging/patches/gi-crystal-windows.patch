@@ -1,0 +1,46 @@
+--- a/src/generator/lib_gen.cr
++++ b/src/generator/lib_gen.cr
+@@ -9 +9 @@
+-        library[/lib([^\/]+)(?:\.so|-.+?\.dll|\..+?\.dylib).*/, 1]
++        library[/(?:lib)?([^\/]+)(?:\.so|-.+?\.dll|\..+?\.dylib).*/, 1]
+--- a/src/generator/helpers.cr
++++ b/src/generator/helpers.cr
+@@ -1,1 +1,17 @@
+ module Generator::Helpers
++  # Some Windows typelibs report signed storage for unsigned flag values.
++  def enum_base_type(info : EnumInfo) : String
++    if info.storage_type.int32? && info.values.any? { |value| value.value > Int32::MAX }
++      "UInt32"
++    else
++      to_crystal_type(info.storage_type)
++    end
++  end
++
++  # Opaque structs cannot be embedded by value in a Crystal lib struct.
++  def opaque_struct_value?(type : TypeInfo) : Bool
++    return false if type.pointer? || !type.tag.interface?
++    iface = type.interface
++    iface.is_a?(StructInfo) && iface.bytesize.zero?
++  end
++
+--- a/ecr/module.ecr
++++ b/ecr/module.ecr
+@@ -43 +43 @@
+-    enum <%= to_type_name(enum_.name) %> : <%= to_crystal_type(enum_.storage_type) %>
++    enum <%= to_type_name(enum_.name) %> : <%= enum_base_type(enum_) %>
+@@ -58 +58 @@
+-    enum <%= to_type_name(flag.name) %> : <%= to_crystal_type(flag.storage_type) %>
++    enum <%= to_type_name(flag.name) %> : <%= enum_base_type(flag) %>
+--- a/ecr/lib_field.ecr
++++ b/ecr/lib_field.ecr
+@@ -1 +1,5 @@
++<% if opaque_struct_value?(field.type_info) -%>
++<% Log.warn { "Skipping opaque by-value field #{field.name}" } -%>
++<% else -%>
+ <%= to_identifier(field.name) %> : <%= to_lib_type(field.type_info) %>
++<% end -%>
+--- a/src/generator/struct_gen.cr
++++ b/src/generator/struct_gen.cr
+@@ -94 +94 @@
+-      config.type_config(@struct.name).ignore_field?(field.name)
++      config.type_config(@struct.name).ignore_field?(field.name) || opaque_struct_value?(field.type_info)

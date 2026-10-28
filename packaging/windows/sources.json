@@ -1,0 +1,18 @@
+{
+  "crystal": {
+    "url": "https://github.com/crystal-lang/crystal/releases/download/1.21.1/crystal-1.21.1-windows-x86_64-msvc-unsupported.zip",
+    "sha256": "696db553299ca120100c0d81682e2aa78d6d230a1e176623e8f2b43d7149163d"
+  },
+  "gtk": {
+    "url": "https://github.com/wingtk/gvsbuild/releases/download/2026.8.0/GTK4_Gvsbuild_2026.8.0_x64.zip",
+    "sha256": "1f95a92d037f5292da05e6ab1037032ff21ddb7b20d4ac8e83e3674c864c07b0"
+  },
+  "imagemagick": {
+    "url": "https://github.com/ImageMagick/ImageMagick/releases/download/7.1.2-34/ImageMagick-7.1.2-34-portable-Q16-x64.7z",
+    "sha256": "52cc6a441c7884f5ff4274b410c9b90c4b7d54245dcdf4d32988bb4e4df4e5d1"
+  },
+  "ghostscript": {
+    "url": "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10080/gs10080w64.exe",
+    "sha256": "52a91b8bf09298788d7a57b9206127026c23eacd75405f0a131e26dc381dce50"
+  }
+}

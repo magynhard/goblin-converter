@@ -11,6 +11,21 @@ require "gettext"
 module GoblinApp
   VERSION = {{read_file("./shard.yml").split("version: ")[1].split("\n")[0]}}
 
+  {% if flag?(:win32) %}
+    # The Windows installer keeps conversion tools private to this application.
+    # Resolve paths from the executable so shortcuts and file arguments work
+    # independently of the working directory, without changing the system PATH.
+    package_root = File.expand_path("..", File.dirname(Process.executable_path || PROGRAM_NAME))
+    magick_dir = File.join(package_root, "tools", "imagemagick")
+    if File.file?(File.join(magick_dir, "magick.exe"))
+      gs_dir = File.join(package_root, "tools", "ghostscript", "bin")
+      ENV["PATH"] = [magick_dir, gs_dir, ENV["PATH"]?].compact.join(';')
+      ENV["MAGICK_GHOSTSCRIPT_PATH"] = gs_dir
+      ENV["XDG_DATA_DIRS"] = File.join(package_root, "share")
+      ENV["GSETTINGS_SCHEMA_DIR"] = File.join(package_root, "share", "glib-2.0", "schemas")
+    end
+  {% end %}
+
   # Initialize gettext for i18n
   installed_locales = File.expand_path("../share/locale", File.dirname(Process.executable_path || PROGRAM_NAME))
   locale_dir = ENV["GOBLIN_LOCALE_DIR"]? || (Dir.exists?(installed_locales) ? installed_locales : File.expand_path("../../po", __DIR__))

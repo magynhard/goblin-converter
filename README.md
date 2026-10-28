@@ -19,8 +19,20 @@ E.g. a PDF document with 300ppi and about 3-4MB in grayscale can be reduced to a
 ![Goblin Converter with conversion settings and source and target file selection](data/screenshots/01-goblin-converter-main.png)
 
 # Setup
-Build AppImage or local Flatpak bundles, or install from source. The GitHub
+Download the Windows setup, build AppImage or local Flatpak bundles, or install from source. The GitHub
 Actions workflow attaches packages to newly published [GitHub Releases](https://github.com/magynhard/goblin-converter/releases).
+
+## Windows
+
+Download `Goblin_Converter-<version>-windows-x86_64-setup.exe` from
+[GitHub Releases](https://github.com/magynhard/goblin-converter/releases) and run it.
+The setup installs for the current user without administrator privileges and adds
+a Start menu shortcut. A desktop shortcut is optional. GTK, ImageMagick and
+Ghostscript are included; no development tools or separate runtime installations
+are needed. Remove it through Windows **Installed apps**.
+
+See [Windows packaging](doc/windows-packaging.md) for local builds, CI smoke tests
+and release details. Windows packages target x64 Windows 10/11.
 
 ## Flatpak
 ```bash
@@ -116,7 +128,8 @@ Target platforms are Linux (primary) and Windows. macOS is not planned.
 * Ghostscript 10
 
 ### Windows (verified 2026-10-02, MSVC route)
-Build must run on a Windows machine (no cross-compile from Linux):
+Release binaries are built and tested on Windows. Crystal can emit Windows object
+code on Linux, but this does not perform the MSVC/Windows SDK/GTK linking step.
 
 1. Install: Crystal for Windows (MSVC, portable zip) + VS2022 Build Tools
    ("Desktop development with C++", MSVC v143 x64) + Windows 10 SDK.
@@ -177,5 +190,7 @@ git tag 0.X.X
 git push origin 0.X.X
 ```
 
-Publish the GitHub release for that tag to build and attach AppImage and Flatpak
-packages automatically. See [Linux packaging](doc/packaging.md#verification-and-releases).
+Publish the GitHub release for that tag to build and attach Windows setup,
+AppImage and Flatpak packages automatically. See
+[Linux packaging](doc/packaging.md#verification-and-releases) and
+[Windows packaging](doc/windows-packaging.md).

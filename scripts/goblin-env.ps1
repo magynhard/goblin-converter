@@ -32,6 +32,11 @@ $vcvarsCandidates = @(
   "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat",
   "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
 )
+$vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+if (Test-Path -LiteralPath $vswhere) {
+  $vsPath = & $vswhere -latest -version '[17.0,18.0)' -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+  if ($vsPath) { $vcvarsCandidates += "$vsPath\VC\Auxiliary\Build\vcvars64.bat" }
+}
 $vcvars = $vcvarsCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 if (-not $vcvars) { throw "vcvars64.bat not found. Install VS2022 Build Tools (MSVC v143) + Windows 10 SDK." }
 
@@ -69,6 +74,7 @@ if ($env:LIB -notlike "$GtkDir\lib*") { $env:LIB = "$GtkDir\lib;" + $env:LIB }
 $gtkIncludes = "$GtkDir\include;$GtkDir\include\cairo;$GtkDir\include\glib-2.0;$GtkDir\include\gobject-introspection-1.0;$GtkDir\lib\glib-2.0\include"
 if ($env:INCLUDE -notlike "$GtkDir\include*") { $env:INCLUDE = $gtkIncludes + ";" + $env:INCLUDE }
 $env:PKG_CONFIG_PATH = "$GtkDir\lib\pkgconfig;$GtkDir\share\pkgconfig"
+$env:GI_TYPELIB_PATH = "$GtkDir\lib\girepository-1.0"
 
 if ($ImageMagickDir -ne "" -and (Test-Path -LiteralPath "$ImageMagickDir\magick.exe")) {
   if (($env:PATH -split ';') -notcontains $ImageMagickDir) { $env:PATH = "$ImageMagickDir;" + $env:PATH }
