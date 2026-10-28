@@ -8,7 +8,7 @@ authors:
 description: |
   A simple document converter using GTK4/Adwaita and ImageMagick
 
-repository: https://github.com/magynhard/goblin-converter.cr
+repository: https://github.com/magynhard/goblin-converter
 
 dependencies:
   libadwaita:

@@ -1,4 +1,4 @@
-# Windows dev environment for goblin-converter.cr (MSVC + gvsbuild GTK stack).
+# Windows dev environment for goblin-converter (MSVC + gvsbuild GTK stack).
 #
 # Usage (PowerShell, per shell session):
 #   . .\scripts\goblin-env.ps1

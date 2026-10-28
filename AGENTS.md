@@ -1,4 +1,4 @@
-# AGENTS.md – goblin-converter.cr
+# AGENTS.md – goblin-converter
 
 Crystal + GTK4/Adwaita document converter. Conversion shells out to ImageMagick `magick` (+ Ghostscript for PDFs).
 

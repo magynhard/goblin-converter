@@ -134,8 +134,8 @@ module GoblinApp
         application_name: "Goblin Converter",
         application_icon: "de.magynhard.GoblinConverter",
         version: GoblinApp::VERSION,
-        website: "https://github.com/magynhard/goblin-converter.cr",
-        issue_url: "https://github.com/magynhard/goblin-converter.cr/issues",
+        website: "https://github.com/magynhard/goblin-converter",
+        issue_url: "https://github.com/magynhard/goblin-converter/issues",
         developers: ["Matthäus J. N. Beyrle <goblin-converter.github.com@mail.magynhard.de>"],
         license_type: Gtk::License::MitX11,
         copyright: "© 2024 Matthäus J. N. Beyrle"

@@ -8,9 +8,9 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
 
-  <url type="homepage">https://github.com/magynhard/goblin-converter.cr</url>
-  <url type="bugtracker">https://github.com/magynhard/goblin-converter.cr/issues/</url>
-  <url type="vcs-browser">https://github.com/magynhard/goblin-converter.cr/</url>
+  <url type="homepage">https://github.com/magynhard/goblin-converter</url>
+  <url type="bugtracker">https://github.com/magynhard/goblin-converter/issues/</url>
+  <url type="vcs-browser">https://github.com/magynhard/goblin-converter/</url>
 
   <developer id="de.magynhard">
     <name translatable="no">Matthäus J. N. Beyrle</name>
@@ -85,7 +85,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>Document conversion options</caption>
-      <image type="source">https://raw.githubusercontent.com/magynhard/goblin-converter.cr/refs/heads/master/data/screenshots/01-goblin-converter-main.jpg</image>
+      <image type="source">https://raw.githubusercontent.com/magynhard/goblin-converter/refs/heads/master/data/screenshots/01-goblin-converter-main.jpg</image>
     </screenshot>
   </screenshots>
 </component>

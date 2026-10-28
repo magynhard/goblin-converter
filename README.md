@@ -3,8 +3,8 @@
 </div>
 
 # Goblin Converter
-![GitHub Release](https://img.shields.io/github/v/release/magynhard/goblin-converter.cr?style=plastic&color=default&label=GitHub&logo=github)
-[![Linux packages](https://github.com/magynhard/goblin-converter.cr/actions/workflows/linux-packages.yml/badge.svg)](https://github.com/magynhard/goblin-converter.cr/actions/workflows/linux-packages.yml)
+![GitHub Release](https://img.shields.io/github/v/release/magynhard/goblin-converter?style=plastic&color=default&label=GitHub&logo=github)
+[![Linux packages](https://github.com/magynhard/goblin-converter/actions/workflows/linux-packages.yml/badge.svg)](https://github.com/magynhard/goblin-converter/actions/workflows/linux-packages.yml)
 [![Crystal](https://img.shields.io/badge/_-Crystal-Sub?style=plastic&color=gray&logo=crystal&logoColor=white)](#)
 [![GTK](https://img.shields.io/badge/_-GTK-Sub?style=plastic&color=gray&logo=gtk&logoColor=green)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=plastic&logo=mit)](LICENSE)
@@ -16,13 +16,11 @@ Initial use case was to convert 300ppi (PDF) documents (grayscale or colored) to
 
 E.g. a PDF document with 300ppi and about 3-4MB in grayscale can be reduced to about 40-75KB(!) in monochrome.
 
-```diff
-- Warning: This app is in early development and may not work as expected or at all due some refactorings.
-```
+![Goblin Converter with conversion settings and source and target file selection](data/screenshots/01-goblin-converter-main.png)
 
 # Setup
 Build AppImage or local Flatpak bundles, or install from source. The GitHub
-Actions workflow attaches packages to newly published [GitHub Releases](https://github.com/magynhard/goblin-converter.cr/releases).
+Actions workflow attaches packages to newly published [GitHub Releases](https://github.com/magynhard/goblin-converter/releases).
 
 ## Flatpak
 ```bash
@@ -67,14 +65,14 @@ sudo pacman -S base-devel crystal gtk4 libadwaita imagemagick
 
 #### Install
 ```
-git clone https://github.com/magynhard/goblin-converter.cr.git
-cd goblin-converter.cr
+git clone https://github.com/magynhard/goblin-converter.git
+cd goblin-converter
 shards install
 make install
 ```
 ### Uninstall
 ```
-cd goblin-converter.cr
+cd goblin-converter
 make uninstall
 ```
 
