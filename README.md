@@ -26,18 +26,18 @@ Actions workflow attaches packages to newly published [GitHub Releases](https://
 
 ## Flatpak
 ```bash
-flatpak install --user ./Goblin_Converter-0.1.0-x86_64.flatpak
+flatpak install --user ./Goblin_Converter-0.1.1-x86_64.flatpak
 flatpak run de.magynhard.GoblinConverter
 ```
 
 ## AppImage
 
 ```sh
-chmod +x Goblin_Converter-0.1.0-x86_64.AppImage
-./Goblin_Converter-0.1.0-x86_64.AppImage
+chmod +x Goblin_Converter-0.1.1-x86_64.AppImage
+./Goblin_Converter-0.1.1-x86_64.AppImage
 ```
 
-Replace `0.1.0` with the downloaded version. Both formats include ImageMagick and
+Replace `0.1.1` with the downloaded version. Both formats include ImageMagick and
 Ghostscript. AppImage requires Ubuntu 26.04/glibc 2.43 or newer; use Flatpak on
 older distributions. The Flatpak is a downloadable local bundle.
 
@@ -50,6 +50,7 @@ make flatpak   # GNOME SDK 51 build
 
 Packages and SHA-256 files are written to `dist/`. See [Linux packaging](doc/packaging.md)
 for prerequisites, verification and the GitHub Actions release workflow.
+See the [changelog](CHANGELOG.md) for release history.
 
 ## Local
 Ensure, Crystal is installed.
@@ -78,6 +79,21 @@ make uninstall
 ```
 
 # Development
+## Conversion modes
+
+Selecting a mode applies its defaults. Sliders remain adjustable afterward.
+
+| Mode | Resolution | Quality | Threshold |
+| --- | --- | --- | --- |
+| Monochrome | 300 dpi | 75 (not used by Fax compression) | 66 |
+| Grayscale | 170 dpi | 40 | 66 |
+| Color | 140 dpi | 50 | 66 |
+
+Grayscale and color use JPEG compression. The threshold is only applied in
+monochrome mode. Changing modes preserves the strip-metadata setting.
+Run `make test-conversion-modes` to check mode switching and slider synchronization
+under Xvfb.
+
 ## Opening files
 
 Pass local file paths or `file://` URIs to prefill the source and suggested target:

@@ -14,7 +14,7 @@ can access it, then run:
 
 ```sh
 make appimage
-./dist/Goblin_Converter-0.1.0-x86_64.AppImage
+./dist/Goblin_Converter-0.1.1-x86_64.AppImage
 ```
 
 The builder targets x86_64 and uses Ubuntu 26.04. The app needs its newer
@@ -26,7 +26,7 @@ are bundled. Wayland and the desktop's light/dark style remain enabled.
 Without a usable FUSE installation:
 
 ```sh
-./dist/Goblin_Converter-0.1.0-x86_64.AppImage --appimage-extract-and-run
+./dist/Goblin_Converter-0.1.1-x86_64.AppImage --appimage-extract-and-run
 ```
 
 ## Local Flatpak
@@ -38,7 +38,7 @@ Python 3.12+, PyYAML and Make. Install the GNOME runtime and SDK:
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install --user flathub org.gnome.Platform//51 org.gnome.Sdk//51
 make flatpak
-flatpak install --user dist/Goblin_Converter-0.1.0-x86_64.flatpak
+flatpak install --user dist/Goblin_Converter-0.1.1-x86_64.flatpak
 flatpak run de.magynhard.GoblinConverter
 ```
 
@@ -96,4 +96,4 @@ Before a release, update `shard.yml` and the first release entry in
 `data/de.magynhard.GoblinConverter.metainfo.xml`, run the checks above, and commit
 the changes. Tag that commit with the same version (an optional `v` prefix is
 accepted), push it, and publish the GitHub release. The tagged commit must contain
-the workflow. Replace `0.1.0` in the examples with the current version.
+the workflow. Replace `0.1.1` in the examples with the current version.

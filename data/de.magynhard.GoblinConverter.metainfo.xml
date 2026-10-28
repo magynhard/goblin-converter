@@ -50,6 +50,18 @@
   </description>
 
   <releases>
+    <release version="0.1.1" date="2026-10-28">
+      <description>
+        <p>Simplify conversion modes and apply mode-specific defaults.</p>
+        <ul>
+          <li>Remove the separate grayscale-quality mode from the interface and translations.</li>
+          <li>Use 140 dpi and quality 50 for color, and 170 dpi and quality 40 for grayscale.</li>
+          <li>Use JPEG compression for grayscale so its quality setting takes effect.</li>
+          <li>Keep monochrome defaults at 300 dpi, quality 75 and threshold 66.</li>
+          <li>Synchronize sliders and conversion settings when changing modes.</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.0" date="2026-10-28">
       <description>
         <p>Portable Linux packages and improved desktop integration.</p>
