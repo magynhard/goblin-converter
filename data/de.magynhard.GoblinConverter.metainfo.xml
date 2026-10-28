@@ -50,6 +50,17 @@
   </description>
 
   <releases>
+    <release version="0.1.0" date="2026-10-28">
+      <description>
+        <p>Portable Linux packages and improved desktop integration.</p>
+        <ul>
+          <li>AppImage and Flatpak bundles include ImageMagick 7 and Ghostscript.</li>
+          <li>Open file arguments and local file URIs in separate document windows.</li>
+          <li>Forward file-opening requests to an already running application.</li>
+          <li>Refresh the application icon in the GNOME style.</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.1" date="2026-10-28">
       <description>
         <p>Initial beta release with basic features.</p>

@@ -26,18 +26,18 @@ Actions workflow attaches packages to newly published [GitHub Releases](https://
 
 ## Flatpak
 ```bash
-flatpak install --user ./Goblin_Converter-0.0.1-x86_64.flatpak
+flatpak install --user ./Goblin_Converter-0.1.0-x86_64.flatpak
 flatpak run de.magynhard.GoblinConverter
 ```
 
 ## AppImage
 
 ```sh
-chmod +x Goblin_Converter-0.0.1-x86_64.AppImage
-./Goblin_Converter-0.0.1-x86_64.AppImage
+chmod +x Goblin_Converter-0.1.0-x86_64.AppImage
+./Goblin_Converter-0.1.0-x86_64.AppImage
 ```
 
-Replace `0.0.1` with the downloaded version. Both formats include ImageMagick and
+Replace `0.1.0` with the downloaded version. Both formats include ImageMagick and
 Ghostscript. AppImage requires Ubuntu 26.04/glibc 2.43 or newer; use Flatpak on
 older distributions. The Flatpak is a downloadable local bundle.
 
