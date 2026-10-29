@@ -1,8 +1,14 @@
 --- a/src/generator/lib_gen.cr
 +++ b/src/generator/lib_gen.cr
-@@ -9 +9 @@
+@@ -9 +9,7 @@
 -        library[/lib([^\/]+)(?:\.so|-.+?\.dll|\..+?\.dylib).*/, 1]
-+        library[/(?:lib)?([^\/]+)(?:\.so|-.+?\.dll|\..+?\.dylib).*/, 1]
++        if library.ends_with?(".dll")
++          # Remove only the final numeric DLL ABI suffix, keeping names such
++          # as harfbuzz-gobject intact and accepting unversioned harfbuzz.dll.
++          library.sub(/\.dll$/, "").sub(/-\d+$/, "").sub(/^lib/, "")
++        else
++          library[/lib([^\/]+)(?:\.so|\..+?\.dylib).*/, 1]
++        end
 --- a/src/generator/helpers.cr
 +++ b/src/generator/helpers.cr
 @@ -1,1 +1,17 @@

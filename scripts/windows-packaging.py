@@ -80,9 +80,9 @@ def build():
     default_path = subprocess.check_output(["crystal", "env", "CRYSTAL_PATH"], text=True).strip()
     os.environ["CRYSTAL_PATH"] = str(SOURCE / "lib") + os.pathsep + default_path
     (SOURCE / "bin").mkdir()
-    run("crystal", "build", "src/generator/main.cr", "--no-debug",
+    run("crystal", "build", "src/generator/main.cr",
         "-o", SOURCE / "bin/gi-crystal.exe", cwd=SOURCE / "lib/gi-crystal")
-    run(SOURCE / "bin/gi-crystal.exe")
+    run(SOURCE / "bin/gi-crystal.exe", env=dict(os.environ, DEBUG="1"))
     run("crystal", "tool", "format", "--check", "src/", "spec/")
     run("crystal", "spec")
     run("crystal", "build", "src/goblin-converter.cr", "--release", "--no-debug",

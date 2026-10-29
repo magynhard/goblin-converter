@@ -112,7 +112,9 @@ def fetch_shards(destination):
         target.mkdir()
         subprocess.run(["git", "init", "--quiet", str(target)], check=True)
         subprocess.run(["git", "-C", str(target), "fetch", "--quiet", "--depth=1", source["url"], source["commit"]], check=True)
-        subprocess.run(["git", "-C", str(target), "checkout", "--quiet", "--detach", "FETCH_HEAD"], check=True)
+        # Keep upstream sources byte-stable for patches and read_file macros,
+        # even when the Windows build host enables core.autocrlf globally.
+        subprocess.run(["git", "-c", "core.autocrlf=false", "-C", str(target), "checkout", "--quiet", "--detach", "FETCH_HEAD"], check=True)
 
 
 def build_converters(destination):
