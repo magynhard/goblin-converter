@@ -50,6 +50,16 @@
   </description>
 
   <releases>
+    <release version="0.1.2" date="2026-10-29">
+      <description>
+        <p>Add Windows installer packages and automated Windows releases.</p>
+        <ul>
+          <li>Bundle GTK, ImageMagick, Ghostscript and translations in a Windows x64 installer.</li>
+          <li>Build and test the Windows installer with GitHub Actions and attach it to published releases.</li>
+          <li>Include SHA-256 checksums, Start menu shortcuts and an uninstaller.</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.1" date="2026-10-28">
       <description>
         <p>Simplify conversion modes and apply mode-specific defaults.</p>

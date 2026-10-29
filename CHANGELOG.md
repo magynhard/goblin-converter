@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.2] - 2026-10-29
+
+### Added
+
+- A Windows x64 NSIS installer with bundled GTK/Adwaita, ImageMagick, Ghostscript
+  and translations. Install for the current user without administrator privileges,
+  with Start menu shortcuts, an optional desktop shortcut and an uninstaller.
+- A Windows GitHub Actions workflow that builds and tests the installer and
+  attaches it with a SHA-256 checksum to published GitHub releases.
+- Windows package smoke tests for installation, GUI startup, PDF conversion modes,
+  image codecs and uninstallation, plus local Windows packaging documentation.
+
+### Fixed
+
+- Handle versioned and unversioned Windows DLL names during binding generation,
+  including HarfBuzz, and keep shard sources and patches in LF format.
+- Compile bundled Windows translations from the existing locale directories.
+
 ## [0.1.1] - 2026-10-28
 
 ### Changed
