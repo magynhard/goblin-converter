@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.1.3] - 2026-10-29
+
+### Changed
+
+- Reduce the Windows installer to the runtime files used by Goblin Converter:
+  keep ImageMagick's `magick.exe`, Ghostscript's console executable and DLL,
+  configuration, fonts, profiles and required GTK resources.
+- Resolve ordinary and delay-loaded DLL dependencies recursively instead of
+  bundling every GTK library. Include dynamically loaded GTK modules explicitly.
+- Omit redundant ImageMagick executables, nested redistributable installers,
+  development/introspection files, examples and manuals. Keep license notices
+  and limit GTK translations to the application's supported languages.
+- Replace application-owned runtime directories when updating an existing
+  installation so obsolete files from larger packages are removed.
+
+### Fixed
+
+- Bundle ImageMagick's required MSVC OpenMP runtime rather than relying on the
+  copy already installed on the Windows build runner.
+
+### Added
+
+- Regression tests for DLL dependency selection, runtime resources and package
+  exclusions, plus a Windows upgrade-cleanup smoke test and build-size logging.
+
 ## [0.1.2] - 2026-10-29
 
 ### Added

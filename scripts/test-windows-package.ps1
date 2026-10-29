@@ -31,6 +31,18 @@ try {
   # NSIS requires /D to be the last argument, unquoted even with spaces.
   Wait-Checked (Start-Process -FilePath $Installer -ArgumentList "/S /D=$installDir" -PassThru)
   if (-not (Test-Path "$installDir/bin/goblin-converter.exe")) { throw 'Application not installed' }
+  # Model obsolete files from the old full runtime and verify upgrade cleanup.
+  'obsolete' | Set-Content "$installDir/bin/old-unused.dll"
+  'obsolete' | Set-Content "$installDir/tools/imagemagick/identify.exe"
+  Wait-Checked (Start-Process -FilePath $Installer -ArgumentList "/S /D=$installDir" -PassThru)
+  if (Test-Path "$installDir/bin/old-unused.dll") { throw 'Upgrade retained obsolete DLLs' }
+  $magickPrograms = @(Get-ChildItem "$installDir/tools/imagemagick/*.exe")
+  if ($magickPrograms.Count -ne 1 -or $magickPrograms[0].Name -ne 'magick.exe') {
+    throw 'Unexpected ImageMagick helper executables in runtime'
+  }
+  if ((Test-Path "$installDir/tools/ghostscript/vcredist_x64.exe") -or (Test-Path "$installDir/share/gir-1.0")) {
+    throw 'Development files or nested installers included in runtime'
+  }
   if (-not (Test-Path "$env:APPDATA/Microsoft/Windows/Start Menu/Programs/Goblin Converter/Goblin Converter.lnk")) {
     throw 'Start menu shortcut missing'
   }
@@ -92,4 +104,4 @@ try {
   }
   Remove-Item -Recurse -Force $testRoot
 }
-Write-Host 'Windows setup, GUI startup, PDF modes, image codecs and uninstall passed.'
+Write-Host 'Windows setup, upgrade cleanup, GUI startup, PDF modes, image codecs and uninstall passed.'

@@ -33,7 +33,7 @@ jobs:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
           . ./scripts/goblin-env.ps1 -GtkDir "$PWD/build/windows/tools/gtk" -CrystalDir "$PWD/build/windows/tools/crystal"
-          python -m unittest discover -s tests -p test_windows_packaging.py -v
+          python -m unittest discover -s tests -p 'test_windows*.py' -v
           if ($LASTEXITCODE -ne 0) { throw 'Windows generator regression tests failed' }
           python scripts/windows-packaging.py build
           if ($LASTEXITCODE -ne 0) { throw 'Windows build failed' }

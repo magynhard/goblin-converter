@@ -10,9 +10,10 @@ workflow runs independently.
 `Goblin_Converter-<version>-windows-x86_64-setup.exe` includes:
 
 - Goblin Converter, compiled in release mode for baseline x86-64 CPUs.
-- The gvsbuild GTK4/Adwaita runtime, schemas, icons and translations.
+- Required gvsbuild GTK4/Adwaita DLLs, runtime modules, schemas, icons and translations.
 - Crystal's GC DLL and the app-local MSVC runtime DLLs.
-- Portable ImageMagick 7 and Ghostscript 10, including their notices.
+- ImageMagick 7 (`magick.exe`) and the Ghostscript 10 console runtime, including
+  conversion configuration, fonts, profiles and license notices.
 - Application translations for every language in `po/LINGUAS`.
 - Dependency source URLs and revisions under `share/licenses/`.
 
@@ -22,6 +23,28 @@ offers an optional desktop shortcut. Administrator privileges are not required.
 The installation appears in Windows **Installed apps** and supports silent
 installation (`/S`) and uninstallation (`Uninstall.exe /S`). Close the application
 before installing an update into the same directory.
+
+Updates replace the application-owned `bin`, `lib`, `etc`, `share` and `tools`
+directories so files removed from newer packages do not accumulate on disk.
+
+### Runtime selection
+
+`scripts/windows_payload.py` uses MSVC `dumpbin /IMPORTS` to collect ordinary and
+delay-loaded DLL dependencies recursively. It seeds GTK's dynamically loaded
+modules separately (including the SVG pixbuf loader), preserves their caches and
+copies the required DLL closure beside the application and each converter.
+Windows system DLLs and API sets are provided by the OS; MSVC redistributable
+DLLs must come from the input runtime directories even if installed globally on
+the build runner. ImageMagick's OpenMP DLL comes from VS2022's app-local
+`Microsoft.VC143.OpenMP` redistributable directory.
+
+The package excludes redundant ImageMagick executables, Ghostscript's nested
+redistributable installer and GUI executable, manuals, examples, GIR files and
+unrelated GTK libraries. GTK catalogs and emoji resources are restricted to the
+application's supported languages, with GTK's `ja`/`ko` aliases for the existing
+`jp`/`kr` application locales. Runtime icon themes, schemas, font configuration,
+Ghostscript resources and profiles, and legal notices are retained. Build logs
+report both the uncompressed runtime size and the compressed installer size.
 
 Conversion tools are private to the application. The executable locates them
 relative to its own installation directory, sets its child-process search path
@@ -76,7 +99,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
 extracts them under `build/windows/tools`. Ghostscript's NSIS archive is extracted
 with 7-Zip; its installer is not executed on the build host or the user's machine.
 `build` compiles the bindings, checks Crystal formatting, runs the headless specs,
-builds the release executable, assembles `build/windows/payload` and invokes NSIS.
+builds the release executable, assembles the minimal `build/windows/payload` and invokes NSIS.
 The setup and its `.exe.sha256` checksum are written to `dist/`.
 
 If `dist/` contains multiple installer versions, select one explicitly:
@@ -86,7 +109,8 @@ If `dist/` contains multiple installer versions, select one explicitly:
 ```
 
 The smoke test installs into a temporary path with spaces and a non-ASCII
-character, opens the actual GUI from another working directory using only the
+character, reinstalls over obsolete runtime files to check upgrade cleanup,
+opens the actual GUI from another working directory using only the
 Windows system `PATH`, checks all three PDF conversion modes and PNG/JPEG/TIFF/
 WebP codecs, then uninstalls and checks registry cleanup. It requires an
 interactive Windows session and should run on a disposable build machine: it

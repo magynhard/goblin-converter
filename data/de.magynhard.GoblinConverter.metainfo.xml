@@ -50,6 +50,16 @@
   </description>
 
   <releases>
+    <release version="0.1.3" date="2026-10-29">
+      <description>
+        <p>Reduce the Windows installer to the required runtime components.</p>
+        <ul>
+          <li>Remove redundant tools, development files, examples and manuals while retaining conversion resources and licenses.</li>
+          <li>Bundle only required DLL dependencies, including the MSVC OpenMP runtime used by ImageMagick.</li>
+          <li>Remove obsolete runtime files when updating an existing installation.</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.2" date="2026-10-29">
       <description>
         <p>Add Windows installer packages and automated Windows releases.</p>

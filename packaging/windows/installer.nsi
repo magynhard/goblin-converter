@@ -43,6 +43,20 @@ FunctionEnd
 
 Section "${APP}" Main
   SectionIn RO
+  ; Replace application-owned runtime directories on upgrades, so files removed
+  ; from the slim payload do not remain from older installations.
+  IfFileExists "$INSTDIR\Uninstall.exe" 0 install_files
+  IfFileExists "$INSTDIR\bin\goblin-converter.exe" 0 install_files
+  ClearErrors
+  RMDir /r "$INSTDIR\bin"
+  RMDir /r "$INSTDIR\lib"
+  RMDir /r "$INSTDIR\etc"
+  RMDir /r "$INSTDIR\share"
+  RMDir /r "$INSTDIR\tools"
+  IfErrors 0 install_files
+  MessageBox MB_OK|MB_ICONSTOP "Could not replace the previous installation. Close Goblin Converter and try again." /SD IDOK
+  Abort
+install_files:
   SetOutPath "$INSTDIR"
   File /r "${PAYLOAD}\*"
   WriteUninstaller "$INSTDIR\Uninstall.exe"

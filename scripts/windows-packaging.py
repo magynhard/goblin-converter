@@ -13,6 +13,7 @@ import zipfile
 from pathlib import Path
 
 import packaging as inputs
+from windows_payload import assemble_runtime
 
 ROOT = inputs.ROOT
 WORK = ROOT / "build/windows"
@@ -44,10 +45,6 @@ def prepare():
         else:
             run("7z", "x", "-y", f"-o{destination}", archive, cwd=ROOT)
         marker.write_text(PINS[name]["sha256"] + "\n")
-
-
-def copytree(source, destination):
-    shutil.copytree(source, destination, dirs_exist_ok=True)
 
 
 def remove_tree(path):
@@ -90,44 +87,14 @@ def build():
 
     if PAYLOAD.exists():
         shutil.rmtree(PAYLOAD)
-    (PAYLOAD / "bin").mkdir(parents=True)
     gtk = TOOLS / "gtk"
-    # Keep runtime modules, schemas, icons, translations and their original layout.
-    # Do not ship build executables, headers, import libraries or Python tooling.
-    for dll in (gtk / "bin").glob("*.dll"):
-        shutil.copy2(dll, PAYLOAD / "bin" / dll.name)
-    for directory in ("share", "etc"):
-        copytree(gtk / directory, PAYLOAD / directory)
-    for directory in ("gtk-4.0", "gdk-pixbuf-2.0", "gio"):
-        if (gtk / "lib" / directory).exists():
-            copytree(gtk / "lib" / directory, PAYLOAD / "lib" / directory)
-    shutil.copy2(SOURCE / "bin/goblin-converter.exe", PAYLOAD / "bin")
-    # Include the application's Crystal runtime dependencies, not compiler-only
-    # DLLs such as LLVM. Prefer GTK's PCRE2 when already bundled (same ABI).
-    for name in ("gc.dll", "iconv-2.dll", "pcre2-8.dll"):
-        target = PAYLOAD / "bin" / name
-        if not target.exists():
-            shutil.copy2(TOOLS / "crystal" / name, target)
-    # App-local MSVC runtime avoids a separate redistributable installer.
     redist = Path(os.environ["VCToolsRedistDir"]) / "x64/Microsoft.VC143.CRT"
     if not redist.is_dir():
         raise ValueError(f"MSVC x64 redistributable directory missing: {redist}")
-    for dll in redist.glob("*.dll"):
-        shutil.copy2(dll, PAYLOAD / "bin" / dll.name)
-    for name in ("imagemagick", "ghostscript"):
-        copytree(TOOLS / name, PAYLOAD / "tools" / name)
-        # These child processes need the same app-local CRT as the application.
-        target = PAYLOAD / "tools" / name
-        if name == "ghostscript":
-            target /= "bin"
-        for dll in redist.glob("*.dll"):
-            shutil.copy2(dll, target / dll.name)
-    # Drop the Ghostscript installer's NSIS helper binaries, not its runtime/docs.
-    for directory in (PAYLOAD / "tools/ghostscript").glob("$*"):
-        if directory.is_dir():
-            shutil.rmtree(directory)
+    languages = (ROOT / "po/LINGUAS").read_text().split()
+    assemble_runtime(TOOLS, SOURCE / "bin/goblin-converter.exe", redist, PAYLOAD, languages)
     run(gtk / "bin/glib-compile-schemas.exe", PAYLOAD / "share/glib-2.0/schemas")
-    for language in (ROOT / "po/LINGUAS").read_text().split():
+    for language in languages:
         target = PAYLOAD / "share/locale" / language / "LC_MESSAGES/de.magynhard.GoblinConverter.mo"
         target.parent.mkdir(parents=True, exist_ok=True)
         source = ROOT / "po" / language / "LC_MESSAGES/de.magynhard.GoblinConverter.po"
@@ -147,6 +114,9 @@ def build():
     shutil.copy2(ROOT / "packaging/windows/sources.json",
                  PAYLOAD / "share/licenses/de.magynhard.GoblinConverter/windows-sources.json")
 
+    size = sum(path.stat().st_size for path in PAYLOAD.rglob("*") if path.is_file())
+    print(f"Windows runtime payload: {size / 1024 ** 2:.1f} MiB", flush=True)
+
     dist = ROOT / "dist"
     dist.mkdir(exist_ok=True)
     output = dist / f"Goblin_Converter-{version}-windows-x86_64-setup.exe"
@@ -157,6 +127,7 @@ def build():
     with output.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
     output.with_suffix(".exe.sha256").write_text(f"{digest}  {output.name}\n")
+    print(f"Windows installer: {output.stat().st_size / 1024 ** 2:.1f} MiB", flush=True)
     print(output)
 
 
