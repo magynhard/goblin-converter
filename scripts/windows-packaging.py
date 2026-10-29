@@ -130,7 +130,8 @@ def build():
     for language in (ROOT / "po/LINGUAS").read_text().split():
         target = PAYLOAD / "share/locale" / language / "LC_MESSAGES/de.magynhard.GoblinConverter.mo"
         target.parent.mkdir(parents=True, exist_ok=True)
-        run(gtk / "bin/msgfmt.exe", ROOT / "po" / f"{language}.po", "-o", target)
+        source = ROOT / "po" / language / "LC_MESSAGES/de.magynhard.GoblinConverter.po"
+        run(gtk / "bin/msgfmt.exe", source, "-o", target)
     icon = PAYLOAD / "share/icons/hicolor/scalable/apps/de.magynhard.GoblinConverter.svg"
     icon.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "data/icons/app-icon.svg", icon)
